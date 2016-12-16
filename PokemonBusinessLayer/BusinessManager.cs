@@ -61,7 +61,7 @@ namespace PokemonBusinessLayer
 
         public List<string> DisplayMatchsByPlaces(int nbPlaces)
         {
-            return DalManager.GetAllMatchs().Where(m => m.Stade.NbPlaces >= 200).Select(m => m.ToString()).ToList();
+            return DalManager.GetAllMatchs().Where(m => m.Stade.NbPlaces >= nbPlaces).Select(m => m.ToString()).ToList();
         }
 
         public List<string> DisplayAllStades()
@@ -73,11 +73,17 @@ namespace PokemonBusinessLayer
         {
             return DalManager.GetAllCaracteristiques().Select(c => c.ToString()).ToList();
         }
+
+        public string DisplayWinner()
+        {
+            return DalManager.GetWinner().ToString();
+        }
         #endregion
 
         public void RunTournament()
         {
-            List<Pokemon> pokemons = DalManager.GetAllPokemons();
+            List<Pokemon> pokemons = new List<Pokemon>();
+            pokemons.AddRange(DalManager.GetAllPokemons());
             for (int i = 0; i < 5; i++)
             {
                 RunPhaseOfTournament(pokemons, (EPhaseTournoi)i);
@@ -93,14 +99,12 @@ namespace PokemonBusinessLayer
                     match = RunMatch(pokemons[i], pokemons[i - 1], phase);
                 else
                     match = RunMatch(pokemons[i - 1], pokemons[i], phase);
-                DalManager.allMatchs.Add(match);
+                DalManager.AddMatchToList(match);
 
                 if (pokemons[i].ID == match.IdPokemonVainqueur)
                     pokemons.RemoveAt(i - 1);
                 else
                     pokemons.RemoveAt(i);
-
-                Console.WriteLine(match);
             }
 
             return pokemons;

@@ -10,7 +10,7 @@ namespace PokemonDataAccessLayer
     public class DalManager
     {
         private List<Pokemon> allPokemons { get; set; }
-        public List<Match> allMatchs { get; set; }
+        private List<Match> allMatchs { get; set; }
         private List<Stade> allStades { get; set; }
         private List<Caracteristiques> allCaracteristiques { get; set; }
         public static int LastId = 0;
@@ -39,13 +39,23 @@ namespace PokemonDataAccessLayer
             }
         }
 
+        public void AddMatchToList(Match m)
+        {
+            allMatchs.Add(m);
+        }
+
+        public Pokemon GetWinner()
+        {
+            return GetAllPokemons()[allMatchs.Last().IdPokemonVainqueur];
+        }
+
         public List<Pokemon> GetAllPokemons()
         {
             return allPokemons;
         }
 
         public List<Pokemon> GetAllPokemonsByType(ETypeElement type)
-        {           
+        {
             return GetAllPokemons().FindAll(p => p.Type == type);
         }
 
