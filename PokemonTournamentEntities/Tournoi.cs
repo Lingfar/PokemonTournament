@@ -8,7 +8,7 @@ namespace PokemonTournamentEntities
 {
     public enum EPhaseTournoi
     {
-        QuartFinale, HuitimeFinale, DemiFinale, Finale
+        SeiziemeFinale, HuitimeFinale, QuartFinale, DemiFinale, Finale
     }
 
     public class Tournoi : EntityObject

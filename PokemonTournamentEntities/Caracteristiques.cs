@@ -9,14 +9,72 @@ namespace PokemonTournamentEntities
     public class Caracteristiques
     {
         private static Random rand = new Random(42);
-        public int PV { get; set; }
-        public int Attaque { get; set; }
-        public int Defense { get; set; }
-        public int Vitesse { get; set; }
+
+        private int pv;
+        public int PV
+        {
+            get { return pv; }
+            set
+            {
+                if (value > 200)
+                    pv = 200;
+                else
+                    pv = value;
+            }
+        }
+        private int attaque;
+        public int Attaque
+        {
+            get { return attaque; }
+            set
+            {
+                if (value > 20)
+                    attaque = 20;
+                else if (value <= 0)
+                    attaque = 1;
+                else
+                    attaque = value;
+            }
+        }
+        private int defense;
+        public int Defense
+        {
+            get { return defense; }
+            set
+            {
+                if (value > 20)
+                    defense = 20;
+                else if (value <= 0)
+                    defense = 1;
+                else
+                    defense = value;
+            }
+        }
+        private int vitesse;
+        public int Vitesse
+        {
+            get { return vitesse; }
+            set
+            {
+                if (value > 20)
+                    vitesse = 20;
+                else if (value <= 0)
+                    vitesse = 1;
+                else
+                    vitesse = value;
+            }
+        }
 
         public Caracteristiques()
         {
             
+        }
+        public Caracteristiques(Caracteristiques c)
+        {
+            PV = c.PV;
+            Attaque = c.Attaque;
+            Defense = c.Defense;
+            Vitesse = c.Vitesse;
         }
 
         public override string ToString()

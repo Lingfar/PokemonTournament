@@ -26,7 +26,7 @@ namespace PokemonTournamentEntities
 
         public override string ToString()
         {
-            return ID.ToString();
+            return "Id = " + ID.ToString();
         }
     }
 }

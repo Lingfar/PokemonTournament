@@ -12,16 +12,18 @@ namespace PokemonConsole
     {
         static void Main(string[] args)
         {
-            BusinessManager businessManager = new BusinessManager();
+            BusinessManager businessManager = BusinessManager.Instance;
 
             List<string> allPokemons = businessManager.DisplayAllPokemons();
-            foreach(string pokemon in allPokemons)
+            foreach (string pokemon in allPokemons)
                 Console.WriteLine(pokemon);
 
             Console.WriteLine();
             List<string> allStades = businessManager.DisplayAllStades();
             foreach (string stade in allStades)
                 Console.WriteLine(stade);
+
+            businessManager.RunTournament();
 
             Console.ReadKey();
         }

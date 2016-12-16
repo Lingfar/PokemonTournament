@@ -9,7 +9,7 @@ namespace PokemonDataAccessLayer
 {
     public class Rand
     {
-        private static Random rand = new Random(5);
+        public static Random rand = new Random(5);
 
         public static Pokemon GeneratePokemon(int id)
         {

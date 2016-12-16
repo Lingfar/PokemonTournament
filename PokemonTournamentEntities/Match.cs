@@ -14,15 +14,17 @@ namespace PokemonTournamentEntities
         public Pokemon Pokemon2 { get; set; }
         public Stade Stade { get; set; }
 
-        public Match(int id) : base(id)
+        public Match(int id, EPhaseTournoi phase, Pokemon p1, Pokemon p2) : base(id)
         {
-
+            PhaseTournoi = phase;
+            Pokemon1 = p1;
+            Pokemon2 = p2;
         }
 
         public override string ToString()
         {
-            return "Match : Id = " + base.ToString() + " IdPokemonVainqueur = " + IdPokemonVainqueur + " PhaseTournoi = " + PhaseTournoi
-                + " Pokemon1 = " + Pokemon1 + " Pokemon2 = " + Pokemon2 + " Stade = " + Stade;
+            return "Match : " + base.ToString() + "\n\tPhase = " + PhaseTournoi + "\n\t" + Pokemon1
+            + "\n\t" + Pokemon2 + "\n\tVainqueur = " + IdPokemonVainqueur+ "\n\tStade = " + Stade;
         }
     }
 }

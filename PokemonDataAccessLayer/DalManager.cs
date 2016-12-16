@@ -10,9 +10,10 @@ namespace PokemonDataAccessLayer
     public class DalManager
     {
         private List<Pokemon> allPokemons { get; set; }
-        private List<Match> allMatchs { get; set; }
+        public List<Match> allMatchs { get; set; }
         private List<Stade> allStades { get; set; }
         private List<Caracteristiques> allCaracteristiques { get; set; }
+        public static int LastId = 0;
 
         public DalManager()
         {
@@ -20,21 +21,21 @@ namespace PokemonDataAccessLayer
             allMatchs = new List<Match>();
             allStades = new List<Stade>();
             allCaracteristiques = new List<Caracteristiques>();
-            int id = 0;
 
+            //32 pokemons à générer (avec type + caracteristiques random) pour les seiziemes
             for(int i = 0; i < 32; i++)
             {
-                Pokemon poke = Rand.GeneratePokemon(id);
+                Pokemon poke = Rand.GeneratePokemon(LastId);
                 allPokemons.Add(poke);
                 allCaracteristiques.Add(poke.Caracteristiques);
-                id++;
+                LastId++;
             }
 
-            //Eau, Feu, Terre, Insecte, Plante, Dragon
+            //1 stade par type
             for (int i = 0; i < 6; i++)
             {
-                allStades.Add(Rand.GenerateStade(id, (ETypeElement)i));
-                id++;
+                allStades.Add(Rand.GenerateStade(LastId, (ETypeElement)i));
+                LastId++;
             }
         }
 

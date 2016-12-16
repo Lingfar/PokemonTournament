@@ -14,6 +14,8 @@ namespace PokemonTournamentEntities
     public class Pokemon : EntityObject
     {
         private static Random rand = new Random(42);
+        public static int[,] TableFaiblesses = new int[,] { {-1, 1, 1, 0, -1, -1}, {-1, -1, 1, 1, 1, -1},
+            {0, 1, 0, -1, -1, 0}, {0, -1, 0, 0, 1, 0}, {1, -1, 1, -1, -1, -1}, {0, 0, 0, 0, 0, 1} };
         public Caracteristiques Caracteristiques { get; set; }
         public string Nom { get; set; }
         public ETypeElement Type { get; set; }
@@ -25,7 +27,7 @@ namespace PokemonTournamentEntities
 
         public override string ToString()
         {
-            return "Pokemon : Id = " + base.ToString() + " Nom =" + Nom + " Caracteristiques : " + Caracteristiques.ToString()
+            return "Pokemon : " + base.ToString() + " Nom =" + Nom + " Caracteristiques : " + Caracteristiques.ToString()
                 + " Type = " + Type.ToString();
         }
     }
