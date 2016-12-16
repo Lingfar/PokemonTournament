@@ -13,11 +13,12 @@ namespace PokemonBusinessLayer
         private static BusinessManager instance;
         private static object syncRoot = new Object();
 
-        public static DalManager DalManager;
+        public static DalManager DalManager = new DalManager();
+        private static Random rng = new Random(5);
 
         private BusinessManager()
         {
-            DalManager = new DalManager();
+
         }
 
         public static BusinessManager Instance
@@ -32,7 +33,6 @@ namespace PokemonBusinessLayer
                             instance = new BusinessManager();
                     }
                 }
-
                 return instance;
             }
         }
@@ -80,6 +80,7 @@ namespace PokemonBusinessLayer
         }
         #endregion
 
+        #region Tournoi
         public void RunTournament()
         {
             List<Pokemon> pokemons = new List<Pokemon>();
@@ -117,7 +118,8 @@ namespace PokemonBusinessLayer
 
             Match match = new Match(DalManager.LastId, phase, pokemon1, pokemon2);
             DalManager.LastId++;
-            match.Stade = DalManager.GetAllStades()[Rand.rand.Next(0, 6)];
+            
+            match.Stade = DalManager.GetAllStades()[rng.Next(0, 6)];
 
             BuffNerfPokemonByStade(pokemon1, match.Stade);
             BuffNerfPokemonByStade(pokemon2, match.Stade);
@@ -126,8 +128,10 @@ namespace PokemonBusinessLayer
             decimal multiplicatorP2 = GetMultiplicatorBetweenType(pokemon2.Type, pokemon1.Type);
             while (pokemon1.Caracteristiques.PV > 0 && pokemon2.Caracteristiques.PV > 0)
             {
-                pokemon2.Caracteristiques.PV -= (int)Math.Ceiling(multiplicatorP1 * (decimal)pokemon1.Caracteristiques.Attaque / (decimal)pokemon2.Caracteristiques.Defense * 4m);
-                pokemon1.Caracteristiques.PV -= (int)Math.Ceiling(multiplicatorP2 * (decimal)pokemon2.Caracteristiques.Attaque / (decimal)pokemon1.Caracteristiques.Defense * 4m);
+                if(!EsquiveOrNot(pokemon2))
+                    pokemon2.Caracteristiques.PV -= (int)Math.Ceiling(multiplicatorP1 * (decimal)pokemon1.Caracteristiques.Attaque / (decimal)pokemon2.Caracteristiques.Defense * 4m);
+                if(!EsquiveOrNot(pokemon1))
+                    pokemon1.Caracteristiques.PV -= (int)Math.Ceiling(multiplicatorP2 * (decimal)pokemon2.Caracteristiques.Attaque / (decimal)pokemon1.Caracteristiques.Defense * 4m);
             }
 
             if (pokemon1.Caracteristiques.PV <= 0 && pokemon2.Caracteristiques.PV <= 0)
@@ -160,7 +164,7 @@ namespace PokemonBusinessLayer
                 pokemon.Caracteristiques.Attaque += stade.Caracteristiques.Attaque;
                 pokemon.Caracteristiques.Defense += stade.Caracteristiques.Defense;
             }
-            else if(GetMultiplicatorBetweenType(pokemon.Type, stade.Type) == 0.5m)
+            else if (GetMultiplicatorBetweenType(pokemon.Type, stade.Type) == 0.5m)
             {
                 pokemon.Caracteristiques.Attaque -= stade.Caracteristiques.Attaque;
                 pokemon.Caracteristiques.Defense -= stade.Caracteristiques.Defense;
@@ -184,5 +188,14 @@ namespace PokemonBusinessLayer
 
             return firstPokemon1;
         }
+
+        private bool EsquiveOrNot(Pokemon pokemon1)
+        {
+            bool esquive = true;
+            if (rng.Next(0, 101) > pokemon1.Caracteristiques.Esquive)
+                esquive = false;
+            return esquive;
+        }
+        #endregion
     }
 }

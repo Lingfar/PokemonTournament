@@ -12,8 +12,7 @@ namespace PokemonConsole
     {
         static void Main(string[] args)
         {
-            BusinessManager businessManager = BusinessManager.Instance;
-            
+            BusinessManager businessManager = BusinessManager.Instance;            
             businessManager.RunTournament();
 
             List<string> allMatchs = businessManager.DisplayAllMatchs();

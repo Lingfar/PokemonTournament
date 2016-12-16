@@ -22,6 +22,7 @@ namespace PokemonTournamentEntities
                     pv = value;
             }
         }
+
         private int attaque;
         public int Attaque
         {
@@ -36,6 +37,7 @@ namespace PokemonTournamentEntities
                     attaque = value;
             }
         }
+
         private int defense;
         public int Defense
         {
@@ -50,6 +52,7 @@ namespace PokemonTournamentEntities
                     defense = value;
             }
         }
+
         private int vitesse;
         public int Vitesse
         {
@@ -65,22 +68,39 @@ namespace PokemonTournamentEntities
             }
         }
 
+        private int esquive;
+        public int Esquive
+        {
+            get { return esquive; }
+            set
+            {
+                if (value > 50)
+                    esquive = 50;
+                else if (value <= 0)
+                    esquive = 0;
+                else
+                    esquive = value;
+            }
+        }
+
         public Caracteristiques()
         {
             
         }
+
         public Caracteristiques(Caracteristiques c)
         {
             PV = c.PV;
             Attaque = c.Attaque;
             Defense = c.Defense;
             Vitesse = c.Vitesse;
+            Esquive = c.Esquive;
         }
 
         public override string ToString()
         {
             return "PV = " + PV + " Attaque = " + Attaque + " Defense = " + Defense
-                + " Vitesse = " + Vitesse;
+                + " Vitesse = " + Vitesse + " Esquive = " + Esquive;
         }
     }
 }

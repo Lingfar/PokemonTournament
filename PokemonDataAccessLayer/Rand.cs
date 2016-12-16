@@ -26,6 +26,7 @@ namespace PokemonDataAccessLayer
             carac.Attaque = rand.Next(1, 21);
             carac.Defense = rand.Next(1, 21);
             carac.Vitesse = rand.Next(1, 21);
+            carac.Esquive = rand.Next(1, 51);
             return carac;
         }
 
