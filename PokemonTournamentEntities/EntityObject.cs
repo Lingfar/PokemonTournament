@@ -22,7 +22,7 @@ namespace PokemonTournamentEntities
 
         public override bool Equals(object obj)
         {
-            if (obj != null)
+            if (obj != null && obj.GetType() == typeof(EntityObject))
                 return ID == ((EntityObject)obj).ID;
             else
                 return false;
