@@ -71,13 +71,9 @@ namespace PokemonTournamentWPF
             save.FileName = "Pokemons";
             save.DefaultExt = ".xml";
             save.Filter = "XML-File | *.xml";
-
-            Nullable<bool> result = save.ShowDialog();
-
-            // Process save file dialog box results
+            Nullable<bool> result = save.ShowDialog();            
             if (result == true)
             {
-                // Save document
                 string filename = save.FileName;
                 using (FileStream fs = new FileStream(filename, FileMode.Create))
                 {
