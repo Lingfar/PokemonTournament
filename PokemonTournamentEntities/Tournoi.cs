@@ -13,8 +13,8 @@ namespace PokemonTournamentEntities
 
     public class Tournoi : EntityObject
     {
-        public List<Match> Matchs { get; set; }
         public string Nom { get; set; }
+        public List<Match> Matchs { get; set; }
 
         public Tournoi(int id) : base(id)
         {

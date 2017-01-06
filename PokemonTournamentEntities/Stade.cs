@@ -8,10 +8,10 @@ namespace PokemonTournamentEntities
 {
     public class Stade : EntityObject
     {
-        public Caracteristiques Caracteristiques { get; set; }
-        public int NbPlaces { get; set; }
         public string Nom { get; set; }
         public ETypeElement Type { get; set; }
+        public int NbPlaces { get; set; }
+        public Caracteristiques Caracteristiques { get; set; }
 
         public Stade(int id) : base(id)
         {

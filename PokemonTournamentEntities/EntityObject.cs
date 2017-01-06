@@ -22,7 +22,10 @@ namespace PokemonTournamentEntities
 
         public override bool Equals(object obj)
         {
-            return ID == ((EntityObject)obj).ID;
+            if (obj != null)
+                return ID == ((EntityObject)obj).ID;
+            else
+                return false;
         }
 
         public override int GetHashCode()
