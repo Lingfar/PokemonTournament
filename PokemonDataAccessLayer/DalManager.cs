@@ -13,6 +13,9 @@ namespace PokemonDataAccessLayer
         private List<Match> allMatchs { get; set; }
         private List<Stade> allStades { get; set; }
         private List<Caracteristiques> allCaracteristiques { get; set; }
+
+        private static List<Utilisateur> allUtilisateurs = new List<Utilisateur>
+            { new Utilisateur {Login = "Lingfar", Nom = "Rubin", Prenom = "Gaëtan", Password = "azertyuiop" } };
         public static int LastId = 0;
 
         public DalManager()
@@ -72,6 +75,11 @@ namespace PokemonDataAccessLayer
         public List<Caracteristiques> GetAllCaracteristiques()
         {
             return allCaracteristiques;
+        }
+
+        public static Utilisateur GetUtilisateurByLogin(string login)
+        {
+            return allUtilisateurs.Find(u => u.Login.ToLower() == login.ToLower());
         }
     }
 }

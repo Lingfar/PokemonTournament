@@ -54,10 +54,6 @@
       <Project>{bf9568c9-6b22-44c0-87aa-14acea9669e4}</Project>
       <Name>PokemonBusinessLayer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PokemonTournamentEntities\PokemonTournamentEntities.csproj">
-      <Project>{0a85b218-058d-40a0-99d0-935c83cc39a4}</Project>
-      <Name>PokemonTournamentEntities</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

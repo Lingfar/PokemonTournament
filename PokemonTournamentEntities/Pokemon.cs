@@ -11,14 +11,18 @@ namespace PokemonTournamentEntities
         Eau, Feu, Sol, Insecte, Plante, Dragon
     }
 
+    [Serializable]
     public class Pokemon : EntityObject
     {
         private static Random rand = new Random(42);
         public static int[,] TableFaiblesses = new int[,] { {-1, 1, 1, 0, -1, -1}, {-1, -1, 1, 1, 1, -1},
             {0, 1, 0, -1, -1, 0}, {0, -1, 0, 0, 1, 0}, {1, -1, 1, -1, -1, -1}, {0, 0, 0, 0, 0, 1} };
-        public Caracteristiques Caracteristiques { get; set; }
+
         public string Nom { get; set; }
         public ETypeElement Type { get; set; }
+        public Caracteristiques Caracteristiques { get; set; }
+
+        public Pokemon() { }
 
         public Pokemon(int id) : base(id)
         {

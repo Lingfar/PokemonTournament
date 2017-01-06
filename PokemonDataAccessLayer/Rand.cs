@@ -16,6 +16,7 @@ namespace PokemonDataAccessLayer
             Pokemon poke = new Pokemon(id);
             poke.Caracteristiques = GenerateCaracteristiques();
             poke.Type = (ETypeElement)rand.Next(0, 6);
+            poke.Nom = " ";
             return poke;
         }
 

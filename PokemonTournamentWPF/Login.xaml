@@ -1,0 +1,29 @@
+﻿<Window x:Class="PokemonTournamentWPF.Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PokemonTournamentWPF"
+        mc:Ignorable="d"
+        Title="Login" Height="500" Width="500" ResizeMode="NoResize"
+        FocusManager.FocusedElement="{Binding ElementName=txtLogin}">
+    <Grid Background="BlueViolet">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Connexion" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"/>
+        <TextBlock Text="Login :" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="1"/>
+        <TextBox x:Name="txtLogin" FontSize="24" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1"/>
+        <TextBlock Text="Password :" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="2"/>
+        <PasswordBox x:Name="txtPassword" FontSize="24" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="2"/>
+        <Button x:Name="btnLogin" Content="Se connecter" Width="250" FontSize="24" IsDefault="True"
+                Click="btnLogin_Click" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+    </Grid>
+</Window>

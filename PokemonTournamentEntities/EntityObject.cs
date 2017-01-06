@@ -9,6 +9,12 @@ namespace PokemonTournamentEntities
     public abstract class EntityObject
     {
         public int ID { get; set; }
+
+        public EntityObject()
+        {
+
+        }
+
         public EntityObject(int id)
         {
             ID = id;
