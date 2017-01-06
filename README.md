@@ -1,2 +1,2 @@
-# PokemonTournamentConsole
-Pokemon Tournament in Console using C#
+# PokemonTournament
+Pokemon Tournament in Console / WPF using C#
