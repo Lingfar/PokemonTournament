@@ -143,7 +143,7 @@ namespace PokemonBusinessLayer
             for (int i = pokemons.Count - 1; i >= 0; i -= 2)
             {
                 Match match;
-                if(FastestPokemon(pokemons[i], pokemons[i - 1]))
+                if (FastestPokemon(pokemons[i], pokemons[i - 1]))
                     match = RunMatch(pokemons[i], pokemons[i - 1], phase);
                 else
                     match = RunMatch(pokemons[i - 1], pokemons[i], phase);
@@ -164,19 +164,19 @@ namespace PokemonBusinessLayer
             Caracteristiques newCaracP2 = new Caracteristiques(pokemon2.Caracteristiques);
 
             Match match = new Match(DalManager.LastId, phase, pokemon1, pokemon2);
-            DalManager.LastId++;            
+            DalManager.LastId++;
             match.Stade = dalManager.GetAllStades()[rng.Next(0, 6)];
 
             BuffNerfPokemonByStade(pokemon1.Type, newCaracP1, match.Stade);
             BuffNerfPokemonByStade(pokemon2.Type, newCaracP2, match.Stade);
-            
+
             decimal multiplicatorP1 = GetMultiplicatorBetweenType(pokemon1.Type, pokemon2.Type);
             decimal multiplicatorP2 = GetMultiplicatorBetweenType(pokemon2.Type, pokemon1.Type);
             while (newCaracP1.PV > 0 && newCaracP2.PV > 0)
             {
-                if(!EsquiveOrNot(pokemon2))
+                if (!EsquiveOrNot(pokemon2))
                     newCaracP2.PV -= (int)Math.Ceiling(multiplicatorP1 * (decimal)newCaracP1.Attaque / (decimal)newCaracP2.Defense * 4m);
-                if(!EsquiveOrNot(pokemon1))
+                if (!EsquiveOrNot(pokemon1))
                     newCaracP1.PV -= (int)Math.Ceiling(multiplicatorP2 * (decimal)newCaracP2.Attaque / (decimal)newCaracP1.Defense * 4m);
             }
 
@@ -193,8 +193,8 @@ namespace PokemonBusinessLayer
         private decimal GetMultiplicatorBetweenType(ETypeElement type1, ETypeElement type2)
         {
             decimal multiplicator = 1m;
-            if (Pokemon.TableFaiblesses[(int)type1, (int)type2] == -1)            
-                multiplicator = 0.5m;            
+            if (Pokemon.TableFaiblesses[(int)type1, (int)type2] == -1)
+                multiplicator = 0.5m;
             else if (Pokemon.TableFaiblesses[(int)type1, (int)type2] == 1)
                 multiplicator = 2m;
             return multiplicator;

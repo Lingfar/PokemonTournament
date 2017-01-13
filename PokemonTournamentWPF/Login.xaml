@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PokemonTournamentWPF"
         mc:Ignorable="d"
-        Title="Login" Height="500" Width="500" ResizeMode="NoResize"
+        Title="Login" Height="500" Width="500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
         FocusManager.FocusedElement="{Binding ElementName=txtLogin}">
     <Grid Background="CadetBlue">
         <Grid.RowDefinitions>
