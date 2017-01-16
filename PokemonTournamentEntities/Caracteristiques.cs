@@ -89,6 +89,12 @@ namespace PokemonTournamentEntities
             
         }
 
+        public Caracteristiques(int attaque, int defense)
+        {
+            Attaque = attaque;
+            Defense = defense;
+        }
+
         public Caracteristiques(Caracteristiques c)
         {
             PV = c.PV;

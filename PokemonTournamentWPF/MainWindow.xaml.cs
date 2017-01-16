@@ -100,6 +100,7 @@ namespace PokemonTournamentWPF
                     if (row != null)
                     {
                         ModifStade modStade = new ModifStade(this, (Stade)row.DataContext);
+                        modStade.Closed += modStade_Closed;
                         modStade.Show();
                     }
                 }
@@ -124,8 +125,16 @@ namespace PokemonTournamentWPF
             if (!otherWindowsOpened)
             {
                 ModifStade modStade = new ModifStade(this);
+                modStade.Closed += modStade_Closed;
                 modStade.Show();
             }
+        }
+
+        private void modStade_Closed(object sender, EventArgs e)
+        {
+            List<Stade> allStades = businessManager.GetAllStades();
+            dataGridData.ItemsSource = businessManager.GetAllStades();
+            dataGridData.Items.Refresh();
         }
     }
 }

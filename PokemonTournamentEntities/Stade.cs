@@ -13,6 +13,11 @@ namespace PokemonTournamentEntities
         public int NbPlaces { get; set; }
         public Caracteristiques Caracteristiques { get; set; }
 
+        public Stade()
+        {
+
+        }
+
         public Stade(int id) : base(id)
         {
 

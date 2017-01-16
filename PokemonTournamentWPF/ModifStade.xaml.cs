@@ -1,4 +1,5 @@
-﻿using PokemonTournamentEntities;
+﻿using PokemonBusinessLayer;
+using PokemonTournamentEntities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,6 +39,7 @@ namespace PokemonTournamentWPF
             InitializeComponent();
             InitListType();
             MainWindow = mainWindow;
+            stade = new Stade();
         }
 
         public ModifStade(MainWindow mainWindow, Stade stade)
@@ -49,6 +51,8 @@ namespace PokemonTournamentWPF
             cbType.SelectedIndex = (int)this.stade.Type;
             txtName.Text = this.stade.Nom;
             txtNbPlaces.Text = this.stade.NbPlaces.ToString();
+            txtAtt.Text = this.stade.Caracteristiques.Attaque.ToString();
+            txtDef.Text = this.stade.Caracteristiques.Defense.ToString();
         }
 
         private void InitListType()
@@ -64,7 +68,34 @@ namespace PokemonTournamentWPF
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            stade.Nom = txtName.Text;
+            stade.Type = (ETypeElement)Enum.Parse(typeof(ETypeElement), cbType.SelectedValue.ToString());
+            if (txtNbPlaces.Text == "")
+                stade.NbPlaces = 0;
+            else
+                stade.NbPlaces = Convert.ToInt32(txtNbPlaces.Text);
 
+            stade.Caracteristiques = new Caracteristiques();
+            if (txtAtt.Text != "" && txtDef.Text != "")
+            {
+                stade.Caracteristiques = new Caracteristiques(Convert.ToInt32(txtAtt.Text),
+                    Convert.ToInt32(txtDef.Text));
+            }
+            else if(txtAtt.Text != "" && txtDef.Text == "")
+            {
+                stade.Caracteristiques.Attaque = Convert.ToInt32(txtAtt.Text);
+            }
+            else
+            {
+                stade.Caracteristiques.Defense = Convert.ToInt32(txtDef.Text);
+            }
+            stade.Caracteristiques = stade.Caracteristiques;
+            BusinessManager businessManager = BusinessManager.Instance;
+            if (stade.ID == 0)
+                businessManager.AddNewStade(stade);
+            else
+                businessManager.ModifyStade(stade);            
+            Close();
         }
     }
 }

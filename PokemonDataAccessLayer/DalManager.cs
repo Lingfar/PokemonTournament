@@ -77,6 +77,19 @@ namespace PokemonDataAccessLayer
             return allCaracteristiques;
         }
 
+        public void AddNewStade(Stade stade)
+        {
+            stade.ID = LastId;         
+            allStades.Add(stade);
+            LastId++;
+        }
+
+        public void ModifyStade(Stade stade)
+        {
+            Stade sd = allStades.Find(s => s.ID == stade.ID);
+            sd = stade;
+        }
+
         public static Utilisateur GetUtilisateurByLogin(string login)
         {
             return allUtilisateurs.Find(u => u.Login.ToLower() == login.ToLower());

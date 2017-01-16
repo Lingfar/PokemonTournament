@@ -127,6 +127,16 @@ namespace PokemonBusinessLayer
         }
         #endregion
 
+        public void AddNewStade(Stade stade)
+        {
+            dalManager.AddNewStade(stade);
+        }
+
+        public void ModifyStade(Stade stade)
+        {
+
+        }
+
         #region Tournoi
         public void RunTournament()
         {
