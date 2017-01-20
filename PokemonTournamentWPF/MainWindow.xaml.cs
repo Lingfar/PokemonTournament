@@ -78,12 +78,6 @@ namespace PokemonTournamentWPF
             Console.WriteLine("coucou");
         }
 
-        private void pokemonControl_ButtonClick(object sender, EventArgs e)
-        {
-            PokemonModel pokeControl = (PokemonModel)sender;
-            Console.WriteLine(pokeControl.Pokemon.ID);
-        }
-
         private void btnExportPokemons_Click(object sender, RoutedEventArgs e)
         {
             XmlSerializer ser = new XmlSerializer(typeof(List<Pokemon>));
