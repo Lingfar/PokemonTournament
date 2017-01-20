@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PokemonBusinessLayer;
 using PokemonTournamentEntities;
-using PokemonTournamentWPF.View;
+using PokemonTournamentWPF.Forms;
 using System.Xml;
 using System.Xml.Serialization;
 using System.IO;
@@ -28,12 +28,10 @@ namespace PokemonTournamentWPF
     public partial class MainWindow : Window
     {
         public BusinessManager businessManager { get; set; }
-        public bool otherWindowsOpened { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
-            otherWindowsOpened = false;
 
             businessManager = BusinessManager.Instance;
             businessManager.RunTournament();
@@ -94,16 +92,17 @@ namespace PokemonTournamentWPF
         {
             if (dataGridData.ItemsSource.GetType() == typeof(List<Stade>))
             {
-                if (!otherWindowsOpened)
+                DataGridRow row = (DataGridRow)ItemsControl.ContainerFromElement((DataGrid)sender,
+                           (DependencyObject)e.OriginalSource);
+                if (row != null)
                 {
-                    DataGridRow row = (DataGridRow)ItemsControl.ContainerFromElement((DataGrid)sender,
-                        (DependencyObject)e.OriginalSource);
-                    if (row != null)
-                    {
-                        View.StadeView modStade = new View.StadeView(this, (Stade)row.DataContext);
-                        modStade.Closed += modStade_Closed;
-                        modStade.Show();
-                    }
+                    StadeViewer stadeViewer = new StadeViewer((Stade)row.DataContext);
+                    stadeViewer.Closed += StadeView_Closed;
+                    stadeViewer.ShowDialog();
+
+                    //View.StadeViewOld modStade = new View.StadeViewOld(this, (Stade)row.DataContext);
+                    //modStade.Closed += modStade_Closed;
+                    //modStade.Show();
                 }
             }
         }
@@ -118,7 +117,7 @@ namespace PokemonTournamentWPF
                     item.DisplayIndex = 0;
                     break;
                 }
-                else if(item.Header.ToString() == "Suppression")
+                else if (item.Header.ToString() == "Suppression")
                 {
                     item.DisplayIndex = grid.Columns.Count - 1;
                 }
@@ -127,15 +126,21 @@ namespace PokemonTournamentWPF
 
         private void btnAddStade_Click(object sender, RoutedEventArgs e)
         {
-            if (!otherWindowsOpened)
-            {
-                View.StadeView modStade = new View.StadeView(this);
-                modStade.Closed += modStade_Closed;
-                modStade.Show();
-            }
+            StadeViewer stadeViewer = new StadeViewer();
+            stadeViewer.ShowDialog();
+
+            /*View.StadeViewOld modStade = new View.StadeViewOld(this);
+            modStade.Closed += modStade_Closed;
+            modStade.Show();*/
         }
 
         private void modStade_Closed(object sender, EventArgs e)
+        {
+            dataGridData.ItemsSource = businessManager.GetAllStades();
+            dataGridData.Items.Refresh();
+        }
+
+        private void StadeView_Closed(object sender, EventArgs e)
         {
             dataGridData.ItemsSource = businessManager.GetAllStades();
             dataGridData.Items.Refresh();

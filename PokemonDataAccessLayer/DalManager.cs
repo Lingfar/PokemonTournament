@@ -79,9 +79,8 @@ namespace PokemonDataAccessLayer
 
         public void AddNewStade(Stade stade)
         {
-            stade.ID = LastId;         
+            stade.ID = LastId++;         
             allStades.Add(stade);
-            LastId++;
         }
 
         public void DeleteNewStade(Stade stade)
