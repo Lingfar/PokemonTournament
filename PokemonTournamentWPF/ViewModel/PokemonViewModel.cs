@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 using PokemonTournamentEntities;
 namespace PokemonTournamentWPF.ViewModel
 {
-    public class PokemonModel : ViewModelBase
+    public class PokemonViewModel : ViewModelBase
     {
         private Pokemon poke { get; set; }
 
-        PokemonModel (Pokemon orig)
+        public PokemonViewModel (Pokemon orig)
         {
             poke = orig;
             base.OnPropertyChanged("Nom");

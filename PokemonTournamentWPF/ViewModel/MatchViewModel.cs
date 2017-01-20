@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 using PokemonTournamentEntities;
 namespace PokemonTournamentWPF.ViewModel
 {
-    class MatchModel : ViewModelBase
+    class MatchViewModel : ViewModelBase
     {
         private Match match { get; set; }
 
-        MatchModel(Match orig)
+        MatchViewModel(Match orig)
         {
             match = orig;
             base.OnPropertyChanged("Stade");
