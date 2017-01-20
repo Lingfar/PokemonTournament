@@ -7,9 +7,18 @@ using PokemonTournamentEntities;
 
 namespace PokemonTournamentWPF.ViewModel
 {
-    class PokemonModel
+    public class PokemonViewModel : ViewModelBase
     {
         private Pokemon poke { get; set; }
+
+        public PokemonViewModel (Pokemon orig)
+        {
+            poke = orig;
+            base.OnPropertyChanged("Nom");
+            base.OnPropertyChanged("Type");
+            base.OnPropertyChanged("Caracteristiques");
+        }
+
         public String Nom
         {
             get
@@ -19,6 +28,7 @@ namespace PokemonTournamentWPF.ViewModel
             set
             {
                 poke.Nom = value;
+                base.OnPropertyChanged("Nom");
             }
         }
         public ETypeElement Type
@@ -30,6 +40,7 @@ namespace PokemonTournamentWPF.ViewModel
             set
             {
                 poke.Type = value;
+                base.OnPropertyChanged("Type");
             }
         }
         public Caracteristiques Caracteristiques
@@ -41,9 +52,20 @@ namespace PokemonTournamentWPF.ViewModel
             set
             {
                 poke.Caracteristiques = value;
+                base.OnPropertyChanged("Caracteristiques");
             }
         }
+        public int ID
+        {
+            get
+            {
+                return poke.ID;
+            }
+            set
+            {
 
+            }
+        }
 
         public override string ToString()
         {

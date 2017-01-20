@@ -91,9 +91,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ViewModel\ETypeElementModel.cs" />
-    <Compile Include="ViewModel\PokemonModel.cs" />
-    <Compile Include="ViewModel\StadeViewModel.cs" />
+    <Compile Include="ViewModel\MatchViewModel.cs" />
+    <Compile Include="ViewModel\PokemonViewModel.cs" />
+    <Compile Include="ViewModel\PokemonsViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\StadeView.xaml.cs">
       <DependentUpon>StadeView.xaml</DependentUpon>
