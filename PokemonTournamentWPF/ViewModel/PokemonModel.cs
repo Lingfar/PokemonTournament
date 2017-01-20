@@ -10,6 +10,15 @@ namespace PokemonTournamentWPF.ViewModel
     public class PokemonModel : ViewModelBase
     {
         private Pokemon poke { get; set; }
+
+        PokemonModel (Pokemon orig)
+        {
+            poke = orig;
+            base.OnPropertyChanged("Nom");
+            base.OnPropertyChanged("Type");
+            base.OnPropertyChanged("Caracteristiques");
+        }
+
         public String Nom
         {
             get
@@ -44,6 +53,17 @@ namespace PokemonTournamentWPF.ViewModel
             {
                 poke.Caracteristiques = value;
                 base.OnPropertyChanged("Caracteristiques");
+            }
+        }
+        public int ID
+        {
+            get
+            {
+                return poke.ID;
+            }
+            set
+            {
+
             }
         }
 
