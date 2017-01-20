@@ -14,12 +14,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PokemonTournamentWPF
+namespace PokemonTournamentWPF.View
 {
     /// <summary>
     /// Interaction logic for ModifStade.xaml
     /// </summary>
-    public partial class ModifStade : Window
+    public partial class StadeView : Window
     {
         private MainWindow mainWindow;
         public MainWindow MainWindow
@@ -34,7 +34,7 @@ namespace PokemonTournamentWPF
 
         private Stade stade { get; set; }
 
-        public ModifStade(MainWindow mainWindow)
+        public StadeView(MainWindow mainWindow)
         {
             InitializeComponent();
             InitListType();
@@ -44,7 +44,7 @@ namespace PokemonTournamentWPF
             btnSave.SetValue(Grid.ColumnSpanProperty, 2);
         }
 
-        public ModifStade(MainWindow mainWindow, Stade stade)
+        public StadeView(MainWindow mainWindow, Stade stade)
         {
             InitializeComponent();
             InitListType();

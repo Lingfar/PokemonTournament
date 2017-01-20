@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PokemonBusinessLayer;
 using PokemonTournamentEntities;
+using PokemonTournamentWPF.View;
 using System.Xml;
 using System.Xml.Serialization;
 using System.IO;
@@ -99,7 +100,7 @@ namespace PokemonTournamentWPF
                         (DependencyObject)e.OriginalSource);
                     if (row != null)
                     {
-                        ModifStade modStade = new ModifStade(this, (Stade)row.DataContext);
+                        View.StadeView modStade = new View.StadeView(this, (Stade)row.DataContext);
                         modStade.Closed += modStade_Closed;
                         modStade.Show();
                     }
@@ -128,7 +129,7 @@ namespace PokemonTournamentWPF
         {
             if (!otherWindowsOpened)
             {
-                ModifStade modStade = new ModifStade(this);
+                View.StadeView modStade = new View.StadeView(this);
                 modStade.Closed += modStade_Closed;
                 modStade.Show();
             }

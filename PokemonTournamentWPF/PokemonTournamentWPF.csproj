@@ -74,15 +74,16 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ModifStade.xaml">
+    <Page Include="View\StadeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ModifStade.xaml.cs">
-      <DependentUpon>ModifStade.xaml</DependentUpon>
+    <Compile Include="View\StadeView.xaml.cs">
+      <DependentUpon>StadeView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PokemonModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -118,6 +119,9 @@
       <Project>{0a85b218-058d-40a0-99d0-935c83cc39a4}</Project>
       <Name>PokemonTournamentEntities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModel\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
