@@ -20,10 +20,10 @@
         </Grid.ColumnDefinitions>
         <TextBlock Text="Connexion" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"/>
         <TextBlock Text="Login :" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="1"/>
-        <TextBox x:Name="txtLogin" FontSize="24" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1"/>
+        <TextBox Name="txtLogin" FontSize="24" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1"/>
         <TextBlock Text="Password :" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="2"/>
-        <PasswordBox x:Name="txtPassword" FontSize="24" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="2"/>
-        <Button x:Name="btnLogin" Content="Se connecter" Width="250" FontSize="24" IsDefault="True"
+        <PasswordBox Name="txtPassword" FontSize="24" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="2"/>
+        <Button Name="btnLogin" Content="Se connecter" Width="250" FontSize="24" IsDefault="True"
                 Click="btnLogin_Click" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
     </Grid>
 </Window>

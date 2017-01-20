@@ -92,9 +92,7 @@ namespace PokemonTournamentWPF
             stade.Caracteristiques = stade.Caracteristiques;
             BusinessManager businessManager = BusinessManager.Instance;
             if (stade.ID == 0)
-                businessManager.AddNewStade(stade);
-            else
-                businessManager.ModifyStade(stade);            
+                businessManager.AddNewStade(stade);         
             Close();
         }
     }

@@ -84,11 +84,12 @@ namespace PokemonDataAccessLayer
             LastId++;
         }
 
-        public void ModifyStade(Stade stade)
+        public void DeleteNewStade(Stade stade)
         {
-            Stade sd = allStades.Find(s => s.ID == stade.ID);
-            sd = stade;
+            int index = allStades.FindIndex(s => s.ID == stade.ID);
+            allStades.RemoveAt(index);
         }
+
 
         public static Utilisateur GetUtilisateurByLogin(string login)
         {

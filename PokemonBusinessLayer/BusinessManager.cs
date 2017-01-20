@@ -132,9 +132,9 @@ namespace PokemonBusinessLayer
             dalManager.AddNewStade(stade);
         }
 
-        public void ModifyStade(Stade stade)
+        public void DeleteStade(Stade stade)
         {
-
+            dalManager.DeleteNewStade(stade);
         }
 
         #region Tournoi
