@@ -12,7 +12,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition/>
+            <!--<RowDefinition/>-->
         </Grid.RowDefinitions>
         
         <Grid Grid.Row="0" Background="DarkRed">
@@ -41,13 +41,13 @@
         <Button Name="btnExportPokemons" Grid.Row="3" Content="Exporter tous les pokemons" Click="btnExportPokemons_Click" FontSize="20" Margin="5" Width="300" />
         <Button Name="btnAddStade" Grid.Row="3" Visibility="Collapsed" Content="Ajouter un nouveau stade" Click="btnAddStade_Click" FontSize="20" Margin="5" Width="300" />
 
-        <local:PokemonControl x:Name="pokeCtrl" Grid.Row="4" />
+        <!--<local:PokemonModel x:Name="pokeCtrl" Grid.Row="4" />
         <ListBox Name="lbData" Grid.Row="4">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <local:PokemonControl/>
+                    <local:PokemonModel/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-        </ListBox>
+        </ListBox>-->
     </Grid>
 </Window>

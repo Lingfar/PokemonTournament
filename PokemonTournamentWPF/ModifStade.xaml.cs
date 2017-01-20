@@ -95,5 +95,12 @@ namespace PokemonTournamentWPF
                 businessManager.AddNewStade(stade);         
             Close();
         }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            BusinessManager businessManager = BusinessManager.Instance;
+            businessManager.DeleteStade(stade);
+            Close();
+        }
     }
 }

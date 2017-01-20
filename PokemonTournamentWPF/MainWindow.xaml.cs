@@ -37,18 +37,6 @@ namespace PokemonTournamentWPF
             businessManager = BusinessManager.Instance;
             businessManager.RunTournament();
             dataGridData.ItemsSource = businessManager.GetAllPokemons();
-
-
-            List<Pokemon> allPokemons = businessManager.GetAllPokemons();
-            List<PokemonControl> listPokemonControl = new List<PokemonControl>();
-            foreach (Pokemon poke in allPokemons)
-            {
-                PokemonControl pokeControl = new PokemonControl(poke);
-                pokeControl.ButtonDeleteClick += new EventHandler(pokemonControl_ButtonClick);
-                listPokemonControl.Add(pokeControl);
-            }
-
-            lbData.ItemsSource = listPokemonControl;
         }
 
         private void btn_Click(object sender, RoutedEventArgs e)
@@ -84,9 +72,15 @@ namespace PokemonTournamentWPF
             }
         }
 
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            Console.WriteLine("coucou");
+        }
+
         private void pokemonControl_ButtonClick(object sender, EventArgs e)
         {
-            PokemonControl pokeControl = (PokemonControl)sender;
+            PokemonModel pokeControl = (PokemonModel)sender;
             Console.WriteLine(pokeControl.Pokemon.ID);
         }
 
@@ -134,6 +128,10 @@ namespace PokemonTournamentWPF
                 {
                     item.DisplayIndex = 0;
                     break;
+                }
+                else if(item.Header.ToString() == "Suppression")
+                {
+                    item.DisplayIndex = grid.Columns.Count - 1;
                 }
             }
         }

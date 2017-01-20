@@ -44,7 +44,9 @@
         </Grid>
         
         <TextBox Name="txtNbPlaces" FontSize="24" Grid.Column="1" Grid.Row="2" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Button Name="btnSave" FontSize="24" Grid.ColumnSpan="2" Width="400" Grid.Column="0" Grid.Row="4" Click="btnSave_Click"
-                Content="Sauvegarder les modifications" HorizontalAlignment="Center" VerticalAlignment="Center" IsDefault="True" />
+        <Button Name="btnSave" FontSize="24" Width="200" Grid.Column="0" Grid.Row="4" Click="btnSave_Click"
+                Content="Sauvegarder" HorizontalAlignment="Center" VerticalAlignment="Center" IsDefault="True" />
+        <Button Name="btnDelete" FontSize="24" Width="200" Grid.Column="1" Grid.Row="4" Click="btnDelete_Click"
+                Content="Supprimer" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     </Grid>
 </Window>
