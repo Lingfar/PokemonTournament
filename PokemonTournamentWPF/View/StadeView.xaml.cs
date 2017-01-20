@@ -1,4 +1,5 @@
 ﻿using PokemonTournamentEntities;
+using PokemonTournamentWPF.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,23 @@ namespace PokemonTournamentWPF.View
         {
             InitializeComponent();
             cbType.ItemsSource = Enum.GetNames(typeof(ETypeElement));
+        }
+
+        private void UserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            StadeViewModel stadeModel = DataContext as StadeViewModel;
+            if(stadeModel != null && stadeModel.ID == 0)
+            {
+                btnAdd.Visibility = Visibility.Visible;
+                btnSave.Visibility = Visibility.Collapsed;
+                btnRemove.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                btnAdd.Visibility = Visibility.Collapsed;
+                btnSave.Visibility = Visibility.Visible;
+                btnRemove.Visibility = Visibility.Visible;
+            }
         }
     }
 }

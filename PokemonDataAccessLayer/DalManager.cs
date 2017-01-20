@@ -16,7 +16,7 @@ namespace PokemonDataAccessLayer
 
         private static List<Utilisateur> allUtilisateurs = new List<Utilisateur>
             { new Utilisateur {Login = "Lingfar", Nom = "Rubin", Prenom = "Gaëtan", Password = "azertyuiop" } };
-        public static int LastId = 0;
+        public static int LastId = 1;
 
         public DalManager()
         {

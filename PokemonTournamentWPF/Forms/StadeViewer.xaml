@@ -7,7 +7,6 @@
         xmlns:view="clr-namespace:PokemonTournamentWPF.View" 
         mc:Ignorable="d"
         Title="StadeViewer" Height="600" Width="600" ResizeMode="NoResize"
-        FocusManager.FocusedElement="{Binding ElementName=txtName}"
         WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid>
         <view:StadeView x:Name="ucStadeView"/>

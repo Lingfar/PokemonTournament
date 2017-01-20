@@ -15,12 +15,12 @@ namespace PokemonTournamentEntities
 
         public Stade()
         {
-
+            Caracteristiques = new Caracteristiques();
         }
 
         public Stade(int id) : base(id)
         {
-
+            Caracteristiques = new Caracteristiques();
         }
 
         public override string ToString()

@@ -99,10 +99,6 @@ namespace PokemonTournamentWPF
                     StadeViewer stadeViewer = new StadeViewer((Stade)row.DataContext);
                     stadeViewer.Closed += StadeView_Closed;
                     stadeViewer.ShowDialog();
-
-                    //View.StadeViewOld modStade = new View.StadeViewOld(this, (Stade)row.DataContext);
-                    //modStade.Closed += modStade_Closed;
-                    //modStade.Show();
                 }
             }
         }
@@ -127,11 +123,8 @@ namespace PokemonTournamentWPF
         private void btnAddStade_Click(object sender, RoutedEventArgs e)
         {
             StadeViewer stadeViewer = new StadeViewer();
+            stadeViewer.Closed += StadeView_Closed;
             stadeViewer.ShowDialog();
-
-            /*View.StadeViewOld modStade = new View.StadeViewOld(this);
-            modStade.Closed += modStade_Closed;
-            modStade.Show();*/
         }
 
         private void modStade_Closed(object sender, EventArgs e)

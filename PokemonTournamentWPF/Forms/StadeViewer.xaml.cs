@@ -38,8 +38,19 @@ namespace PokemonTournamentWPF.Forms
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            StadeViewModel stadeViewModel = new StadeViewModel(stade);
+            StadeViewModel stadeViewModel;
+            if (stade != null)
+                stadeViewModel = new StadeViewModel(stade);
+            else
+                stadeViewModel = new StadeViewModel();
+
+            stadeViewModel.CloseNotified += CloseNotified;
             ucStadeView.DataContext = stadeViewModel;
+        }
+
+        private void CloseNotified(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
