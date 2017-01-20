@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using PokemonTournamentEntities;
 namespace PokemonTournamentWPF.ViewModel
 {
-    class PokemonModel
+    public class PokemonModel : ViewModelBase
     {
         private Pokemon poke { get; set; }
         public String Nom
@@ -19,6 +19,7 @@ namespace PokemonTournamentWPF.ViewModel
             set
             {
                 poke.Nom = value;
+                base.OnPropertyChanged("Nom");
             }
         }
         public ETypeElement Type
@@ -30,6 +31,7 @@ namespace PokemonTournamentWPF.ViewModel
             set
             {
                 poke.Type = value;
+                base.OnPropertyChanged("Type");
             }
         }
         public Caracteristiques Caracteristiques
@@ -41,9 +43,9 @@ namespace PokemonTournamentWPF.ViewModel
             set
             {
                 poke.Caracteristiques = value;
+                base.OnPropertyChanged("Caracteristiques");
             }
         }
-
 
         public override string ToString()
         {
