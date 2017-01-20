@@ -72,12 +72,6 @@ namespace PokemonTournamentWPF
             }
         }
 
-        private void btnDelete_Click(object sender, RoutedEventArgs e)
-        {
-            Button button = (Button)sender;
-            Console.WriteLine("coucou");
-        }
-
         private void btnExportPokemons_Click(object sender, RoutedEventArgs e)
         {
             XmlSerializer ser = new XmlSerializer(typeof(List<Pokemon>));

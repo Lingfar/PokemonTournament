@@ -40,6 +40,8 @@ namespace PokemonTournamentWPF
             InitListType();
             MainWindow = mainWindow;
             stade = new Stade();
+            btnDelete.Visibility = Visibility.Collapsed;
+            btnSave.SetValue(Grid.ColumnSpanProperty, 2);
         }
 
         public ModifStade(MainWindow mainWindow, Stade stade)
@@ -53,6 +55,8 @@ namespace PokemonTournamentWPF
             txtNbPlaces.Text = this.stade.NbPlaces.ToString();
             txtAtt.Text = this.stade.Caracteristiques.Attaque.ToString();
             txtDef.Text = this.stade.Caracteristiques.Defense.ToString();
+            btnDelete.Visibility = Visibility.Visible;
+            btnSave.SetValue(Grid.ColumnSpanProperty, 1);
         }
 
         private void InitListType()
