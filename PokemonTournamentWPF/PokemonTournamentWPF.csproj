@@ -80,10 +80,11 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ViewModel\PokemonModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\StadeView.xaml.cs">
       <DependentUpon>StadeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PokemonModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -120,9 +121,7 @@
       <Name>PokemonTournamentEntities</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModel\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
