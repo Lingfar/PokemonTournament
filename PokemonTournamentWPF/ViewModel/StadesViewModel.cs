@@ -1,5 +1,4 @@
 ﻿using PokemonTournamentEntities;
-using PokemonTournamentWPF.Forms;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -129,6 +128,7 @@ namespace PokemonTournamentWPF.ViewModel
             {
                 PokemonBusinessLayer.BusinessManager.Instance.DeleteStade(SelectedItem.Stade);
                 Stades.Remove(SelectedItem);
+                SelectedItem = new StadeViewModel();
             }
         }
     }

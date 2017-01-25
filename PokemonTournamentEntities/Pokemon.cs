@@ -20,13 +20,13 @@ namespace PokemonTournamentEntities
 
         public string Nom { get; set; }
         public ETypeElement Type { get; set; }
-        public Caracteristiques Caracteristiques { get; set; }
+        public Caracteristique Caracteristiques { get; set; }
 
         public Pokemon() { }
 
         public Pokemon(int id) : base(id)
         {
-            Caracteristiques = new Caracteristiques();
+            Caracteristiques = new Caracteristique();
         }
 
         public override string ToString()

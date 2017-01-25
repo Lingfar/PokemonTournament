@@ -20,9 +20,9 @@ namespace PokemonDataAccessLayer
             return poke;
         }
 
-        public static Caracteristiques GenerateCaracteristiques()
+        public static Caracteristique GenerateCaracteristiques()
         {
-            Caracteristiques carac = new Caracteristiques();
+            Caracteristique carac = new Caracteristique();
             carac.PV = rand.Next(50, 201);
             carac.Attaque = rand.Next(1, 21);
             carac.Defense = rand.Next(1, 21);
@@ -36,7 +36,7 @@ namespace PokemonDataAccessLayer
             Stade stade = new Stade(id);
             stade.Type = type;
 
-            Caracteristiques carac = new Caracteristiques();
+            Caracteristique carac = new Caracteristique();
             carac.Attaque = rand.Next(1, 6);
             carac.Defense = carac.Attaque;
 

@@ -121,7 +121,7 @@ namespace PokemonBusinessLayer
             return dalManager.GetAllStades();
         }
 
-        public List<Caracteristiques> GetAllCaracteristiques()
+        public List<Caracteristique> GetAllCaracteristiques()
         {
             return dalManager.GetAllCaracteristiques();
         }
@@ -170,8 +170,8 @@ namespace PokemonBusinessLayer
 
         private Match RunMatch(Pokemon pokemon1, Pokemon pokemon2, EPhaseTournoi phase)
         {
-            Caracteristiques newCaracP1 = new Caracteristiques(pokemon1.Caracteristiques);
-            Caracteristiques newCaracP2 = new Caracteristiques(pokemon2.Caracteristiques);
+            Caracteristique newCaracP1 = new Caracteristique(pokemon1.Caracteristiques);
+            Caracteristique newCaracP2 = new Caracteristique(pokemon2.Caracteristiques);
 
             Match match = new Match(DalManager.LastId, phase, pokemon1, pokemon2);
             DalManager.LastId++;
@@ -210,7 +210,7 @@ namespace PokemonBusinessLayer
             return multiplicator;
         }
 
-        private void BuffNerfPokemonByStade(ETypeElement type, Caracteristiques carac, Stade stade)
+        private void BuffNerfPokemonByStade(ETypeElement type, Caracteristique carac, Stade stade)
         {
             if (type == stade.Type)
             {

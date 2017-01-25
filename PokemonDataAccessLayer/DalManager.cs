@@ -12,7 +12,7 @@ namespace PokemonDataAccessLayer
         private List<Pokemon> allPokemons { get; set; }
         private List<Match> allMatchs { get; set; }
         private List<Stade> allStades { get; set; }
-        private List<Caracteristiques> allCaracteristiques { get; set; }
+        private List<Caracteristique> allCaracteristiques { get; set; }
 
         private static List<Utilisateur> allUtilisateurs = new List<Utilisateur>
             { new Utilisateur {Login = "Lingfar", Nom = "Rubin", Prenom = "Gaëtan", Password = "azertyuiop" } };
@@ -23,7 +23,7 @@ namespace PokemonDataAccessLayer
             allPokemons = new List<Pokemon>();
             allMatchs = new List<Match>();
             allStades = new List<Stade>();
-            allCaracteristiques = new List<Caracteristiques>();
+            allCaracteristiques = new List<Caracteristique>();
 
             //32 pokemons à générer (avec type + caracteristiques random) pour les seiziemes
             for(int i = 0; i < 32; i++)
@@ -72,7 +72,7 @@ namespace PokemonDataAccessLayer
             return allStades;
         }
 
-        public List<Caracteristiques> GetAllCaracteristiques()
+        public List<Caracteristique> GetAllCaracteristiques()
         {
             return allCaracteristiques;
         }

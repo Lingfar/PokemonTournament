@@ -55,10 +55,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Forms\StadeViewer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -71,9 +67,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Forms\StadeViewer.xaml.cs">
-      <DependentUpon>StadeViewer.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
@@ -81,6 +74,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\CaracteristiquesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\StadesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -91,6 +88,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ViewModel\CaracteristiquesViewModel.cs" />
+    <Compile Include="ViewModel\CaracteristiqueViewModel.cs" />
     <Compile Include="ViewModel\ETypeElementModel.cs" />
     <Compile Include="ViewModel\MatchViewModel.cs" />
     <Compile Include="ViewModel\PokemonViewModel.cs" />
@@ -99,6 +98,9 @@
     <Compile Include="ViewModel\StadesViewModel.cs" />
     <Compile Include="ViewModel\StadeViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\CaracteristiquesView.xaml.cs">
+      <DependentUpon>CaracteristiquesView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\StadesView.xaml.cs">
       <DependentUpon>StadesView.xaml</DependentUpon>
     </Compile>

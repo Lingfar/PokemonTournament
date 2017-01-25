@@ -43,7 +43,7 @@ namespace PokemonTournamentWPF.ViewModel
                 base.OnPropertyChanged("Type");
             }
         }
-        public Caracteristiques Caracteristiques
+        public Caracteristique Caracteristiques
         {
             get
             {

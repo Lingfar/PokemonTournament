@@ -14,12 +14,12 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PokemonBusinessLayer;
 using PokemonTournamentEntities;
-using PokemonTournamentWPF.Forms;
 using System.Xml;
 using System.Xml.Serialization;
 using System.IO;
 using Microsoft.Win32;
 using PokemonTournamentWPF.ViewModel;
+using PokemonTournamentWPF.View;
 
 namespace PokemonTournamentWPF
 {
@@ -36,11 +36,6 @@ namespace PokemonTournamentWPF
 
             businessManager = BusinessManager.Instance;
             businessManager.RunTournament();
-
-            StadesViewModel stadesViewModel = new StadesViewModel(businessManager.GetAllStades());
-            ucStadesView.DataContext = stadesViewModel;
-            ucStadesView.Visibility = Visibility.Collapsed;
-
             dataGridData.ItemsSource = businessManager.GetAllPokemons();
         }
 
@@ -51,31 +46,36 @@ namespace PokemonTournamentWPF
             {
                 case "btnPokemons":
                     dataGridData.ItemsSource = businessManager.GetAllPokemons();
-                    ucStadesView.Visibility = Visibility.Collapsed;
+                    contentControl.Visibility = Visibility.Collapsed;
                     dataGridData.Visibility = Visibility.Visible;
                     break;
                 case "btnStades":
                     dataGridData.ItemsSource = businessManager.GetAllStades();
                     dataGridData.Visibility = Visibility.Collapsed;
-                    ucStadesView.Visibility = Visibility.Visible;
+                    contentControl.Visibility = Visibility.Visible;
 
                     StadesViewModel stadesViewModel = new StadesViewModel(businessManager.GetAllStades());
-                    ucStadesView.DataContext = stadesViewModel;
+                    contentControl.Content = new StadesView();
+                    contentControl.DataContext = stadesViewModel;
                     break;
                 case "btnMatchs":
                     dataGridData.ItemsSource = businessManager.GetAllMatchs();
                     dataGridData.Visibility = Visibility.Visible;
-                    ucStadesView.Visibility = Visibility.Collapsed;
+                    contentControl.Visibility = Visibility.Collapsed;
                     break;
                 case "btnCarac":
                     dataGridData.ItemsSource = businessManager.GetAllCaracteristiques();
-                    dataGridData.Visibility = Visibility.Visible;
-                    ucStadesView.Visibility = Visibility.Collapsed;
+                    dataGridData.Visibility = Visibility.Collapsed;
+                    contentControl.Visibility = Visibility.Visible;
+
+                    CaracteristiquesViewModel caracViewModel = new CaracteristiquesViewModel(businessManager.GetAllCaracteristiques());
+                    contentControl.Content = new CaracteristiquesView();
+                    contentControl.DataContext = caracViewModel;
                     break;
                 case "btnBonus":
                     dataGridData.ItemsSource = businessManager.GetAllPokemonsByType(ETypeElement.Dragon);
                     dataGridData.Visibility = Visibility.Visible;
-                    ucStadesView.Visibility = Visibility.Collapsed;
+                    contentControl.Visibility = Visibility.Collapsed;
                     break;
             }
         }
@@ -105,9 +105,9 @@ namespace PokemonTournamentWPF
                            (DependencyObject)e.OriginalSource);
                 if (row != null)
                 {
-                    StadeViewer stadeViewer = new StadeViewer((Stade)row.DataContext);
-                    stadeViewer.Closed += StadeView_Closed;
-                    stadeViewer.ShowDialog();
+                    //StadeViewer stadeViewer = new StadeViewer((Stade)row.DataContext);
+                    //stadeViewer.Closed += StadeView_Closed;
+                    //stadeViewer.ShowDialog();
                 }
             }
         }
@@ -131,9 +131,9 @@ namespace PokemonTournamentWPF
 
         private void btnAddStade_Click(object sender, RoutedEventArgs e)
         {
-            StadeViewer stadeViewer = new StadeViewer();
-            stadeViewer.Closed += StadeView_Closed;
-            stadeViewer.ShowDialog();
+            //StadeViewer stadeViewer = new StadeViewer();
+            //stadeViewer.Closed += StadeView_Closed;
+            //stadeViewer.ShowDialog();
         }
 
         private void modStade_Closed(object sender, EventArgs e)

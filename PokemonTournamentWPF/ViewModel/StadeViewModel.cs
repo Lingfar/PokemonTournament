@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using PokemonTournamentEntities;
 using System.Windows.Input;
-using PokemonBusinessLayer;
 using System.Windows;
 
 namespace PokemonTournamentWPF.ViewModel
@@ -83,7 +82,7 @@ namespace PokemonTournamentWPF.ViewModel
             }
         }
 
-        public Caracteristiques Caracteristiques
+        public Caracteristique Caracteristiques
         {
             get { return stade.Caracteristiques; }
             set

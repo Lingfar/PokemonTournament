@@ -11,16 +11,16 @@ namespace PokemonTournamentEntities
         public string Nom { get; set; }
         public ETypeElement Type { get; set; }
         public int NbPlaces { get; set; }
-        public Caracteristiques Caracteristiques { get; set; }
+        public Caracteristique Caracteristiques { get; set; }
 
         public Stade()
         {
-            Caracteristiques = new Caracteristiques();
+            Caracteristiques = new Caracteristique();
         }
 
         public Stade(int id) : base(id)
         {
-            Caracteristiques = new Caracteristiques();
+            Caracteristiques = new Caracteristique();
         }
 
         public override string ToString()
