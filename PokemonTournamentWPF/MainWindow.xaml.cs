@@ -39,6 +39,7 @@ namespace PokemonTournamentWPF
 
             StadesViewModel stadesViewModel = new StadesViewModel(businessManager.GetAllStades());
             ucStadesView.DataContext = stadesViewModel;
+            ucStadesView.Visibility = Visibility.Collapsed;
 
             dataGridData.ItemsSource = businessManager.GetAllPokemons();
         }
@@ -50,28 +51,28 @@ namespace PokemonTournamentWPF
             {
                 case "btnPokemons":
                     dataGridData.ItemsSource = businessManager.GetAllPokemons();
-                    //btnExportPokemons.Visibility = Visibility.Visible;
-                    //btnAddStade.Visibility = Visibility.Collapsed;
+                    ucStadesView.Visibility = Visibility.Collapsed;
+                    dataGridData.Visibility = Visibility.Visible;
                     break;
                 case "btnStades":
                     dataGridData.ItemsSource = businessManager.GetAllStades();
-                    //btnExportPokemons.Visibility = Visibility.Collapsed;
-                    //btnAddStade.Visibility = Visibility.Visible;
+                    dataGridData.Visibility = Visibility.Collapsed;
+                    ucStadesView.Visibility = Visibility.Visible;
                     break;
                 case "btnMatchs":
                     dataGridData.ItemsSource = businessManager.GetAllMatchs();
-                    btnExportPokemons.Visibility = Visibility.Collapsed;
-                    btnAddStade.Visibility = Visibility.Collapsed;
+                    dataGridData.Visibility = Visibility.Visible;
+                    ucStadesView.Visibility = Visibility.Collapsed;
                     break;
                 case "btnCarac":
                     dataGridData.ItemsSource = businessManager.GetAllCaracteristiques();
-                    btnExportPokemons.Visibility = Visibility.Collapsed;
-                    btnAddStade.Visibility = Visibility.Collapsed;
+                    dataGridData.Visibility = Visibility.Visible;
+                    ucStadesView.Visibility = Visibility.Collapsed;
                     break;
                 case "btnBonus":
                     dataGridData.ItemsSource = businessManager.GetAllPokemonsByType(ETypeElement.Dragon);
-                    btnExportPokemons.Visibility = Visibility.Collapsed;
-                    btnAddStade.Visibility = Visibility.Collapsed;
+                    dataGridData.Visibility = Visibility.Visible;
+                    ucStadesView.Visibility = Visibility.Collapsed;
                     break;
             }
         }
