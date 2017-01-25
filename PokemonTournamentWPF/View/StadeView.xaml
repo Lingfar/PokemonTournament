@@ -7,10 +7,6 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"
              d:DesignHeight="500" d:DesignWidth="500">
-    <UserControl.Resources>
-        <local:IsNullConverter x:Key="IsNullConverter"/>
-    </UserControl.Resources>
-
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -25,18 +21,7 @@
         <TextBlock Text="Nom du stade :" FontSize="24" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"/>
         <TextBox Name="txtName" Text="{Binding Nom, UpdateSourceTrigger=PropertyChanged}" FontSize="24" Grid.Column="1" Grid.Row="0" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <TextBlock Text="Type du stade :" FontSize="24" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="5"/>
-        <ComboBox Name="cbType" FontSize="24" Grid.Column="1" Grid.Row="1" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <ComboBox.Style>
-                <Style TargetType="ComboBox">
-                    <Setter Property="SelectedValue" Value="Eau"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding TypeModel.TypeString, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IsNullConverter}}" Value="False">
-                            <Setter Property="SelectedValue" Value="{Binding TypeModel.TypeString}"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </ComboBox.Style>
-        </ComboBox>
+        <ComboBox Name="cbType" SelectedItem="{Binding Type}" ItemsSource="{Binding MyEnumTypeValues}" FontSize="24" Grid.Column="1" Grid.Row="1" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <TextBlock Text="Nombre de places :" FontSize="24" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"/>
         <TextBox Name="txtNbPlaces" FontSize="24" Text="{Binding NbPlaces, UpdateSourceTrigger=PropertyChanged, TargetNullValue={x:Static sys:String.Empty}}" Grid.Column="1" Grid.Row="2" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         

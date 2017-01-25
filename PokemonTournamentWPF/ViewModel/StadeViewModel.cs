@@ -60,14 +60,23 @@ namespace PokemonTournamentWPF.ViewModel
             }
         }
 
-        public ETypeElementModel TypeModel
+        public ETypeElement Type
         {
-            get { return new ETypeElementModel(stade.Type); }
+            get { return stade.Type; }
             set
             {
-                if (value.Type == stade.Type) return;
-                stade.Type = value.Type;
+                if (value == stade.Type) return;
+                stade.Type = value;
                 base.OnPropertyChanged("Type");
+            }
+        }
+
+        public IEnumerable<ETypeElement> MyEnumTypeValues
+        {
+            get
+            {
+                return Enum.GetValues(typeof(ETypeElement))
+                    .Cast<ETypeElement>();
             }
         }
 

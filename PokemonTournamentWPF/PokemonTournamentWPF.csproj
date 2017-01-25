@@ -94,7 +94,6 @@
   <ItemGroup>
     <Compile Include="ViewModel\CaracteristiquesViewModel.cs" />
     <Compile Include="ViewModel\CaracteristiqueViewModel.cs" />
-    <Compile Include="ViewModel\ETypeElementModel.cs" />
     <Compile Include="ViewModel\MatchesViewModel.cs" />
     <Compile Include="ViewModel\MatchViewModel.cs" />
     <Compile Include="ViewModel\PokemonViewModel.cs" />

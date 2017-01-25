@@ -40,6 +40,5 @@
         <ContentControl Name="contentControl" Grid.Row="2"/>
 
         <Button Name="btnExportPokemons" Grid.Row="3" Visibility="Collapsed" Content="Exporter tous les pokemons" Click="btnExportPokemons_Click" FontSize="20" Margin="5" Width="300" />
-        <Button Name="btnAddStade" Grid.Row="3" Visibility="Collapsed" Content="Ajouter un nouveau stade" Click="btnAddStade_Click" FontSize="20" Margin="5" Width="300" />
     </Grid>
 </Window>

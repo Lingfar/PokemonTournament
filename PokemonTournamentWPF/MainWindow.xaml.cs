@@ -132,24 +132,5 @@ namespace PokemonTournamentWPF
                 }
             }
         }
-
-        private void btnAddStade_Click(object sender, RoutedEventArgs e)
-        {
-            //StadeViewer stadeViewer = new StadeViewer();
-            //stadeViewer.Closed += StadeView_Closed;
-            //stadeViewer.ShowDialog();
-        }
-
-        private void modStade_Closed(object sender, EventArgs e)
-        {
-            dataGridData.ItemsSource = businessManager.GetAllStades();
-            dataGridData.Items.Refresh();
-        }
-
-        private void StadeView_Closed(object sender, EventArgs e)
-        {
-            dataGridData.ItemsSource = businessManager.GetAllStades();
-            dataGridData.Items.Refresh();
-        }
     }
 }

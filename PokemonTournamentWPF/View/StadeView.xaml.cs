@@ -26,7 +26,7 @@ namespace PokemonTournamentWPF.View
         public StadeView()
         {
             InitializeComponent();
-            cbType.ItemsSource = Enum.GetNames(typeof(ETypeElement));
+            //cbType.ItemsSource = Enum.GetNames(typeof(ETypeElement));
         }
     }
 

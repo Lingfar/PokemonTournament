@@ -16,7 +16,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
                 <DataGridTextColumn Header="Nom" Binding="{Binding Nom}"/>
-                <DataGridTextColumn Header="Type" Binding="{Binding TypeModel.TypeString}"/>
+                <DataGridTextColumn Header="Type" Binding="{Binding Type}"/>
                 <DataGridTextColumn Header="Nombre de places" Binding="{Binding NbPlaces}"/>
                 <DataGridTextColumn Header="Attaque bonus / malus" Binding="{Binding Caracteristiques.Attaque}"/>
                 <DataGridTextColumn Header="Défense bonus / malus" Binding="{Binding Caracteristiques.Defense}"/>
