@@ -58,6 +58,9 @@ namespace PokemonTournamentWPF
                     dataGridData.ItemsSource = businessManager.GetAllStades();
                     dataGridData.Visibility = Visibility.Collapsed;
                     ucStadesView.Visibility = Visibility.Visible;
+
+                    StadesViewModel stadesViewModel = new StadesViewModel(businessManager.GetAllStades());
+                    ucStadesView.DataContext = stadesViewModel;
                     break;
                 case "btnMatchs":
                     dataGridData.ItemsSource = businessManager.GetAllMatchs();

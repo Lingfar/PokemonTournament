@@ -2,6 +2,7 @@
 using PokemonTournamentWPF.Forms;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,8 +29,8 @@ namespace PokemonTournamentWPF.ViewModel
             }
         }
 
-        private List<StadeViewModel> stades;
-        public List<StadeViewModel> Stades
+        private ObservableCollection<StadeViewModel> stades;
+        public ObservableCollection<StadeViewModel> Stades
         {
             get { return stades; }
             private set
@@ -41,7 +42,8 @@ namespace PokemonTournamentWPF.ViewModel
 
         public StadesViewModel(List<Stade> stadesModels)
         {
-            Stades = new List<StadeViewModel>();
+            SelectedItem = new StadeViewModel();
+            Stades = new ObservableCollection<StadeViewModel>();
             foreach (Stade stade in stadesModels)
                 Stades.Add(new StadeViewModel(stade));
         }
@@ -64,11 +66,15 @@ namespace PokemonTournamentWPF.ViewModel
         }
         private bool CanAdd()
         {
-            return (SelectedItem == null);
+            return (SelectedItem != null && SelectedItem.ID == 0);
         }
         private void Add()
         {
-
+            if (SelectedItem != null)
+            {
+                Stades.Add(SelectedItem);
+                PokemonBusinessLayer.BusinessManager.Instance.AddNewStade(SelectedItem.Stade);
+            }
         }
 
         // Commande Remove
@@ -94,7 +100,7 @@ namespace PokemonTournamentWPF.ViewModel
         private void Clear()
         {
             if (SelectedItem != null)
-                SelectedItem = null;
+                SelectedItem = new StadeViewModel();
         }
 
         // Commande Remove
@@ -115,12 +121,15 @@ namespace PokemonTournamentWPF.ViewModel
         }
         private bool CanRemove()
         {
-            return (SelectedItem != null);
+            return (SelectedItem != null && SelectedItem.ID != 0);
         }
         private void Remove()
         {
             if (SelectedItem != null)
+            {
+                PokemonBusinessLayer.BusinessManager.Instance.DeleteStade(SelectedItem.Stade);
                 Stades.Remove(SelectedItem);
+            }
         }
     }
 }
