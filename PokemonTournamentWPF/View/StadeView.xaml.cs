@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Globalization;
 
 namespace PokemonTournamentWPF.View
 {
@@ -27,22 +28,20 @@ namespace PokemonTournamentWPF.View
             InitializeComponent();
             cbType.ItemsSource = Enum.GetNames(typeof(ETypeElement));
         }
+    }
 
-        private void UserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+
+
+    public class IsNullConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            StadeViewModel stadeModel = DataContext as StadeViewModel;
-            if(stadeModel != null && stadeModel.ID == 0)
-            {
-                btnAdd.Visibility = Visibility.Visible;
-                btnSave.Visibility = Visibility.Collapsed;
-                btnRemove.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                btnAdd.Visibility = Visibility.Collapsed;
-                btnSave.Visibility = Visibility.Visible;
-                btnRemove.Visibility = Visibility.Visible;
-            }
+            return (value == null);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new InvalidOperationException("IsNullConverter can only be used OneWay.");
         }
     }
 }

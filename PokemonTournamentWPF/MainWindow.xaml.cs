@@ -19,6 +19,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.IO;
 using Microsoft.Win32;
+using PokemonTournamentWPF.ViewModel;
 
 namespace PokemonTournamentWPF
 {
@@ -35,6 +36,10 @@ namespace PokemonTournamentWPF
 
             businessManager = BusinessManager.Instance;
             businessManager.RunTournament();
+
+            StadesViewModel stadesViewModel = new StadesViewModel(businessManager.GetAllStades());
+            ucStadesView.DataContext = stadesViewModel;
+
             dataGridData.ItemsSource = businessManager.GetAllPokemons();
         }
 
@@ -45,13 +50,13 @@ namespace PokemonTournamentWPF
             {
                 case "btnPokemons":
                     dataGridData.ItemsSource = businessManager.GetAllPokemons();
-                    btnExportPokemons.Visibility = Visibility.Visible;
-                    btnAddStade.Visibility = Visibility.Collapsed;
+                    //btnExportPokemons.Visibility = Visibility.Visible;
+                    //btnAddStade.Visibility = Visibility.Collapsed;
                     break;
                 case "btnStades":
                     dataGridData.ItemsSource = businessManager.GetAllStades();
-                    btnExportPokemons.Visibility = Visibility.Collapsed;
-                    btnAddStade.Visibility = Visibility.Visible;
+                    //btnExportPokemons.Visibility = Visibility.Collapsed;
+                    //btnAddStade.Visibility = Visibility.Visible;
                     break;
                 case "btnMatchs":
                     dataGridData.ItemsSource = businessManager.GetAllMatchs();

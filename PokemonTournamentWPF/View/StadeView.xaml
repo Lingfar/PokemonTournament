@@ -5,28 +5,42 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PokemonTournamentWPF.View"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
-             mc:Ignorable="d" DataContextChanged="UserControl_DataContextChanged"
+             mc:Ignorable="d"
              d:DesignHeight="500" d:DesignWidth="500">
-    <Grid>
+    <UserControl.Resources>
+        <local:IsNullConverter x:Key="IsNullConverter"/>
+    </UserControl.Resources>
+
+    <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="2.5*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBlock Text="Nom du stade :" FontSize="24" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Text="Nom du stade :" FontSize="24" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"/>
         <TextBox Name="txtName" Text="{Binding Nom, UpdateSourceTrigger=PropertyChanged}" FontSize="24" Grid.Column="1" Grid.Row="0" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBlock Text="Type du stade :" FontSize="24" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <ComboBox Name="cbType" FontSize="24" SelectedValue="{Binding TypeModel.TypeString, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="1" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBlock Text="Nombre de places :" FontSize="24" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Text="Type du stade :" FontSize="24" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="5"/>
+        <ComboBox Name="cbType" FontSize="24" Grid.Column="1" Grid.Row="1" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <ComboBox.Style>
+                <Style TargetType="ComboBox">
+                    <Setter Property="SelectedValue" Value="Eau"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding TypeModel.TypeString, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IsNullConverter}}" Value="False">
+                            <Setter Property="SelectedValue" Value="{Binding TypeModel.TypeString}"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ComboBox.Style>
+        </ComboBox>
+        <TextBlock Text="Nombre de places :" FontSize="24" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"/>
         <TextBox Name="txtNbPlaces" FontSize="24" Text="{Binding NbPlaces, UpdateSourceTrigger=PropertyChanged, TargetNullValue={x:Static sys:String.Empty}}" Grid.Column="1" Grid.Row="2" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         
-        <Grid Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="3">
+        <Grid Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="3" Margin="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition/>
@@ -36,17 +50,11 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="Caractéristiques :" FontSize="24" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBlock Text="Attaque bonus / malus :" FontSize="20" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Text="Caractéristiques :" FontSize="24" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2"/>
+            <TextBlock Text="Attaque bonus / malus :" FontSize="20" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2"/>
             <TextBox Name="txtAtt" FontSize="20" Text="{Binding Caracteristiques.Attaque, UpdateSourceTrigger=PropertyChanged, TargetNullValue={x:Static sys:String.Empty}}" Grid.Column="1" Grid.Row="1" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBlock Text="Défense bonus / malus :" FontSize="20" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Text="Défense bonus / malus :" FontSize="20" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2"/>
             <TextBox Name="txtDef" FontSize="20" Text="{Binding Caracteristiques.Defense, UpdateSourceTrigger=PropertyChanged, TargetNullValue={x:Static sys:String.Empty}}" Grid.Column="1" Grid.Row="2" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
-        <Button Name="btnAdd" FontSize="24" Width="200" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Command="{Binding Path=AddCommand}"
-                Content="Ajouter" HorizontalAlignment="Center" VerticalAlignment="Center" IsDefault="True" />
-        <Button Name="btnSave" FontSize="24" Width="200" Grid.Column="0" Grid.Row="4" Command="{Binding Path=SaveCommand}"
-                Content="Sauvegarder" HorizontalAlignment="Center" VerticalAlignment="Center" IsDefault="True" />
-        <Button Name="btnRemove" FontSize="24" Width="200" Grid.Column="1" Grid.Row="4" Command="{Binding Path=RemoveCommand}"
-                Content="Supprimer" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     </Grid>
 </UserControl>
