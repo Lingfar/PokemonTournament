@@ -60,8 +60,12 @@ namespace PokemonTournamentWPF
                     break;
                 case "btnMatchs":
                     dataGridData.ItemsSource = businessManager.GetAllMatchs();
-                    dataGridData.Visibility = Visibility.Visible;
-                    contentControl.Visibility = Visibility.Collapsed;
+                    dataGridData.Visibility = Visibility.Collapsed;
+                    contentControl.Visibility = Visibility.Visible;
+
+                    MatchesViewModel matchesViewModel = new MatchesViewModel(businessManager.GetAllMatchs());
+                    contentControl.Content = new MatchesView();
+                    contentControl.DataContext = matchesViewModel;
                     break;
                 case "btnCarac":
                     dataGridData.ItemsSource = businessManager.GetAllCaracteristiques();

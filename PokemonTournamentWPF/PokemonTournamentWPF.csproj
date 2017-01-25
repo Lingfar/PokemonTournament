@@ -78,6 +78,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\MatchesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\StadesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -91,6 +95,7 @@
     <Compile Include="ViewModel\CaracteristiquesViewModel.cs" />
     <Compile Include="ViewModel\CaracteristiqueViewModel.cs" />
     <Compile Include="ViewModel\ETypeElementModel.cs" />
+    <Compile Include="ViewModel\MatchesViewModel.cs" />
     <Compile Include="ViewModel\MatchViewModel.cs" />
     <Compile Include="ViewModel\PokemonViewModel.cs" />
     <Compile Include="ViewModel\PokemonsViewModel.cs" />
@@ -100,6 +105,9 @@
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\CaracteristiquesView.xaml.cs">
       <DependentUpon>CaracteristiquesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MatchesView.xaml.cs">
+      <DependentUpon>MatchesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\StadesView.xaml.cs">
       <DependentUpon>StadesView.xaml</DependentUpon>
