@@ -30,7 +30,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <my:PokemonView Background="LightBlue" Grid.Row="2" Grid.ColumnSpan="3" DataContext="{Binding SelectedItem}"></my:PokemonView>
+        <PokemonView Background="LightBlue" Grid.Row="2" Grid.ColumnSpan="3" DataContext="{Binding SelectedItem}"></PokemonView>
         <Button Name="Add" 
                 Command="{Binding Path=AddCommand}" 
                 Grid.Row="3" Grid.Column="0">Add</Button>

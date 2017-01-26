@@ -14,11 +14,12 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PokemonBusinessLayer;
 using PokemonTournamentEntities;
-using PokemonTournamentWPF.View;
 using System.Xml;
 using System.Xml.Serialization;
 using System.IO;
 using Microsoft.Win32;
+using PokemonTournamentWPF.ViewModel;
+using PokemonTournamentWPF.View;
 
 namespace PokemonTournamentWPF
 {
@@ -28,12 +29,10 @@ namespace PokemonTournamentWPF
     public partial class MainWindow : Window
     {
         public BusinessManager businessManager { get; set; }
-        public bool otherWindowsOpened { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
-            otherWindowsOpened = false;
 
             businessManager = BusinessManager.Instance;
             businessManager.RunTournament();
@@ -47,28 +46,40 @@ namespace PokemonTournamentWPF
             {
                 case "btnPokemons":
                     dataGridData.ItemsSource = businessManager.GetAllPokemons();
-                    btnExportPokemons.Visibility = Visibility.Visible;
-                    btnAddStade.Visibility = Visibility.Collapsed;
+                    contentControl.Visibility = Visibility.Collapsed;
+                    dataGridData.Visibility = Visibility.Visible;
                     break;
                 case "btnStades":
                     dataGridData.ItemsSource = businessManager.GetAllStades();
-                    btnExportPokemons.Visibility = Visibility.Collapsed;
-                    btnAddStade.Visibility = Visibility.Visible;
+                    dataGridData.Visibility = Visibility.Collapsed;
+                    contentControl.Visibility = Visibility.Visible;
+
+                    StadesViewModel stadesViewModel = new StadesViewModel(businessManager.GetAllStades());
+                    contentControl.Content = new StadesView();
+                    contentControl.DataContext = stadesViewModel;
                     break;
                 case "btnMatchs":
                     dataGridData.ItemsSource = businessManager.GetAllMatchs();
-                    btnExportPokemons.Visibility = Visibility.Collapsed;
-                    btnAddStade.Visibility = Visibility.Collapsed;
+                    dataGridData.Visibility = Visibility.Collapsed;
+                    contentControl.Visibility = Visibility.Visible;
+
+                    MatchesViewModel matchesViewModel = new MatchesViewModel(businessManager.GetAllMatchs());
+                    contentControl.Content = new MatchesView();
+                    contentControl.DataContext = matchesViewModel;
                     break;
                 case "btnCarac":
                     dataGridData.ItemsSource = businessManager.GetAllCaracteristiques();
-                    btnExportPokemons.Visibility = Visibility.Collapsed;
-                    btnAddStade.Visibility = Visibility.Collapsed;
+                    dataGridData.Visibility = Visibility.Collapsed;
+                    contentControl.Visibility = Visibility.Visible;
+
+                    CaracteristiquesViewModel caracViewModel = new CaracteristiquesViewModel(businessManager.GetAllCaracteristiques());
+                    contentControl.Content = new CaracteristiquesView();
+                    contentControl.DataContext = caracViewModel;
                     break;
                 case "btnBonus":
                     dataGridData.ItemsSource = businessManager.GetAllPokemonsByType(ETypeElement.Dragon);
-                    btnExportPokemons.Visibility = Visibility.Collapsed;
-                    btnAddStade.Visibility = Visibility.Collapsed;
+                    dataGridData.Visibility = Visibility.Visible;
+                    contentControl.Visibility = Visibility.Collapsed;
                     break;
             }
         }
@@ -94,16 +105,13 @@ namespace PokemonTournamentWPF
         {
             if (dataGridData.ItemsSource.GetType() == typeof(List<Stade>))
             {
-                if (!otherWindowsOpened)
+                DataGridRow row = (DataGridRow)ItemsControl.ContainerFromElement((DataGrid)sender,
+                           (DependencyObject)e.OriginalSource);
+                if (row != null)
                 {
-                    DataGridRow row = (DataGridRow)ItemsControl.ContainerFromElement((DataGrid)sender,
-                        (DependencyObject)e.OriginalSource);
-                    if (row != null)
-                    {
-                        View.StadeView modStade = new View.StadeView(this, (Stade)row.DataContext);
-                        modStade.Closed += modStade_Closed;
-                        modStade.Show();
-                    }
+                    //StadeViewer stadeViewer = new StadeViewer((Stade)row.DataContext);
+                    //stadeViewer.Closed += StadeView_Closed;
+                    //stadeViewer.ShowDialog();
                 }
             }
         }
@@ -118,27 +126,11 @@ namespace PokemonTournamentWPF
                     item.DisplayIndex = 0;
                     break;
                 }
-                else if(item.Header.ToString() == "Suppression")
+                else if (item.Header.ToString() == "Suppression")
                 {
                     item.DisplayIndex = grid.Columns.Count - 1;
                 }
             }
-        }
-
-        private void btnAddStade_Click(object sender, RoutedEventArgs e)
-        {
-            if (!otherWindowsOpened)
-            {
-                View.StadeView modStade = new View.StadeView(this);
-                modStade.Closed += modStade_Closed;
-                modStade.Show();
-            }
-        }
-
-        private void modStade_Closed(object sender, EventArgs e)
-        {
-            dataGridData.ItemsSource = businessManager.GetAllStades();
-            dataGridData.Items.Refresh();
         }
     }
 }

@@ -9,11 +9,16 @@ namespace PokemonTournamentWPF.ViewModel
 {
     class MatchViewModel : ViewModelBase
     {
-        private Match match { get; set; }
-
-        MatchViewModel(Match orig)
+        private Match match;
+        public Match Match
         {
-            match = orig;
+            get { return match; }
+            set { match = value; }
+        }
+
+        public MatchViewModel(Match matchModel)
+        {
+            Match = matchModel;
             base.OnPropertyChanged("Stade");
             base.OnPropertyChanged("Pokemon1");
             base.OnPropertyChanged("Pokemon2");
@@ -21,63 +26,69 @@ namespace PokemonTournamentWPF.ViewModel
             base.OnPropertyChanged("ID");
         }
 
-        public Stade Stade
+        public int ID
         {
-            get
-            {
-                return match.Stade;
-            }
+            get { return match.ID; }
             set
             {
+                if (value == match.ID) return;
+                match.ID = value;
+                base.OnPropertyChanged("ID");
+            }
+        }
+
+        public int IdPokemonVainqueur
+        {
+            get { return match.IdPokemonVainqueur; }
+            set
+            {
+                if (value == match.IdPokemonVainqueur) return;
+                match.IdPokemonVainqueur = value;
+                base.OnPropertyChanged("IdPokemonVainqueur");
+            }
+        }
+
+        public Stade Stade
+        {
+            get { return match.Stade; }
+            set
+            {
+                if (value == match.Stade) return;
                 match.Stade = value;
                 base.OnPropertyChanged("Stade");
             }
         }
+
         public Pokemon Pokemon1
         {
-            get
-            {
-                return match.Pokemon1;
-            }
+            get { return match.Pokemon1; }
             set
             {
+                if (value == match.Pokemon1) return;
                 match.Pokemon1 = value;
                 base.OnPropertyChanged("Pokemon1");
             }
         }
+
         public Pokemon Pokemon2
         {
-            get
-            {
-                return match.Pokemon2;
-            }
+            get { return match.Pokemon2; }
             set
             {
+                if (value == match.Pokemon2) return;
                 match.Pokemon2 = value;
                 base.OnPropertyChanged("Pokemon2");
             }
         }
+
         public EPhaseTournoi PhaseTournoi
         {
-            get
-            {
-                return match.PhaseTournoi;
-            }
+            get { return match.PhaseTournoi; }
             set
             {
+                if (value == match.PhaseTournoi) return;
                 match.PhaseTournoi = value;
                 base.OnPropertyChanged("PhaseTournoi");
-            }
-        }
-        public int ID
-        {
-            get
-            {
-                return match.ID;
-            }
-            set
-            {
-
             }
         }
 

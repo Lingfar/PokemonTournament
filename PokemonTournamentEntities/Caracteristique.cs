@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace PokemonTournamentEntities
 {
     [Serializable]
-    public class Caracteristiques
+    public class Caracteristique
     {
         private static Random rand = new Random(42);
 
@@ -84,18 +84,18 @@ namespace PokemonTournamentEntities
             }
         }
 
-        public Caracteristiques()
+        public Caracteristique()
         {
             
         }
 
-        public Caracteristiques(int attaque, int defense)
+        public Caracteristique(int attaque, int defense)
         {
             Attaque = attaque;
             Defense = defense;
         }
 
-        public Caracteristiques(Caracteristiques c)
+        public Caracteristique(Caracteristique c)
         {
             PV = c.PV;
             Attaque = c.Attaque;

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using PokemonTournamentEntities;
+
 namespace PokemonTournamentWPF.ViewModel
 {
     public class PokemonViewModel : ViewModelBase
@@ -43,7 +43,7 @@ namespace PokemonTournamentWPF.ViewModel
                 base.OnPropertyChanged("Type");
             }
         }
-        public Caracteristiques Caracteristiques
+        public Caracteristique Caracteristiques
         {
             get
             {
