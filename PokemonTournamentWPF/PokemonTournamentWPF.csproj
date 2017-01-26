@@ -37,6 +37,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -74,6 +76,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\PokemonsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\StadeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -83,7 +89,11 @@
     <Compile Include="ViewModel\MatchViewModel.cs" />
     <Compile Include="ViewModel\PokemonViewModel.cs" />
     <Compile Include="ViewModel\PokemonsViewModel.cs" />
+    <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\PokemonsView.xaml.cs">
+      <DependentUpon>PokemonsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\StadeView.xaml.cs">
       <DependentUpon>StadeView.xaml</DependentUpon>
     </Compile>
