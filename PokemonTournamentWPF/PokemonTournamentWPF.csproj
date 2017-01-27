@@ -80,6 +80,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\PokemonView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\CaracteristiquesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -106,9 +110,6 @@
     <Compile Include="ViewModel\PokemonsViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
-    <Compile Include="View\PokemonsView.xaml.cs">
-      <DependentUpon>PokemonsView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewModel\StadesViewModel.cs" />
     <Compile Include="ViewModel\StadeViewModel.cs" />
     <Compile Include="View\CaracteristiquesView.xaml.cs">
@@ -116,6 +117,12 @@
     </Compile>
     <Compile Include="View\MatchesView.xaml.cs">
       <DependentUpon>MatchesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PokemonsView.xaml.cs">
+      <DependentUpon>PokemonsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PokemonView.xaml.cs">
+      <DependentUpon>PokemonView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\StadesView.xaml.cs">
       <DependentUpon>StadesView.xaml</DependentUpon>

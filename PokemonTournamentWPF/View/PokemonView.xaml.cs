@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PokemonTournamentEntities;
+using PokemonTournamentWPF.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,9 +19,9 @@ namespace PokemonTournamentWPF.View
     /// <summary>
     /// Logique d'interaction pour PokemonsView.xaml
     /// </summary>
-    public partial class PokemonsView : Window
+    public partial class PokemonView : UserControl
     {
-        public PokemonsView()
+        public PokemonView()
         {
             InitializeComponent();
         }

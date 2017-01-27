@@ -9,8 +9,15 @@ namespace PokemonTournamentWPF.ViewModel
 {
     public class PokemonViewModel : ViewModelBase
     {
-        private Pokemon poke { get; set; }
+        public Pokemon poke { get; set; }
 
+        public PokemonViewModel()
+        {
+            poke = new Pokemon();
+            base.OnPropertyChanged("Nom");
+            base.OnPropertyChanged("Type");
+            base.OnPropertyChanged("Caracteristiques");
+        }
         public PokemonViewModel (Pokemon orig)
         {
             poke = orig;
