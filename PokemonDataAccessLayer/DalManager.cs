@@ -9,6 +9,9 @@ namespace PokemonDataAccessLayer
 {
     public class DalManager
     {
+        private static DalManager instance;
+        private static object syncRoot = new Object();
+
         private List<Pokemon> allPokemons { get; set; }
         private List<Match> allMatchs { get; set; }
         private List<Stade> allStades { get; set; }
@@ -18,7 +21,7 @@ namespace PokemonDataAccessLayer
             { new Utilisateur {Login = "Lingfar", Nom = "Rubin", Prenom = "Gaëtan", Password = "azertyuiop" } };
         public static int LastId = 1;
 
-        public DalManager()
+        private DalManager()
         {
             allPokemons = new List<Pokemon>();
             allMatchs = new List<Match>();
@@ -39,6 +42,22 @@ namespace PokemonDataAccessLayer
             {
                 allStades.Add(Rand.GenerateStade(LastId, (ETypeElement)i));
                 LastId++;
+            }
+        }
+
+        public static DalManager Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    lock (syncRoot)
+                    {
+                        if (instance == null)
+                            instance = new DalManager();
+                    }
+                }
+                return instance;
             }
         }
 

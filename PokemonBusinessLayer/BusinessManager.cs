@@ -18,7 +18,7 @@ namespace PokemonBusinessLayer
 
         private BusinessManager()
         {
-            dalManager = new DalManager();
+            dalManager = DalManager.Instance;
             rng = new Random(5);
         }
 
