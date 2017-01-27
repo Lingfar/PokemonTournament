@@ -19,7 +19,7 @@ namespace PokemonTournamentWPF.View
     /// <summary>
     /// Logique d'interaction pour PokemonsView.xaml
     /// </summary>
-    public partial class PokemonsView : Window
+    public partial class PokemonsView : UserControl
     {
         public PokemonsView()
         {

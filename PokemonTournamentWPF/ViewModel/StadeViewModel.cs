@@ -71,7 +71,7 @@ namespace PokemonTournamentWPF.ViewModel
             }
         }
 
-        public IEnumerable<ETypeElement> MyEnumTypeValues
+        public IEnumerable<ETypeElement> ETypeElementValues
         {
             get
             {

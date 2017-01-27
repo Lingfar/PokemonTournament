@@ -111,7 +111,6 @@
     </Compile>
     <Compile Include="ViewModel\StadesViewModel.cs" />
     <Compile Include="ViewModel\StadeViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\CaracteristiquesView.xaml.cs">
       <DependentUpon>CaracteristiquesView.xaml</DependentUpon>
     </Compile>
