@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace PokemonTournamentWPF.ViewModel
 {
@@ -22,7 +23,7 @@ namespace PokemonTournamentWPF.ViewModel
                 OnPropertyChanged("Pokemons");
             }
         }
-
+        
         private PokemonViewModel _selectedItem;
         public PokemonViewModel SelectedItem
         {
@@ -38,6 +39,7 @@ namespace PokemonTournamentWPF.ViewModel
 
         public PokemonsViewModel(IList<Pokemon> PokemonsModel)
         {
+            SelectedItem = new PokemonViewModel();
             _pokemons = new ObservableCollection<PokemonViewModel>();
             foreach (Pokemon a in PokemonsModel)
             {
@@ -47,61 +49,90 @@ namespace PokemonTournamentWPF.ViewModel
 
         #region "Commandes du formulaire"
 
+
         // Commande Add
-        private RelayCommand _addCommand;
-        public System.Windows.Input.ICommand AddCommand
+        private RelayCommand addCommand;
+        public ICommand AddCommand
         {
             get
             {
-                if (_addCommand == null)
+                if (addCommand == null)
                 {
-                    _addCommand = new RelayCommand(
+                    addCommand = new RelayCommand(
                         () => this.Add(),
                         () => this.CanAdd()
                         );
                 }
-                return _addCommand;
+                return addCommand;
+            }
+        }
+        private bool CanAdd()
+        {
+            return (SelectedItem != null && SelectedItem.ID == 0);
+        }
+        private void Add()
+        {
+            if (SelectedItem != null)
+            {
+                Pokemons.Add(SelectedItem);
+                PokemonBusinessLayer.BusinessManager.Instance.AddNewPokemon(SelectedItem.poke);
             }
         }
 
-        private bool CanAdd()
-        {
-            return true;
-        }
-
-        private void Add()
-        {
-            Pokemon a = new Pokemon();
-
-            this.SelectedItem = new PokemonViewModel(a);
-            Pokemons.Add(this.SelectedItem);
-        }
-
         // Commande Remove
-        private RelayCommand _removeCommand;
-        public System.Windows.Input.ICommand RemoveCommand
+        private RelayCommand clearCommand;
+        public ICommand ClearCommand
         {
             get
             {
-                if (_removeCommand == null)
+                if (clearCommand == null)
                 {
-                    _removeCommand = new RelayCommand(
+                    clearCommand = new RelayCommand(
+                        () => this.Clear(),
+                        () => this.CanClear()
+                        );
+                }
+                return clearCommand;
+            }
+        }
+        private bool CanClear()
+        {
+            return (SelectedItem != null);
+        }
+        private void Clear()
+        {
+            if (SelectedItem != null)
+                SelectedItem = new PokemonViewModel();
+        }
+
+        // Commande Remove
+        private RelayCommand removeCommand;
+        public ICommand RemoveCommand
+        {
+            get
+            {
+                if (removeCommand == null)
+                {
+                    removeCommand = new RelayCommand(
                         () => this.Remove(),
                         () => this.CanRemove()
                         );
                 }
-                return _removeCommand;
+                return removeCommand;
             }
         }
-
         private bool CanRemove()
         {
-            return (this.SelectedItem != null);
+            return (SelectedItem != null && SelectedItem.ID != 0);
         }
-
         private void Remove()
         {
-            if (this.SelectedItem != null) Pokemons.Remove(this.SelectedItem);
+            if (SelectedItem != null)
+            {
+                PokemonBusinessLayer.BusinessManager.Instance.DeletePokemon(SelectedItem.poke);
+                Pokemons.Remove(SelectedItem);
+                SelectedItem = new PokemonViewModel();
+            }
         }
         #endregion
     }
