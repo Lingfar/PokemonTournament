@@ -50,6 +50,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PokemonBusinessLayer\PokemonBusinessLayer.csproj">
+      <Project>{bf9568c9-6b22-44c0-87aa-14acea9669e4}</Project>
+      <Name>PokemonBusinessLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PokemonDataAccessLayerStub\PokemonDataAccessLayerStub.csproj">
       <Project>{9c393fff-f68a-4e91-bd83-1e649baa3a05}</Project>
       <Name>PokemonDataAccessLayerStub</Name>
