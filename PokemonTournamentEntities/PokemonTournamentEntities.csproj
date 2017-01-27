@@ -41,7 +41,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Caracteristique.cs" />
-    <Compile Include="Dresseur.cs" />
     <Compile Include="EntityObject.cs" />
     <Compile Include="Match.cs" />
     <Compile Include="Pokemon.cs" />
@@ -49,6 +48,12 @@
     <Compile Include="Stade.cs" />
     <Compile Include="Tournoi.cs" />
     <Compile Include="Utilisateur.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PokemonDataAccessLayer\PokemonDataAccessLayer.csproj">
+      <Project>{64c0c46a-06a6-4bbf-85d1-c13d62130396}</Project>
+      <Name>PokemonDataAccessLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

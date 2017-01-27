@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9C393FFF-F68A-4E91-BD83-1E649BAA3A05}</ProjectGuid>
+    <ProjectGuid>{64C0C46A-06A6-4BBF-85D1-C13D62130396}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PokemonDataAccessLayer</RootNamespace>
     <AssemblyName>PokemonDataAccessLayer</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,15 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DalManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rand.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\PokemonTournamentEntities\PokemonTournamentEntities.csproj">
-      <Project>{0a85b218-058d-40a0-99d0-935c83cc39a4}</Project>
-      <Name>PokemonTournamentEntities</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PokemonTournamentEntities;
 
 namespace PokemonDataAccessLayer
 {
-    class DalManager
+    public class DalManager
     {
         private static DalManager instance;
         private static object syncRoot = new Object();
@@ -28,7 +29,7 @@ namespace PokemonDataAccessLayer
             allCaracteristiques = new List<Caracteristique>();
 
             //32 pokemons à générer (avec type + caracteristiques random) pour les seiziemes
-            for (int i = 0; i < 32; i++)
+            for(int i = 0; i < 32; i++)
             {
                 Pokemon poke = Rand.GeneratePokemon(LastId);
                 allPokemons.Add(poke);
@@ -58,6 +59,59 @@ namespace PokemonDataAccessLayer
                 }
                 return instance;
             }
+        }
+
+        public void AddMatchToList(Match m)
+        {
+            allMatchs.Add(m);
+        }
+
+        public Pokemon GetWinner()
+        {
+            return GetAllPokemons()[allMatchs.Last().IdPokemonVainqueur];
+        }
+
+        public List<Pokemon> GetAllPokemons()
+        {
+            return allPokemons;
+        }
+
+        public List<Pokemon> GetAllPokemonsByType(ETypeElement type)
+        {
+            return GetAllPokemons().FindAll(p => p.Type == type);
+        }
+
+        public List<Match> GetAllMatchs()
+        {
+            return allMatchs;
+        }
+
+        public List<Stade> GetAllStades()
+        {
+            return allStades;
+        }
+
+        public List<Caracteristique> GetAllCaracteristiques()
+        {
+            return allCaracteristiques;
+        }
+
+        public void AddNewStade(Stade stade)
+        {
+            stade.ID = LastId++;         
+            allStades.Add(stade);
+        }
+
+        public void DeleteNewStade(Stade stade)
+        {
+            int index = allStades.FindIndex(s => s.ID == stade.ID);
+            allStades.RemoveAt(index);
+        }
+
+
+        public static Utilisateur GetUtilisateurByLogin(string login)
+        {
+            return allUtilisateurs.Find(u => u.Login.ToLower() == login.ToLower());
         }
     }
 }

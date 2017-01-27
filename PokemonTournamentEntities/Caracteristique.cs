@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace PokemonTournamentEntities
 {
     [Serializable]
-    public class Caracteristique
+    public class Caracteristique : EntityObject
     {
         private static Random rand = new Random(42);
 
