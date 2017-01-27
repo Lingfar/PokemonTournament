@@ -101,11 +101,20 @@ namespace PokemonDataAccessLayer
             stade.ID = LastId++;         
             allStades.Add(stade);
         }
-
+        public void AddNewPokemon(Pokemon poke)
+        {
+            poke.ID = LastId++;
+            allPokemons.Add(poke);
+        }
         public void DeleteNewStade(Stade stade)
         {
             int index = allStades.FindIndex(s => s.ID == stade.ID);
             allStades.RemoveAt(index);
+        }
+        public void DeleteNewPokemon(Pokemon poke)
+        {
+            int index = allPokemons.FindIndex(s => s.ID == poke.ID);
+            allPokemons.RemoveAt(index);
         }
 
 

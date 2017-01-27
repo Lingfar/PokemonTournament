@@ -131,7 +131,16 @@ namespace PokemonBusinessLayer
         {
             dalManager.AddNewStade(stade);
         }
+        public void AddNewPokemon(Pokemon poke)
+        {
+            dalManager.AddNewPokemon(poke);
+        }
 
+
+        public void DeletePokemon(Pokemon poke)
+        {
+            dalManager.DeleteNewPokemon(poke);
+        }
         public void DeleteStade(Stade stade)
         {
             dalManager.DeleteNewStade(stade);
