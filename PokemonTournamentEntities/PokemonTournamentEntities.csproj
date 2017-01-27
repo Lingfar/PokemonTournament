@@ -41,7 +41,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Caracteristique.cs" />
-    <Compile Include="Dresseur.cs" />
     <Compile Include="EntityObject.cs" />
     <Compile Include="Match.cs" />
     <Compile Include="Pokemon.cs" />

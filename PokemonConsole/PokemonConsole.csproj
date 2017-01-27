@@ -54,6 +54,10 @@
       <Project>{bf9568c9-6b22-44c0-87aa-14acea9669e4}</Project>
       <Name>PokemonBusinessLayer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PokemonDataAccessLayerStub\PokemonDataAccessLayerStub.csproj">
+      <Project>{9c393fff-f68a-4e91-bd83-1e649baa3a05}</Project>
+      <Name>PokemonDataAccessLayerStub</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

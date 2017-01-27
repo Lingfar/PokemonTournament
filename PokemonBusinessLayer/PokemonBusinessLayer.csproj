@@ -44,8 +44,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PokemonDataAccessLayer\PokemonDataAccessLayer.csproj">
+    <ProjectReference Include="..\PokemonDataAccessLayerStub\PokemonDataAccessLayerStub.csproj">
       <Project>{9c393fff-f68a-4e91-bd83-1e649baa3a05}</Project>
+      <Name>PokemonDataAccessLayerStub</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PokemonDataAccessLayer\PokemonDataAccessLayer.csproj">
+      <Project>{64c0c46a-06a6-4bbf-85d1-c13d62130396}</Project>
       <Name>PokemonDataAccessLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\PokemonTournamentEntities\PokemonTournamentEntities.csproj">
