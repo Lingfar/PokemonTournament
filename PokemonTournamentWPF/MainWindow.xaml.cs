@@ -41,7 +41,10 @@ namespace PokemonTournamentWPF
             InitializeComponent();
 
             businessManager = BusinessManager.Instance;
-            businessManager.RunTournament();
+
+            businessManager.Test();
+
+            //businessManager.RunTournament();
 
             LoadAllViewModels();
 

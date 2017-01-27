@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PokemonTournamentEntities;
 using PokemonDataAccessLayer;
+using PokemonDataAccessLayerStub;
 
 namespace PokemonBusinessLayer
 {
@@ -13,12 +14,15 @@ namespace PokemonBusinessLayer
         private static BusinessManager instance;
         private static object syncRoot = new Object();
 
-        private DalManager dalManager { get; set; }
+        private PokemonDataAccessLayerStub.DalManager dalManager { get; set; }
         private Random rng { get; set; }
+
+        private DalSqlServer dalTest { get; set; } 
 
         private BusinessManager()
         {
             dalManager = DalManager.Instance;
+            dalTest = new DalSqlServer();
             rng = new Random(5);
         }
 
@@ -127,19 +131,26 @@ namespace PokemonBusinessLayer
         }
         #endregion
 
+
+        public void Test()
+        {
+            dalTest.GetAllPokemons();
+        }
+
+
         public void AddNewStade(Stade stade)
         {
             dalManager.AddNewStade(stade);
         }
         public void AddNewPokemon(Pokemon poke)
         {
-            dalManager.AddNewPokemon(poke);
+            //dalManager.AddNewPokemon(poke);
         }
 
 
         public void DeletePokemon(Pokemon poke)
         {
-            dalManager.DeleteNewPokemon(poke);
+            //dalManager.DeleteNewPokemon(poke);
         }
         public void DeleteStade(Stade stade)
         {

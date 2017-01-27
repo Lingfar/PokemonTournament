@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PokemonTournamentEntities;
 
-namespace PokemonDataAccessLayer
+namespace PokemonDataAccessLayerStub
 {
     public class Rand
     {
