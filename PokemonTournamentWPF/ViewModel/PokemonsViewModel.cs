@@ -10,14 +10,6 @@ namespace PokemonTournamentWPF.ViewModel
 {
     public class PokemonsViewModel : ViewModelBase
     {
-
-        // Event destiné à réclamer la fermeture du conteneur;
-        public event EventHandler<EventArgs> CloseNotified;
-        protected void OnCloseNotified(EventArgs e)
-        {
-            this.CloseNotified(this, e);
-        }
-
         // Model encapsulé dans le ViewModel
         private ObservableCollection<PokemonViewModel> _pokemons;
 
@@ -110,33 +102,6 @@ namespace PokemonTournamentWPF.ViewModel
         private void Remove()
         {
             if (this.SelectedItem != null) Pokemons.Remove(this.SelectedItem);
-        }
-
-        // Commande Close
-        private RelayCommand _closeCommand;
-        public System.Windows.Input.ICommand CloseCommand
-        {
-            get
-            {
-                if (_closeCommand == null)
-                {
-                    _closeCommand = new RelayCommand(
-                        () => this.Close(),
-                        () => this.CanClose()
-                        );
-                }
-                return _closeCommand;
-            }
-        }
-
-        private bool CanClose()
-        {
-            return true;
-        }
-
-        private void Close()
-        {
-            OnCloseNotified(new EventArgs());
         }
         #endregion
     }

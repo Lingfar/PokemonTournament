@@ -35,9 +35,6 @@
             <Button Name="Remove" 
                 Command="{Binding Path=RemoveCommand}" 
                 Grid.Row="1" Grid.Column="1">Remove</Button>
-            <Button Name="Close" 
-                Command="{Binding Path=CloseCommand}" 
-                Grid.Row="1" Grid.Column="2">Close</Button>
         </Grid>
     </Grid>
 </UserControl>

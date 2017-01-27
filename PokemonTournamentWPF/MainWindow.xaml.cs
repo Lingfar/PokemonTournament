@@ -30,13 +30,32 @@ namespace PokemonTournamentWPF
     {
         public BusinessManager businessManager { get; set; }
 
+        public PokemonsViewModel pokemonsViewModel { get; set; }
+        private StadesViewModel stadesViewModel { get; set; }
+        private MatchesViewModel matchesViewModel { get; set; }
+        private CaracteristiquesViewModel caracteristiquesViewModel { get; set; }
+        public PokemonsViewModel bonusViewModel { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
 
             businessManager = BusinessManager.Instance;
             businessManager.RunTournament();
-            dataGridData.ItemsSource = businessManager.GetAllPokemons();
+
+            LoadAllViewModels();
+
+            contentControl.Content = new PokemonsView();
+            contentControl.DataContext = pokemonsViewModel;
+        }
+
+        private void LoadAllViewModels()
+        {
+            pokemonsViewModel = new PokemonsViewModel(businessManager.GetAllPokemons());
+            stadesViewModel = new StadesViewModel(businessManager.GetAllStades());
+            matchesViewModel = new MatchesViewModel(businessManager.GetAllMatchs());
+            caracteristiquesViewModel = new CaracteristiquesViewModel(businessManager.GetAllCaracteristiques());
+            bonusViewModel = new PokemonsViewModel(businessManager.GetAllPokemonsByType(ETypeElement.Dragon));
         }
 
         private void btn_Click(object sender, RoutedEventArgs e)
@@ -45,76 +64,44 @@ namespace PokemonTournamentWPF
             switch (button.Name)
             {
                 case "btnPokemons":
-                    dataGridData.ItemsSource = businessManager.GetAllPokemons();
-                    contentControl.Visibility = Visibility.Collapsed;
-                    dataGridData.Visibility = Visibility.Visible;
+                    contentControl.Content = new PokemonsView();
+                    contentControl.DataContext = pokemonsViewModel;
                     break;
                 case "btnStades":
-                    dataGridData.ItemsSource = businessManager.GetAllStades();
-                    dataGridData.Visibility = Visibility.Collapsed;
-                    contentControl.Visibility = Visibility.Visible;
-
-                    StadesViewModel stadesViewModel = new StadesViewModel(businessManager.GetAllStades());
                     contentControl.Content = new StadesView();
                     contentControl.DataContext = stadesViewModel;
                     break;
                 case "btnMatchs":
-                    dataGridData.ItemsSource = businessManager.GetAllMatchs();
-                    dataGridData.Visibility = Visibility.Collapsed;
-                    contentControl.Visibility = Visibility.Visible;
-
-                    MatchesViewModel matchesViewModel = new MatchesViewModel(businessManager.GetAllMatchs());
                     contentControl.Content = new MatchesView();
                     contentControl.DataContext = matchesViewModel;
                     break;
                 case "btnCarac":
-                    dataGridData.ItemsSource = businessManager.GetAllCaracteristiques();
-                    dataGridData.Visibility = Visibility.Collapsed;
-                    contentControl.Visibility = Visibility.Visible;
-
-                    CaracteristiquesViewModel caracViewModel = new CaracteristiquesViewModel(businessManager.GetAllCaracteristiques());
                     contentControl.Content = new CaracteristiquesView();
-                    contentControl.DataContext = caracViewModel;
+                    contentControl.DataContext = caracteristiquesViewModel;
                     break;
                 case "btnBonus":
-                    dataGridData.ItemsSource = businessManager.GetAllPokemonsByType(ETypeElement.Dragon);
-                    dataGridData.Visibility = Visibility.Visible;
-                    contentControl.Visibility = Visibility.Collapsed;
+                    contentControl.Content = new PokemonsView();
+                    contentControl.DataContext = bonusViewModel;
                     break;
             }
         }
 
-        private void btnExportPokemons_Click(object sender, RoutedEventArgs e)
-        {
-            XmlSerializer ser = new XmlSerializer(typeof(List<Pokemon>));
-            SaveFileDialog save = new SaveFileDialog();
-            save.FileName = "Pokemons";
-            save.DefaultExt = ".xml";
-            save.Filter = "XML-File | *.xml";
-            Nullable<bool> result = save.ShowDialog();
-            if (result == true)
-            {
-                using (FileStream fs = new FileStream(save.FileName, FileMode.Create))
-                {
-                    ser.Serialize(fs, businessManager.GetAllPokemons());
-                }
-            }
-        }
-
-        private void dataGridData_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (dataGridData.ItemsSource.GetType() == typeof(List<Stade>))
-            {
-                DataGridRow row = (DataGridRow)ItemsControl.ContainerFromElement((DataGrid)sender,
-                           (DependencyObject)e.OriginalSource);
-                if (row != null)
-                {
-                    //StadeViewer stadeViewer = new StadeViewer((Stade)row.DataContext);
-                    //stadeViewer.Closed += StadeView_Closed;
-                    //stadeViewer.ShowDialog();
-                }
-            }
-        }
+        //private void btnExportPokemons_Click(object sender, RoutedEventArgs e)
+        //{
+        //    XmlSerializer ser = new XmlSerializer(typeof(List<Pokemon>));
+        //    SaveFileDialog save = new SaveFileDialog();
+        //    save.FileName = "Pokemons";
+        //    save.DefaultExt = ".xml";
+        //    save.Filter = "XML-File | *.xml";
+        //    Nullable<bool> result = save.ShowDialog();
+        //    if (result == true)
+        //    {
+        //        using (FileStream fs = new FileStream(save.FileName, FileMode.Create))
+        //        {
+        //            ser.Serialize(fs, businessManager.GetAllPokemons());
+        //        }
+        //    }
+        //}
 
         private void dataGridData_AutoGeneratedColumns(object sender, EventArgs e)
         {
