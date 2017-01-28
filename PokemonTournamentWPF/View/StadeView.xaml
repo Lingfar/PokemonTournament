@@ -23,7 +23,7 @@
         <TextBlock Text="Type du stade :" FontSize="24" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="5"/>
         <ComboBox Name="cbType" SelectedItem="{Binding Type}" ItemsSource="{Binding ETypeElementValues}" FontSize="24" Grid.Column="1" Grid.Row="1" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <TextBlock Text="Nombre de places :" FontSize="24" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"/>
-        <TextBox Name="txtNbPlaces" FontSize="24" Text="{Binding NbPlaces, UpdateSourceTrigger=PropertyChanged, TargetNullValue={x:Static sys:String.Empty}}" Grid.Column="1" Grid.Row="2" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox Name="txtNbPlaces" FontSize="24" Text="{Binding NbPlaces, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         
         <Grid Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="3" Margin="5">
             <Grid.RowDefinitions>
@@ -37,9 +37,9 @@
             </Grid.ColumnDefinitions>
             <TextBlock Text="Caractéristiques :" FontSize="24" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2"/>
             <TextBlock Text="Attaque bonus / malus :" FontSize="20" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2"/>
-            <TextBox Name="txtAtt" FontSize="20" Text="{Binding Caracteristiques.Attaque, UpdateSourceTrigger=PropertyChanged, TargetNullValue={x:Static sys:String.Empty}}" Grid.Column="1" Grid.Row="1" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBox Name="txtAtt" FontSize="20" Text="{Binding Caracteristiques.Attaque, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="1" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBlock Text="Défense bonus / malus :" FontSize="20" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2"/>
-            <TextBox Name="txtDef" FontSize="20" Text="{Binding Caracteristiques.Defense, UpdateSourceTrigger=PropertyChanged, TargetNullValue={x:Static sys:String.Empty}}" Grid.Column="1" Grid.Row="2" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBox Name="txtDef" FontSize="20" Text="{Binding Caracteristiques.Defense, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
     </Grid>
 </UserControl>

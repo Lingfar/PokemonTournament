@@ -19,6 +19,10 @@ namespace PokemonTournamentWPF.ViewModel
         public MatchViewModel(Match matchModel)
         {
             Match = matchModel;
+            if (Match.IdPokemonVainqueur == Pokemon1.ID)
+                PokemonVainqueur = Pokemon1.Nom;
+            else
+                PokemonVainqueur = Pokemon2.Nom;
             base.OnPropertyChanged("Stade");
             base.OnPropertyChanged("Pokemon1");
             base.OnPropertyChanged("Pokemon2");
@@ -43,10 +47,12 @@ namespace PokemonTournamentWPF.ViewModel
             set
             {
                 if (value == match.IdPokemonVainqueur) return;
-                match.IdPokemonVainqueur = value;
+                match.IdPokemonVainqueur = value;                
                 base.OnPropertyChanged("IdPokemonVainqueur");
             }
         }
+
+        public string PokemonVainqueur { get; set; }
 
         public Stade Stade
         {

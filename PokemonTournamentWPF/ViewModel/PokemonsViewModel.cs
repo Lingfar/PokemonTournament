@@ -75,7 +75,7 @@ namespace PokemonTournamentWPF.ViewModel
             if (SelectedItem != null)
             {
                 Pokemons.Add(SelectedItem);
-                PokemonBusinessLayer.BusinessManager.Instance.AddNewPokemon(SelectedItem.poke);
+                //PokemonBusinessLayer.BusinessManager.Instance.AddNewPokemon(SelectedItem.poke);
             }
         }
 

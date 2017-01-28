@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace PokemonDataAccessLayer
 {
-    interface IDal
+    public interface IDal
     {
         List<Pokemon> GetAllPokemons();
 
-        Pokemon GetPokemon(DataRow item);
+        List<Match> GetAllMatches();
 
-        Caracteristique GetCaracteristiqueById(int id);
+        bool InsertPokemon(Pokemon pokemon);
 
-        Caracteristique GetCaracteristique(DataRow item);
+        bool InsertMatch(Match match);
     }
 }

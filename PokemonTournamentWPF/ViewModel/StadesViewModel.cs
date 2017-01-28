@@ -11,12 +11,6 @@ namespace PokemonTournamentWPF.ViewModel
 {
     public class StadesViewModel : ViewModelBase
     {
-        public event EventHandler<EventArgs> CloseNotified;
-        protected void OnCloseNotified(EventArgs e)
-        {
-            this.CloseNotified(this, e);
-        }
-
         private StadeViewModel selectedItem;
         public StadeViewModel SelectedItem
         {

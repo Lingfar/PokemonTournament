@@ -10,7 +10,7 @@
         <DataGrid ItemsSource="{Binding Matches}" AutoGenerateColumns="False" FontSize="14" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
-                <DataGridTextColumn Header="ID Pokemon Vainqueur" Binding="{Binding IdPokemonVainqueur}"/>
+                <DataGridTextColumn Header="Pokemon Vainqueur" Binding="{Binding PokemonVainqueur}"/>
                 <DataGridTextColumn Header="Phase du tournoi" Binding="{Binding PhaseTournoi}"/>
                 <DataGridTextColumn Header="Pokemon 1" Binding="{Binding Pokemon1}"/>
                 <DataGridTextColumn Header="Pokemon 2" Binding="{Binding Pokemon2}"/>

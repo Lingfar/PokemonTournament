@@ -8,16 +8,16 @@ using System.Data;
 
 namespace PokemonDataAccessLayer
 {
-    class DalManager : IDal
+    public class DalManager : IDal
     {
         private static DalManager instance;
         private static object syncRoot = new Object();
 
-        private IDal dal { get; set; }
+        private IDal dalDb { get; set; }
 
         private DalManager()
         {
-            dal = new DalSqlServer();
+            dalDb = new DalSqlServer();
         }
         public static DalManager Instance
         {
@@ -37,22 +37,22 @@ namespace PokemonDataAccessLayer
 
         public List<Pokemon> GetAllPokemons()
         {
-            return dal.GetAllPokemons();
+            return dalDb.GetAllPokemons();
         }
 
-        public Pokemon GetPokemon(DataRow item)
+        public List<Match> GetAllMatches()
         {
-            return dal.GetPokemon(item);
+            return dalDb.GetAllMatches();
         }
 
-        public Caracteristique GetCaracteristiqueById(int id)
+        public bool InsertPokemon(Pokemon pokemon)
         {
-            return dal.GetCaracteristiqueById(id);
+            return dalDb.InsertPokemon(pokemon);
         }
 
-        public Caracteristique GetCaracteristique(DataRow item)
+        public bool InsertMatch(Match match)
         {
-            return dal.GetCaracteristique(item);
+            return dalDb.InsertMatch(match);
         }
     }
 }

@@ -14,7 +14,19 @@ namespace PokemonTournamentEntities
         public Pokemon Pokemon2 { get; set; }
         public Stade Stade { get; set; }
 
+        public Match()
+        {
+
+        }
+
         public Match(int id, EPhaseTournoi phase, Pokemon p1, Pokemon p2) : base(id)
+        {
+            PhaseTournoi = phase;
+            Pokemon1 = p1;
+            Pokemon2 = p2;
+        }
+
+        public Match(EPhaseTournoi phase, Pokemon p1, Pokemon p2)
         {
             PhaseTournoi = phase;
             Pokemon1 = p1;

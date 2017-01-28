@@ -14,15 +14,15 @@ namespace PokemonBusinessLayer
         private static BusinessManager instance;
         private static object syncRoot = new Object();
 
-        private PokemonDataAccessLayerStub.DalManager dalManager { get; set; }
+        private PokemonDataAccessLayerStub.DalManager dalManagerStub { get; set; }
         private Random rng { get; set; }
 
-        private DalSqlServer dalTest { get; set; } 
+        private PokemonDataAccessLayer.DalManager dalManager { get; set; } 
 
         private BusinessManager()
         {
-            dalManager = DalManager.Instance;
-            dalTest = new DalSqlServer();
+            dalManagerStub = PokemonDataAccessLayerStub.DalManager.Instance;
+            dalManager = PokemonDataAccessLayer.DalManager.Instance;
             rng = new Random(5);
         }
 
@@ -45,7 +45,7 @@ namespace PokemonBusinessLayer
         public static bool CheckConnectionUser(string login, string password)
         {
             bool user = false;
-            Utilisateur utilisateur = DalManager.GetUtilisateurByLogin(login);
+            Utilisateur utilisateur = PokemonDataAccessLayerStub.DalManager.GetUtilisateurByLogin(login);
             if (utilisateur != null && utilisateur.Password == password)
                 user = true;
             return user;
@@ -54,97 +54,96 @@ namespace PokemonBusinessLayer
         #region Display Console
         public List<string> DisplayAllPokemons()
         {
-            return dalManager.GetAllPokemons().Select(p => p.ToString()).ToList();
+            return dalManagerStub.GetAllPokemons().Select(p => p.ToString()).ToList();
         }
 
         public List<string> DisplayAllPokemonsByType(ETypeElement type)
         {
-            return dalManager.GetAllPokemonsByType(type).Select(p => p.ToString()).ToList();
+            return dalManagerStub.GetAllPokemonsByType(type).Select(p => p.ToString()).ToList();
         }
 
         public List<string> DisplayAllPokemonsByStats(int attaque, int pv)
         {
-            return dalManager.GetAllPokemons().Where(p => p.Caracteristiques.Attaque >= attaque
+            return dalManagerStub.GetAllPokemons().Where(p => p.Caracteristiques.Attaque >= attaque
                 && p.Caracteristiques.PV >= pv).Select(p => p.ToString()).ToList();
         }
 
         public List<string> DisplayAllMatchs()
         {
-            return dalManager.GetAllMatchs().Select(m => m.ToString()).ToList();
+            return dalManagerStub.GetAllMatchs().Select(m => m.ToString()).ToList();
         }
 
         public List<string> DisplayMatchsByPlaces(int nbPlaces)
         {
-            return dalManager.GetAllMatchs().Where(m => m.Stade.NbPlaces >= nbPlaces).Select(m => m.ToString()).ToList();
+            return dalManagerStub.GetAllMatchs().Where(m => m.Stade.NbPlaces >= nbPlaces).Select(m => m.ToString()).ToList();
         }
 
         public List<string> DisplayAllStades()
         {
-            return dalManager.GetAllStades().Select(s => s.ToString()).ToList();
+            return dalManagerStub.GetAllStades().Select(s => s.ToString()).ToList();
         }
 
         public List<string> DisplayAllCaracteristiques()
         {
-            return dalManager.GetAllCaracteristiques().Select(c => c.ToString()).ToList();
+            return dalManagerStub.GetAllCaracteristiques().Select(c => c.ToString()).ToList();
         }
 
         public string DisplayWinner()
         {
-            return dalManager.GetWinner().ToString();
+            return dalManagerStub.GetWinner().ToString();
         }
         #endregion
 
         #region Get data
         public List<Pokemon> GetAllPokemons()
         {
+            //return dalManagerStub.GetAllPokemons();
             return dalManager.GetAllPokemons();
         }
 
         public List<Pokemon> GetAllPokemonsByType(ETypeElement type)
         {
-            return dalManager.GetAllPokemonsByType(type);
+            return dalManagerStub.GetAllPokemonsByType(type);
         }
 
         public List<Pokemon> GetAllPokemonsByStats(int attaque, int pv)
         {
-            return dalManager.GetAllPokemons().FindAll(p => p.Caracteristiques.Attaque >= attaque && p.Caracteristiques.PV >= pv);
+            return dalManagerStub.GetAllPokemons().FindAll(p => p.Caracteristiques.Attaque >= attaque && p.Caracteristiques.PV >= pv);
         }
 
         public List<Match> GetAllMatchs()
         {
-            return dalManager.GetAllMatchs();
+            //return dalManagerStub.GetAllMatchs();
+            return dalManager.GetAllMatches();
         }
 
         public List<Match> GetMatchsByPlaces(int nbPlaces)
         {
-            return dalManager.GetAllMatchs().FindAll(m => m.Stade.NbPlaces >= nbPlaces);
+            return dalManagerStub.GetAllMatchs().FindAll(m => m.Stade.NbPlaces >= nbPlaces);
         }
 
         public List<Stade> GetAllStades()
         {
-            return dalManager.GetAllStades();
+            return dalManagerStub.GetAllStades();
         }
 
         public List<Caracteristique> GetAllCaracteristiques()
         {
-            return dalManager.GetAllCaracteristiques();
+            return dalManagerStub.GetAllCaracteristiques();
         }
         #endregion
-
-
-        public void Test()
-        {
-            dalTest.GetAllPokemons();
-        }
-
-
+        
         public void AddNewStade(Stade stade)
         {
-            dalManager.AddNewStade(stade);
+            dalManagerStub.AddNewStade(stade);
         }
-        public void AddNewPokemon(Pokemon poke)
+        public void AddMatches(List<Match> matches)
         {
-            //dalManager.AddNewPokemon(poke);
+            foreach (Match m in matches)
+            {
+                //dalManagerStub.AddMatchToList(m);
+                dalManager.InsertMatch(m);
+            }
         }
 
 
@@ -154,38 +153,39 @@ namespace PokemonBusinessLayer
         }
         public void DeleteStade(Stade stade)
         {
-            dalManager.DeleteNewStade(stade);
+            dalManagerStub.DeleteNewStade(stade);
         }
 
         #region Tournoi
-        public void RunTournament()
+        public Tournoi RunTournament()
         {
-            List<Pokemon> pokemons = new List<Pokemon>();
-            pokemons.AddRange(dalManager.GetAllPokemons());
+            Tournoi tournament = new Tournoi("Pokemon Tournament");            
+            tournament.Pokemons.AddRange(dalManager.GetAllPokemons());
             for (int i = 0; i < 5; i++)
             {
-                RunPhaseOfTournament(pokemons, (EPhaseTournoi)i);
+                RunPhaseOfTournament(tournament, (EPhaseTournoi)i);
             }
+            return tournament;
         }
 
-        private List<Pokemon> RunPhaseOfTournament(List<Pokemon> pokemons, EPhaseTournoi phase)
+        private List<Pokemon> RunPhaseOfTournament(Tournoi tournament, EPhaseTournoi phase)
         {
-            for (int i = pokemons.Count - 1; i >= 0; i -= 2)
+            for (int i = tournament.Pokemons.Count - 1; i >= 0; i -= 2)
             {
                 Match match;
-                if (FastestPokemon(pokemons[i], pokemons[i - 1]))
-                    match = RunMatch(pokemons[i], pokemons[i - 1], phase);
+                if (FastestPokemon(tournament.Pokemons[i], tournament.Pokemons[i - 1]))
+                    match = RunMatch(tournament.Pokemons[i], tournament.Pokemons[i - 1], phase);
                 else
-                    match = RunMatch(pokemons[i - 1], pokemons[i], phase);
-                dalManager.AddMatchToList(match);
+                    match = RunMatch(tournament.Pokemons[i - 1], tournament.Pokemons[i], phase);
+                dalManagerStub.AddMatchToList(match);
 
-                if (pokemons[i].ID == match.IdPokemonVainqueur)
-                    pokemons.RemoveAt(i - 1);
+                if (tournament.Pokemons[i].ID == match.IdPokemonVainqueur)
+                    tournament.Pokemons.RemoveAt(i - 1);
                 else
-                    pokemons.RemoveAt(i);
+                    tournament.Pokemons.RemoveAt(i);
             }
 
-            return pokemons;
+            return tournament.Pokemons;
         }
 
         private Match RunMatch(Pokemon pokemon1, Pokemon pokemon2, EPhaseTournoi phase)
@@ -193,9 +193,9 @@ namespace PokemonBusinessLayer
             Caracteristique newCaracP1 = new Caracteristique(pokemon1.Caracteristiques);
             Caracteristique newCaracP2 = new Caracteristique(pokemon2.Caracteristiques);
 
-            Match match = new Match(DalManager.LastId, phase, pokemon1, pokemon2);
-            DalManager.LastId++;
-            match.Stade = dalManager.GetAllStades()[rng.Next(0, 6)];
+            Match match = new Match(PokemonDataAccessLayerStub.DalManager.LastId, phase, pokemon1, pokemon2);
+            PokemonDataAccessLayerStub.DalManager.LastId++;
+            match.Stade = dalManagerStub.GetAllStades()[rng.Next(0, 6)];
 
             BuffNerfPokemonByStade(pokemon1.Type, newCaracP1, match.Stade);
             BuffNerfPokemonByStade(pokemon2.Type, newCaracP2, match.Stade);
