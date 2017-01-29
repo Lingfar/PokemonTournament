@@ -43,7 +43,7 @@ namespace PokemonTournamentWPF
             businessManager = BusinessManager.Instance;
 
             //Tournoi tournament = new Tournoi("Pokemon Tournament");
-            //tournament.Run(businessManager.GetAllPokemons());
+            //tournament.Run(businessManager.GetAllPokemons(), businessManager.GetAllStades());
             //businessManager.AddMatches(tournament.Matchs);
 
             LoadAllViewModels();

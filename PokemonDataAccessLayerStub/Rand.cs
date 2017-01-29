@@ -35,12 +35,8 @@ namespace PokemonDataAccessLayerStub
         {
             Stade stade = new Stade(id);
             stade.Type = type;
-
-            Caracteristique carac = new Caracteristique();
-            carac.Attaque = rand.Next(1, 6);
-            carac.Defense = carac.Attaque;
-
-            stade.Caracteristiques = carac;
+            stade.Attaque = rand.Next(1, 6);
+            stade.Defense = stade.Attaque;
             stade.NbPlaces = rand.Next(50, 400);
             return stade;
         }

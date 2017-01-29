@@ -30,9 +30,10 @@ namespace PokemonTournamentEntities
             rng = new Random(5);
         }
 
-        public void Run(List<Pokemon> allPokemons)
+        public void Run(List<Pokemon> allPokemons, List<Stade> allStades)
         {
             AllPokemons = allPokemons;
+            Stades = allStades;
             Pokemons.AddRange(allPokemons);
             for (int i = 0; i < 5; i++)
             {
@@ -65,7 +66,7 @@ namespace PokemonTournamentEntities
             Caracteristique newCaracP2 = new Caracteristique(pokemon2.Caracteristiques);
 
             Match match = new Match(phase, pokemon1, pokemon2);
-            match.Stade = new Stade();
+            match.Stade = Stades[rng.Next(0, Stade.NbStades)];
 
             BuffNerfPokemonByStade(pokemon1.Type, newCaracP1, match.Stade);
             BuffNerfPokemonByStade(pokemon2.Type, newCaracP2, match.Stade);
@@ -104,13 +105,13 @@ namespace PokemonTournamentEntities
         {
             if (type == stade.Type)
             {
-                carac.Attaque += stade.Caracteristiques.Attaque;
-                carac.Defense += stade.Caracteristiques.Defense;
+                carac.Attaque += stade.Attaque;
+                carac.Defense += stade.Defense;
             }
             else if (GetMultiplicatorBetweenType(type, stade.Type) == 0.5m)
             {
-                carac.Attaque -= stade.Caracteristiques.Attaque;
-                carac.Defense -= stade.Caracteristiques.Defense;
+                carac.Attaque -= stade.Attaque;
+                carac.Defense -= stade.Defense;
             }
         }
 

@@ -37,9 +37,9 @@
             </Grid.ColumnDefinitions>
             <TextBlock Text="Caractéristiques :" FontSize="24" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2"/>
             <TextBlock Text="Attaque bonus / malus :" FontSize="20" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2"/>
-            <TextBox Name="txtAtt" FontSize="20" Text="{Binding Caracteristiques.Attaque, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="1" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBox Name="txtAtt" FontSize="20" Text="{Binding Attaque, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="1" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBlock Text="Défense bonus / malus :" FontSize="20" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2"/>
-            <TextBox Name="txtDef" FontSize="20" Text="{Binding Caracteristiques.Defense, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBox Name="txtDef" FontSize="20" Text="{Binding Defense, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
     </Grid>
 </UserControl>

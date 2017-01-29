@@ -14,6 +14,7 @@
                 <DataGridTextColumn Header="Phase du tournoi" Binding="{Binding PhaseTournoi}"/>
                 <DataGridTextColumn Header="Pokemon 1" Binding="{Binding Pokemon1}"/>
                 <DataGridTextColumn Header="Pokemon 2" Binding="{Binding Pokemon2}"/>
+                <DataGridTextColumn Header="Stade" Binding="{Binding Stade}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

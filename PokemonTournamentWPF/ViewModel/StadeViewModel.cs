@@ -85,14 +85,25 @@ namespace PokemonTournamentWPF.ViewModel
             }
         }
 
-        public Caracteristique Caracteristiques
+        public int Attaque
         {
-            get { return stade.Caracteristiques; }
+            get { return stade.Attaque; }
             set
             {
-                if (value == stade.Caracteristiques) return;
-                stade.Caracteristiques = value;
-                base.OnPropertyChanged("Caracteristiques");
+                if (value == stade.Attaque) return;
+                stade.Attaque = value;
+                base.OnPropertyChanged("Attaque");
+            }
+        }
+
+        public int Defense
+        {
+            get { return stade.Defense; }
+            set
+            {
+                if (value == stade.Defense) return;
+                stade.Defense = value;
+                base.OnPropertyChanged("Defense");
             }
         }
     }

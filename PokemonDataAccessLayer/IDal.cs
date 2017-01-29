@@ -14,8 +14,12 @@ namespace PokemonDataAccessLayer
 
         List<Match> GetAllMatches();
 
+        List<Stade> GetAllStades();
+
         bool InsertPokemon(Pokemon pokemon);
 
         bool InsertMatch(Match match);
+
+        bool InsertStade(Stade stade);
     }
 }

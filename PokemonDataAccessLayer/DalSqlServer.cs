@@ -40,7 +40,7 @@ namespace PokemonDataAccessLayer
 
         public bool InsertPokemon(Pokemon pokemon)
         {
-            bool result = false;            
+            bool result = false;
             if (InsertCaracteristique(pokemon.Caracteristiques))
             {
                 try
@@ -63,7 +63,35 @@ namespace PokemonDataAccessLayer
                     Console.WriteLine(e.Message);
                     result = false;
                 }
-            }            
+            }
+            return result;
+        }
+
+        public bool InsertStade(Stade stade)
+        {
+            bool result = false;
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+                {
+                    sqlConnection.Open();
+                    string sql = "INSERT INTO Stade VALUES(@Nom, @Type, @NbPlaces, @Attaque, @Defense);  SELECT @@IDENTITY";
+                    SqlCommand sqlCommand = new SqlCommand(sql, sqlConnection);
+                    sqlCommand.Parameters.Add("@Nom", SqlDbType.VarChar, 50).Value = stade.Nom;
+                    sqlCommand.Parameters.Add("@Type", SqlDbType.Int).Value = (int)stade.Type;
+                    sqlCommand.Parameters.Add("@NbPlaces", SqlDbType.Int).Value = stade.NbPlaces;
+                    sqlCommand.Parameters.Add("@Attaque", SqlDbType.Int).Value = stade.Attaque;
+                    sqlCommand.Parameters.Add("@Defense", SqlDbType.Int).Value = stade.Defense;
+                    sqlCommand.CommandType = CommandType.Text;
+                    stade.ID = Convert.ToInt32(sqlCommand.ExecuteScalar().ToString());
+                    sqlConnection.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                result = false;
+            }
             return result;
         }
 
@@ -161,6 +189,43 @@ namespace PokemonDataAccessLayer
             return poke;
         }
 
+        public List<Stade> GetAllStades()
+        {
+            List<Stade> listStades = new List<Stade>();
+            DataTable dt = Select("select * from Stade");
+            foreach (DataRow item in dt.Rows)
+            {
+                listStades.Add(GetStade(item));
+            }
+            return listStades;
+        }
+
+        private Stade GetStade(DataRow item)
+        {
+            Stade stade = new Stade();
+            if (item != null)
+            {
+                stade.ID = Convert.ToInt32(item["Id"]);
+                stade.Nom = item["Nom"].ToString();
+                stade.Type = (ETypeElement)Convert.ToInt32(item["Type"]);
+                stade.NbPlaces = Convert.ToInt32(item["NbPlaces"]);
+                stade.Attaque = Convert.ToInt32(item["Attaque"]);
+                stade.Defense = Convert.ToInt32(item["Defense"]);
+            }
+            return stade;
+        }
+
+        private Stade GetStadeById(int id)
+        {
+            Stade stade = new Stade();
+            DataTable dt = Select("select * from Stade where id=" + id.ToString());
+            if (dt.Rows.Count > 0)
+            {
+                stade = GetStade(dt.Rows[0]);
+            }
+            return stade;
+        }
+
         public List<Match> GetAllMatches()
         {
             List<Match> listMatches = new List<Match>();
@@ -182,12 +247,12 @@ namespace PokemonDataAccessLayer
                 match.Pokemon1 = GetPokemonById(Convert.ToInt32(item["Pokemon1"]));
                 match.Pokemon2 = GetPokemonById(Convert.ToInt32(item["Pokemon2"]));
                 match.PhaseTournoi = (EPhaseTournoi)Convert.ToInt32(item["PhaseTournoi"]);
-                match.Stade = new Stade();
+                match.Stade = GetStadeById(Convert.ToInt32(item["Stade"]));
             }
             return match;
         }
 
-        public Caracteristique GetCaracteristiqueById(int id)
+        private Caracteristique GetCaracteristiqueById(int id)
         {
             Caracteristique carac = new Caracteristique();
             DataTable dt = Select("select * from caracteristique where id=" + id.ToString());

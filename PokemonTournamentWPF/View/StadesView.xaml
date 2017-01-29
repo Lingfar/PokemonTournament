@@ -18,8 +18,8 @@
                 <DataGridTextColumn Header="Nom" Binding="{Binding Nom}"/>
                 <DataGridTextColumn Header="Type" Binding="{Binding Type}"/>
                 <DataGridTextColumn Header="Nombre de places" Binding="{Binding NbPlaces}"/>
-                <DataGridTextColumn Header="Attaque bonus / malus" Binding="{Binding Caracteristiques.Attaque}"/>
-                <DataGridTextColumn Header="Défense bonus / malus" Binding="{Binding Caracteristiques.Defense}"/>
+                <DataGridTextColumn Header="Attaque bonus / malus" Binding="{Binding Attaque}"/>
+                <DataGridTextColumn Header="Défense bonus / malus" Binding="{Binding Defense}"/>
             </DataGrid.Columns>
         </DataGrid>
         <local:StadeView x:Name="ucStade" Grid.Row="1" DataContext="{Binding SelectedItem}"/>

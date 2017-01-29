@@ -65,8 +65,11 @@ namespace PokemonTournamentWPF.ViewModel
         {
             if (SelectedItem != null)
             {
-                Stades.Add(SelectedItem);
-                PokemonBusinessLayer.BusinessManager.Instance.AddNewStade(SelectedItem.Stade);
+                SelectedItem.Nom = "NomTest";
+                if(PokemonBusinessLayer.BusinessManager.Instance.AddStade(SelectedItem.Stade))
+                {
+                    Stades.Add(SelectedItem);
+                }
             }
         }
 
