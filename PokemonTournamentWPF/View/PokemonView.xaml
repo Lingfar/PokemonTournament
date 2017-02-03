@@ -17,10 +17,10 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBlock Text="Nom du pokemon :" FontSize="24" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5"/>
-        <TextBox Name="txtName" Text="{Binding Nom}" FontSize="24" Grid.Column="1" Grid.Row="0" Width="250" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-        <TextBlock Text="Type du pokemon :" FontSize="24" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center"  Margin="5"/>
-        <ComboBox Name="cbType" SelectedItem="{Binding Type}" ItemsSource="{Binding ETypeElementValues}" FontSize="24" Grid.Row="1" Grid.Column="1" Width="250" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,25,-2,26"/>
+        <TextBlock Text="Nom du pokemon :" FontSize="24" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"/>
+        <TextBox Name="txtName" Text="{Binding Nom}" FontSize="24" Grid.Column="1" Grid.Row="0" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Text="Type du pokemon :" FontSize="24" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="5"/>
+        <ComboBox Name="cbType" SelectedItem="{Binding Type}" ItemsSource="{Binding ETypeElementValues}" FontSize="24" Grid.Row="1" Grid.Column="1" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <local:CaracteristiquesEditorView x:Name="uc" Grid.Row="2" Grid.ColumnSpan="2" DataContext="{Binding Caracteristiques}"/>
     </Grid>
 </UserControl>
