@@ -28,14 +28,14 @@ namespace PokemonTournamentWPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        public BusinessManager businessManager { get; set; }
+        private BusinessManager businessManager { get; set; }
 
-        public PokemonsViewModel pokemonsViewModel { get; set; }
+        private PokemonsViewModel pokemonsViewModel { get; set; }
         private StadesViewModel stadesViewModel { get; set; }
         private MatchesViewModel matchesViewModel { get; set; }
         private CaracteristiquesViewModel caracteristiquesViewModel { get; set; }
         private TournoisViewModel tournoisViewModel { get; set; }
-        public PokemonsViewModel bonusViewModel { get; set; }
+        private PokemonsViewModel bonusViewModel { get; set; }
 
         public MainWindow()
         {
@@ -43,19 +43,15 @@ namespace PokemonTournamentWPF
 
             businessManager = BusinessManager.Instance;
 
-            //Tournoi tournament = new Tournoi("Pokemon Tournament");
-            //tournament.Run(businessManager.GetAllPokemons(), businessManager.GetAllStades());
-            //businessManager.AddMatches(tournament.Matchs);
-
             LoadAllViewModels();
 
-            contentControl.Content = new PokemonsView();
-            contentControl.DataContext = pokemonsViewModel;
+            contentControl.Content = new TournoisView();
+            contentControl.DataContext = tournoisViewModel;
         }
 
         private void LoadAllViewModels()
         {
-            tournoisViewModel = new TournoisViewModel(new List<Tournoi>());
+            tournoisViewModel = new TournoisViewModel(businessManager.GetAllTournois());
             pokemonsViewModel = new PokemonsViewModel(businessManager.GetAllPokemons());
             stadesViewModel = new StadesViewModel(businessManager.GetAllStades());
             matchesViewModel = new MatchesViewModel(businessManager.GetAllMatchs());

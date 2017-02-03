@@ -35,6 +35,11 @@ namespace PokemonDataAccessLayer
             }
         }
 
+        public List<Tournoi> GetAllTournois()
+        {
+            return dalDb.GetAllTournois();
+        }
+
         public List<Pokemon> GetAllPokemons()
         {
             return dalDb.GetAllPokemons();
@@ -64,6 +69,11 @@ namespace PokemonDataAccessLayer
         public bool InsertStade(Stade stade)
         {
             return dalDb.InsertStade(stade);
+        }
+
+        public bool InsertTournoi(Tournoi tournoi)
+        {
+            return dalDb.InsertTournoi(tournoi);
         }
 
 

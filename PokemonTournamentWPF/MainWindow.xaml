@@ -11,17 +11,14 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        
+
         <Grid Grid.Row="0" Background="DarkRed">
             <TextBlock Text="Pokemon Tournament" FontSize="30" HorizontalAlignment="Center" Foreground="White"/>
         </Grid>
 
-        <TextBlock Name="tbTournoi" Text="Tournoi X sélectionné" FontSize="20" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-        <Grid Grid.Row="2" Background="LightGray" Margin="2">
+        <Grid Grid.Row="1" Background="LightGray" Margin="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -37,6 +34,6 @@
             <Button Name="btnCarac" Content="Caractéristiques" FontSize="20" Width="200" Height="50" Grid.Column="4" Margin="5" Click="btn_Click"/>
             <Button Name="btnBonus" Content="Bonus" FontSize="20" Width="200" Height="50" Grid.Column="5" Margin="5" Click="btn_Click"/>
         </Grid>
-        <ContentControl Name="contentControl" Grid.Row="3"/>
+        <ContentControl Name="contentControl" Grid.Row="2"/>
     </Grid>
 </Window>

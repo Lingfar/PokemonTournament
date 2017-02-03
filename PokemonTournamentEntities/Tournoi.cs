@@ -16,54 +16,95 @@ namespace PokemonTournamentEntities
         public string Nom { get; set; }
         public Pokemon Vainqueur { get; set; }
         public List<Match> Matches { get; set; }
-        public List<Pokemon> AllPokemons { get; set; }
-        private List<Pokemon> Pokemons { get; set; }
+        public List<Pokemon> Pokemons { get; set; }
+        private List<Pokemon> PokemonsRestants { get; set; }
         public List<Stade> Stades { get; set; }
         private Random rng { get; set; }
 
         public Tournoi()
         {
-
+            Matches = new List<Match>();
+            Pokemons = new List<Pokemon>();
+            PokemonsRestants = new List<Pokemon>();
+            Stades = new List<Stade>();
+            rng = new Random(5);
         }
 
         public Tournoi(string nom)
         {
             Nom = nom;
             Matches = new List<Match>();
-            AllPokemons = new List<Pokemon>();
             Pokemons = new List<Pokemon>();
+            PokemonsRestants = new List<Pokemon>();
             Stades = new List<Stade>();
             rng = new Random(5);
         }
 
-        public void Run(List<Pokemon> allPokemons, List<Stade> allStades)
+        public void SetPokemonsAndStades(List<Pokemon> allPokemons, List<Stade> allStades)
         {
-            AllPokemons = allPokemons;
-            Stades = allStades;
-            Pokemons.AddRange(allPokemons);
+            int i = 0;
+            while(i < 32)
+            {
+                Pokemon poke = allPokemons[rng.Next(0, allPokemons.Count)];
+                if(!Pokemons.Contains(poke))
+                {
+                    Pokemons.Add(poke);
+                    i++;
+                }
+            }
+
+            int nbStades = rng.Next(6, 13);
+            i = 0;
+
+            while(i < nbStades)
+            {
+                Stade stade = allStades[rng.Next(0, allStades.Count)];
+                if (!Stades.Contains(stade))
+                {
+                    Stades.Add(stade);
+                    i++;
+                }
+            }
+        }
+
+        public void Run()
+        {
+            PokemonsRestants.AddRange(Pokemons);
             for (int i = 0; i < 5; i++)
             {
                 RunPhaseOfTournament((EPhaseTournoi)i);
             }
-            Vainqueur = Pokemons.First();
+            Vainqueur = PokemonsRestants.First();
+        }
+
+        public void Run(List<Pokemon> allPokemons, List<Stade> allStades)
+        {
+            Pokemons = allPokemons;
+            Stades = allStades;
+            PokemonsRestants.AddRange(allPokemons);
+            for (int i = 0; i < 5; i++)
+            {
+                RunPhaseOfTournament((EPhaseTournoi)i);
+            }
+            Vainqueur = PokemonsRestants.First();
         }
 
         private void RunPhaseOfTournament(EPhaseTournoi phase)
         {
-            for (int i = Pokemons.Count - 1; i >= 0; i -= 2)
+            for (int i = PokemonsRestants.Count - 1; i >= 0; i -= 2)
             {
                 Match match;
-                if (FastestPokemon(Pokemons[i], Pokemons[i - 1]))
-                    match = RunMatch(Pokemons[i], Pokemons[i - 1], phase);
+                if (FastestPokemon(PokemonsRestants[i], PokemonsRestants[i - 1]))
+                    match = RunMatch(PokemonsRestants[i], PokemonsRestants[i - 1], phase);
                 else
-                    match = RunMatch(Pokemons[i - 1], Pokemons[i], phase);
+                    match = RunMatch(PokemonsRestants[i - 1], PokemonsRestants[i], phase);
 
                 Matches.Add(match);           
 
-                if (Pokemons[i].ID == match.IdPokemonVainqueur)
-                    Pokemons.RemoveAt(i - 1);
+                if (PokemonsRestants[i].ID == match.IdPokemonVainqueur)
+                    PokemonsRestants.RemoveAt(i - 1);
                 else
-                    Pokemons.RemoveAt(i);
+                    PokemonsRestants.RemoveAt(i);
             }            
         }
 
@@ -72,8 +113,9 @@ namespace PokemonTournamentEntities
             Caracteristique newCaracP1 = new Caracteristique(pokemon1.Caracteristiques);
             Caracteristique newCaracP2 = new Caracteristique(pokemon2.Caracteristiques);
 
-            Match match = new Match(phase, pokemon1, pokemon2);
-            match.Stade = Stades[rng.Next(0, Stade.NbStades)];
+            Match match = new Match(this, phase, pokemon1, pokemon2);
+            
+            match.Stade = Stades[rng.Next(0, Stades.Count)];
 
             BuffNerfPokemonByStade(pokemon1.Type, newCaracP1, match.Stade);
             BuffNerfPokemonByStade(pokemon2.Type, newCaracP2, match.Stade);

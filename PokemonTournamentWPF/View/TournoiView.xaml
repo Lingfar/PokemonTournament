@@ -8,17 +8,41 @@
              d:DesignHeight="500" d:DesignWidth="500">
     <Grid Margin="5">
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <TextBlock Text="Nom du tournoi :" FontSize="24" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"/>
         <TextBox Name="txtName" Text="{Binding Nom, UpdateSourceTrigger=PropertyChanged}" FontSize="24" Grid.Column="1" Grid.Row="0" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBlock Text="Pokemon Vainqueur" FontSize="24" Grid.ColumnSpan="2" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"/>
-        <local:PokemonView DataContext="{Binding Vainqueur}" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Text="Pokemons" FontSize="24" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <DataGrid Grid.Column="0" Grid.Row="2" ItemsSource="{Binding Pokemons}" FontSize="16" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
+                <DataGridTextColumn Header="Nom" Binding="{Binding Nom}"/>
+                <DataGridTextColumn Header="Type" Binding="{Binding Type}"/>
+                <DataGridTextColumn Header="PV" Binding="{Binding Caracteristiques.PV}"/>
+                <DataGridTextColumn Header="Attaque" Binding="{Binding Caracteristiques.Attaque}"/>
+                <DataGridTextColumn Header="Defense" Binding="{Binding Caracteristiques.Defense}"/>
+                <DataGridTextColumn Header="Vitesse" Binding="{Binding Caracteristiques.Vitesse}"/>
+                <DataGridTextColumn Header="Esquive" Binding="{Binding Caracteristiques.Esquive}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBlock Text="Matchs" FontSize="24" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <local:MatchesView DataContext="{Binding MatchesViewModel}" Grid.Row="2" Grid.Column="1"/>
+        <TextBlock Text="Stades" FontSize="24" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <DataGrid Grid.Column="2" Grid.Row="2" ItemsSource="{Binding Stades}" FontSize="16" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
+                <DataGridTextColumn Header="Nom" Binding="{Binding Nom}"/>
+                <DataGridTextColumn Header="Type" Binding="{Binding Type}"/>
+                <DataGridTextColumn Header="Attaque bonus/malus" Binding="{Binding Attaque}"/>
+                <DataGridTextColumn Header="Defense bonus/malus" Binding="{Binding Defense}"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

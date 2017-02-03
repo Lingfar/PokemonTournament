@@ -10,6 +10,8 @@ namespace PokemonDataAccessLayer
 {
     public interface IDal
     {
+        List<Tournoi> GetAllTournois();
+
         List<Pokemon> GetAllPokemons();
 
         List<Match> GetAllMatches();
@@ -22,6 +24,8 @@ namespace PokemonDataAccessLayer
         bool InsertMatch(Match match);
 
         bool InsertStade(Stade stade);
+
+        bool InsertTournoi(Tournoi tournoi);
 
 
         bool UpdateStade(Stade stade);

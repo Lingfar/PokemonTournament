@@ -54,10 +54,19 @@ namespace PokemonTournamentEntities
 
         }
 
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
         public override string ToString()
         {
-            return "Stade : " + base.ToString() + " Nom = " + Nom + " Attaque = " + Attaque + " Defense = " + Defense
-                + " NbPlaces = " + NbPlaces + " Type = " + Type;
+            return base.ToString() + " Nom = " + Nom + " Type = " + Type;
         }
     }
 }

@@ -95,6 +95,11 @@ namespace PokemonBusinessLayer
         #endregion
 
         #region Get data
+        public List<Tournoi> GetAllTournois()
+        {
+            return dalManager.GetAllTournois();
+        }
+
         public List<Pokemon> GetAllPokemons()
         {
             //return dalManagerStub.GetAllPokemons();
@@ -151,6 +156,10 @@ namespace PokemonBusinessLayer
                 //dalManagerStub.AddMatchToList(m);
                 dalManager.InsertMatch(m);
             }
+        }
+        public bool AddTournoi(Tournoi tournoi)
+        {
+            return dalManager.InsertTournoi(tournoi);
         }
 
         public bool UpdateStade(Stade stade)

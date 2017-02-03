@@ -29,10 +29,25 @@ namespace PokemonTournamentEntities
             Caracteristiques = new Caracteristique();
         }
 
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        //public override string ToString()
+        //{
+        //    return "Pokemon : " + base.ToString() + " Nom = " + Nom + " Caracteristiques : " + Caracteristiques.ToString()
+        //        + " Type = " + Type.ToString();
+        //}
+
         public override string ToString()
         {
-            return "Pokemon : " + base.ToString() + " Nom = " + Nom + " Caracteristiques : " + Caracteristiques.ToString()
-                + " Type = " + Type.ToString();
+            return base.ToString() + " Nom = " + Nom + " Type = " + Type.ToString();
         }
     }
 }

@@ -9,6 +9,7 @@ namespace PokemonTournamentEntities
     public class Match : EntityObject
     {
         public int IdPokemonVainqueur { get; set; }
+        public Tournoi Tournoi { get; set; }
         public EPhaseTournoi PhaseTournoi { get; set; }
         public Pokemon Pokemon1 { get; set; }
         public Pokemon Pokemon2 { get; set; }
@@ -19,15 +20,17 @@ namespace PokemonTournamentEntities
 
         }
 
-        public Match(int id, EPhaseTournoi phase, Pokemon p1, Pokemon p2) : base(id)
+        public Match(int id, Tournoi tournoi, EPhaseTournoi phase, Pokemon p1, Pokemon p2) : base(id)
         {
+            Tournoi = tournoi;
             PhaseTournoi = phase;
             Pokemon1 = p1;
             Pokemon2 = p2;
         }
 
-        public Match(EPhaseTournoi phase, Pokemon p1, Pokemon p2)
+        public Match(Tournoi tournoi, EPhaseTournoi phase, Pokemon p1, Pokemon p2)
         {
+            Tournoi = tournoi;
             PhaseTournoi = phase;
             Pokemon1 = p1;
             Pokemon2 = p2;

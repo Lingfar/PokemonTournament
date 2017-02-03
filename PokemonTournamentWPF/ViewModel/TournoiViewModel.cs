@@ -18,25 +18,43 @@ namespace PokemonTournamentWPF.ViewModel
 
         public TournoiViewModel()
         {
-
+            Tournoi = new Tournoi();
+            MatchesViewModel = new MatchesViewModel();
         }
 
         public TournoiViewModel(Tournoi tournoiModel)
         {
             if (tournoiModel != null)
-                Tournoi = tournoi;
+            {
+                Tournoi = tournoiModel;
+                MatchesViewModel = new MatchesViewModel(Tournoi.Matches);
+            }
             else
+            {
                 Tournoi = new Tournoi();
+                MatchesViewModel = new MatchesViewModel();
+            }
         }
 
         public int ID
         {
-            get {  return tournoi.ID; }
+            get { return tournoi.ID; }
             set
             {
                 if (value == tournoi.ID) return;
                 tournoi.ID = value;
                 base.OnPropertyChanged("ID");
+            }
+        }
+
+        public string Nom
+        {
+            get { return tournoi.Nom; }
+            set
+            {
+                if (value == tournoi.Nom) return;
+                tournoi.Nom = value;
+                base.OnPropertyChanged("Nom");
             }
         }
 
@@ -61,14 +79,16 @@ namespace PokemonTournamentWPF.ViewModel
                 base.OnPropertyChanged("Matches");
             }
         }
-        
+
+        public MatchesViewModel MatchesViewModel { get; set; }
+
         public List<Pokemon> Pokemons
         {
-            get { return tournoi.AllPokemons; }
+            get { return tournoi.Pokemons; }
             set
             {
-                if (value == tournoi.AllPokemons) return;
-                tournoi.AllPokemons = value;
+                if (value == tournoi.Pokemons) return;
+                tournoi.Pokemons = value;
                 base.OnPropertyChanged("Pokemons");
             }
         }

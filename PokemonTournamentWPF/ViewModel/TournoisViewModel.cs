@@ -63,8 +63,24 @@ namespace PokemonTournamentWPF.ViewModel
         }
         private void New()
         {
-            if (SelectedItem != null)
+            if (SelectedItem != null && SelectedItem.Tournoi.Nom != null)
             {
+                SelectedItem.Tournoi.SetPokemonsAndStades(PokemonBusinessLayer.BusinessManager.Instance.GetAllPokemons(),
+                        PokemonBusinessLayer.BusinessManager.Instance.GetAllStades());
+                SelectedItem.Tournoi.Run();
+                if (PokemonBusinessLayer.BusinessManager.Instance.AddTournoi(SelectedItem.Tournoi))
+                {                    
+                    PokemonBusinessLayer.BusinessManager.Instance.AddMatches(SelectedItem.Tournoi.Matches);
+                    System.Windows.Forms.MessageBox.Show("Génération du tournoi réussie", "Succeed");
+                }
+                else
+                {
+                    System.Windows.Forms.MessageBox.Show("La génération du stade a échoué", "Failed");
+                }
+            }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show("Veuillez renseigner un nom pour le tournoi", "Error");
             }
         }
 
@@ -112,7 +128,6 @@ namespace PokemonTournamentWPF.ViewModel
         }
         private bool CanRemove()
         {
-            Console.WriteLine(SelectedItem != null && SelectedItem.ID != 0);
             return (SelectedItem != null && SelectedItem.ID != 0);
         }
         private void Remove()

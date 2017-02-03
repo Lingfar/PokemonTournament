@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using PokemonTournamentEntities;
 namespace PokemonTournamentWPF.ViewModel
 {
-    class MatchViewModel : ViewModelBase
+    public class MatchViewModel : ViewModelBase
     {
         private Match match;
         public Match Match
@@ -20,9 +20,9 @@ namespace PokemonTournamentWPF.ViewModel
         {
             Match = matchModel;
             if (Match.IdPokemonVainqueur == Pokemon1.ID)
-                PokemonVainqueur = Pokemon1.Nom;
+                PokemonVainqueur = Pokemon1;
             else
-                PokemonVainqueur = Pokemon2.Nom;
+                PokemonVainqueur = Pokemon2;
             base.OnPropertyChanged("Stade");
             base.OnPropertyChanged("Pokemon1");
             base.OnPropertyChanged("Pokemon2");
@@ -52,7 +52,18 @@ namespace PokemonTournamentWPF.ViewModel
             }
         }
 
-        public string PokemonVainqueur { get; set; }
+        public Tournoi Tournoi
+        {
+            get { return match.Tournoi; }
+            set
+            {
+                if (value == match.Tournoi) return;
+                match.Tournoi = value;
+                base.OnPropertyChanged("Tournoi");
+            }
+        }
+
+        public Pokemon PokemonVainqueur { get; set; }
 
         public Stade Stade
         {

@@ -48,8 +48,6 @@ namespace PokemonTournamentWPF.ViewModel
         }
 
         #region "Commandes du formulaire"
-
-
         // Commande Add
         private RelayCommand addCommand;
         public ICommand AddCommand

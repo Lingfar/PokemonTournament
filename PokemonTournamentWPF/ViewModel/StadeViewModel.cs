@@ -21,7 +21,7 @@ namespace PokemonTournamentWPF.ViewModel
 
         public StadeViewModel()
         {
-            stade = new Stade();
+            Stade = new Stade();
         }
 
         public StadeViewModel(Stade stadeModel)

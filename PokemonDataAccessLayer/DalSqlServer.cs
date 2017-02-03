@@ -134,8 +134,9 @@ namespace PokemonDataAccessLayer
                 using (SqlConnection sqlConnection = new SqlConnection(connectionString))
                 {
                     sqlConnection.Open();
-                    string sql = "INSERT INTO Match VALUES(@IdPokemonVainqueur, @PhaseTournoi, @IdPokemon1, @IdPokemon2, @IdStade); SELECT @@IDENTITY";
+                    string sql = "INSERT INTO Match VALUES(@IdTournoi, @IdPokemonVainqueur, @PhaseTournoi, @IdPokemon1, @IdPokemon2, @IdStade); SELECT @@IDENTITY";
                     SqlCommand sqlCommand = new SqlCommand(sql, sqlConnection);
+                    sqlCommand.Parameters.Add("@IdTournoi", SqlDbType.Int).Value = match.Tournoi.ID;
                     sqlCommand.Parameters.Add("@IdPokemonVainqueur", SqlDbType.Int).Value = match.IdPokemonVainqueur;
                     sqlCommand.Parameters.Add("@PhaseTournoi", SqlDbType.Int).Value = (int)match.PhaseTournoi;
                     sqlCommand.Parameters.Add("@IdPokemon1", SqlDbType.Int).Value = match.Pokemon1.ID;
@@ -143,6 +144,32 @@ namespace PokemonDataAccessLayer
                     sqlCommand.Parameters.Add("@IdStade", SqlDbType.Int).Value = match.Stade.ID;
                     sqlCommand.CommandType = CommandType.Text;
                     match.ID = Convert.ToInt32(sqlCommand.ExecuteScalar().ToString());
+                    sqlConnection.Close();
+                    result = true;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                result = false;
+            }
+            return result;
+        }
+
+        public bool InsertTournoi(Tournoi tournoi)
+        {
+            bool result = false;
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+                {
+                    sqlConnection.Open();
+                    string sql = "INSERT INTO Tournoi VALUES(@Nom, @IdPokemonVainqueur); SELECT @@IDENTITY";
+                    SqlCommand sqlCommand = new SqlCommand(sql, sqlConnection);
+                    sqlCommand.Parameters.Add("@Nom", SqlDbType.VarChar, 50).Value = tournoi.Nom;
+                    sqlCommand.Parameters.Add("@IdPokemonVainqueur", SqlDbType.Int).Value = tournoi.Vainqueur.ID;
+                    sqlCommand.CommandType = CommandType.Text;
+                    tournoi.ID = Convert.ToInt32(sqlCommand.ExecuteScalar().ToString());
                     sqlConnection.Close();
                     result = true;
                 }
@@ -217,6 +244,44 @@ namespace PokemonDataAccessLayer
         }
 
 
+
+        public List<Tournoi> GetAllTournois()
+        {
+            List<Tournoi> listTournois = new List<Tournoi>();
+            DataTable dt = Select("select * from tournoi");
+            foreach (DataRow item in dt.Rows)
+            {
+                listTournois.Add(GetTournoi(item));
+            }
+            return listTournois;
+        }
+
+        private Tournoi GetTournoi(DataRow item)
+        {
+            Tournoi tournoi = new Tournoi();
+            if (item != null)
+            {
+                tournoi.ID = Convert.ToInt32(item["Id"]);
+                tournoi.Nom = item["Nom"].ToString();
+                tournoi.Vainqueur = GetPokemonById(Convert.ToInt32(item["IdPokemonVainqueur"]));
+                tournoi.Matches = GetMatchesByIdTournoi(tournoi.ID);
+                tournoi.Pokemons = GetPokemonsByMatches(tournoi.Matches).OrderBy(p => p.ID).ToList();
+                tournoi.Stades = GetStadesByMatches(tournoi.Matches).OrderBy(p => p.ID).ToList();
+            }
+            return tournoi;
+        }
+
+        private Tournoi GetTournoiById(int id)
+        {
+            Tournoi t = new Tournoi();
+            DataTable dt = Select("select * from Tournoi where id=" + id.ToString());
+            if (dt.Rows.Count > 0)
+            {
+                t.Nom = dt.Rows[0]["Nom"].ToString();
+            }
+            return t;
+        }
+
         public List<Pokemon> GetAllPokemons()
         {
             List<Pokemon> listPokemons = new List<Pokemon>();
@@ -250,6 +315,23 @@ namespace PokemonDataAccessLayer
                 poke = GetPokemon(dt.Rows[0]);
             }
             return poke;
+        }
+
+        private List<Pokemon> GetPokemonsByMatches(List<Match> matches)
+        {
+            List<Pokemon> listPokemons = new List<Pokemon>();
+            if (matches.Count > 0)
+            {
+                int length = matches.Count / 2 + 1;
+                for (int i = 0; i < length; i++)
+                {
+                    DataTable dt = Select("select * from pokemon where id=" + matches[i].Pokemon1.ID.ToString()
+                        + " or id=" + matches[i].Pokemon2.ID.ToString());
+                    listPokemons.Add(GetPokemon(dt.Rows[0]));
+                    listPokemons.Add(GetPokemon(dt.Rows[1]));
+                }
+            }
+            return listPokemons;
         }
 
         public List<Stade> GetAllStades()
@@ -289,6 +371,19 @@ namespace PokemonDataAccessLayer
             return stade;
         }
 
+        private List<Stade> GetStadesByMatches(List<Match> matches)
+        {
+            List<Stade> listStades = new List<Stade>();
+            for (int i = 0; i < matches.Count; i++)
+            {
+                DataTable dt = Select("select * from Stade where id=" + matches[i].Stade.ID.ToString());
+                Stade stade = GetStade(dt.Rows[0]);
+                if (!listStades.Contains(stade))
+                    listStades.Add(stade);
+            }
+            return listStades;
+        }
+
         public List<Match> GetAllMatches()
         {
             List<Match> listMatches = new List<Match>();
@@ -306,6 +401,7 @@ namespace PokemonDataAccessLayer
             if (item != null)
             {
                 match.ID = Convert.ToInt32(item["Id"]);
+                match.Tournoi = GetTournoiById(Convert.ToInt32(item["IdTournoi"]));
                 match.IdPokemonVainqueur = Convert.ToInt32(item["IdPokemonVainqueur"]);
                 match.Pokemon1 = GetPokemonById(Convert.ToInt32(item["Pokemon1"]));
                 match.Pokemon2 = GetPokemonById(Convert.ToInt32(item["Pokemon2"]));
@@ -313,6 +409,17 @@ namespace PokemonDataAccessLayer
                 match.Stade = GetStadeById(Convert.ToInt32(item["Stade"]));
             }
             return match;
+        }
+
+        private List<Match> GetMatchesByIdTournoi(int idTournoi)
+        {
+            List<Match> listMatches = new List<Match>();
+            DataTable dt = Select("select * from match where idTournoi=" + idTournoi.ToString());
+            foreach (DataRow item in dt.Rows)
+            {
+                listMatches.Add(GetMatch(item));
+            }
+            return listMatches;
         }
 
         private Caracteristique GetCaracteristiqueById(int id)

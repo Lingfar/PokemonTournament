@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PokemonTournamentWPF.ViewModel
 {
-    class MatchesViewModel : ViewModelBase
+    public class MatchesViewModel : ViewModelBase
     {
         private ObservableCollection<MatchViewModel> matches;
         public ObservableCollection<MatchViewModel> Matches
@@ -19,6 +19,11 @@ namespace PokemonTournamentWPF.ViewModel
                 matches = value;
                 OnPropertyChanged("Matches");
             }
+        }
+
+        public MatchesViewModel()
+        {
+
         }
 
         public MatchesViewModel(List<Match> matchesModel)
