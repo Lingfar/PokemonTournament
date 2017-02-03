@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="PokemonTournamentWPF.View.CaracteristiquesEditorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PokemonTournamentWPF.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="pv" FontSize="24" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"/>
+            <TextBox Name="pvTxt" Text="{Binding Nom}" FontSize="24" Grid.Column="1" Grid.Row="0" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Text="att" FontSize="24" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="5"/>
+            <TextBox Name="atTxt" Text="{Binding Attaque}" FontSize="24" Grid.Column="1" Grid.Row="1" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Text="def" FontSize="24" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="5"/>
+            <TextBox Name="deTxt" Text="{Binding Defense}" FontSize="24" Grid.Column="1" Grid.Row="2" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Text="vit" FontSize="24" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="5"/>
+            <TextBox Name="viTxt" Text="{Binding Vitesse}" FontSize="24" Grid.Column="1" Grid.Row="3" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Text="esq" FontSize="24" Grid.Column="0" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="5"/>
+            <TextBox Name="esTxt" Text="{Binding Esquive}" FontSize="24" Grid.Column="1" Grid.Row="4" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+    </Grid>
+</UserControl>
