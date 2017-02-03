@@ -38,18 +38,28 @@ namespace PokemonTournamentWPF.ViewModel
                 base.OnPropertyChanged("Nom");
             }
         }
+
+
         public ETypeElement Type
         {
-            get
-            {
-                return poke.Type;
-            }
+            get { return poke.Type; }
             set
             {
+                if (value == poke.Type) return;
                 poke.Type = value;
                 base.OnPropertyChanged("Type");
             }
         }
+
+        public IEnumerable<ETypeElement> ETypeElementValues
+        {
+            get
+            {
+                return Enum.GetValues(typeof(ETypeElement))
+                    .Cast<ETypeElement>();
+            }
+        }
+
         public Caracteristique Caracteristiques
         {
             get

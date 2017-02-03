@@ -82,6 +82,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\CaracteristiquesEditorView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\PokemonsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -128,6 +132,9 @@
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\StadesViewModel.cs" />
     <Compile Include="ViewModel\StadeViewModel.cs" />
+    <Compile Include="View\CaracteristiquesEditorView.xaml.cs">
+      <DependentUpon>CaracteristiquesEditorView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\CaracteristiquesView.xaml.cs">
       <DependentUpon>CaracteristiquesView.xaml</DependentUpon>
     </Compile>

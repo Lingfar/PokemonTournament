@@ -8,11 +8,11 @@
              d:DesignHeight="300" d:DesignWidth="550">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="3*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <DataGrid ItemsSource="{Binding Pokemons}" AutoGenerateColumns="False" FontSize="14" IsReadOnly="True">
+            <DataGrid ItemsSource="{Binding Pokemons}" AutoGenerateColumns="False" FontSize="14" IsReadOnly="True" SelectedItem="{Binding SelectedItem}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
                 <DataGridTextColumn Header="Nom" Binding="{Binding Nom}"/>
