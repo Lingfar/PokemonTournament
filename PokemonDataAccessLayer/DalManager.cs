@@ -50,6 +50,7 @@ namespace PokemonDataAccessLayer
             return dalDb.GetAllStades();
         }
 
+
         public bool InsertPokemon(Pokemon pokemon)
         {
             return dalDb.InsertPokemon(pokemon);
@@ -63,6 +64,19 @@ namespace PokemonDataAccessLayer
         public bool InsertStade(Stade stade)
         {
             return dalDb.InsertStade(stade);
+        }
+
+
+
+        public bool UpdateStade(Stade stade)
+        {
+            return dalDb.UpdateStade(stade);
+        }
+
+
+        public bool DeleteStade(Stade stade)
+        {
+            return dalDb.DeleteStade(stade);
         }
     }
 }

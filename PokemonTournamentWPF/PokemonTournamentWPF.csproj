@@ -57,6 +57,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="View\TournoisView.xaml.cs">
+      <DependentUpon>TournoisView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TournoiView.xaml.cs">
+      <DependentUpon>TournoiView.xaml</DependentUpon>
+    </Compile>
     <Page Include="Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -100,6 +106,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\TournoisView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TournoiView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ViewModel\CaracteristiquesViewModel.cs" />
@@ -109,6 +123,8 @@
     <Compile Include="ViewModel\PokemonViewModel.cs" />
     <Compile Include="ViewModel\PokemonsViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
+    <Compile Include="ViewModel\TournoisViewModel.cs" />
+    <Compile Include="ViewModel\TournoiViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\StadesViewModel.cs" />
     <Compile Include="ViewModel\StadeViewModel.cs" />

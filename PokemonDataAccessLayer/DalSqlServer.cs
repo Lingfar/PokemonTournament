@@ -56,6 +56,7 @@ namespace PokemonDataAccessLayer
                         sqlCommand.CommandType = CommandType.Text;
                         pokemon.ID = Convert.ToInt32(sqlCommand.ExecuteScalar().ToString());
                         sqlConnection.Close();
+                        result = true;
                     }
                 }
                 catch (Exception e)
@@ -85,6 +86,7 @@ namespace PokemonDataAccessLayer
                     sqlCommand.CommandType = CommandType.Text;
                     stade.ID = Convert.ToInt32(sqlCommand.ExecuteScalar().ToString());
                     sqlConnection.Close();
+                    result = true;
                 }
             }
             catch (Exception e)
@@ -151,6 +153,67 @@ namespace PokemonDataAccessLayer
                 result = false;
             }
             return result;
+        }
+
+
+        public bool UpdateStade(Stade stade)
+        {
+            bool result = false;
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+                {
+                    sqlConnection.Open();
+                    string sql = "UPDATE Stade SET Nom=@Nom, Type=@Type, NbPlaces=@NbPlaces, Attaque=@Attaque, Defense=@Defense WHERE ID=@Id;";
+                    SqlCommand sqlCommand = new SqlCommand(sql, sqlConnection);
+                    sqlCommand.Parameters.Add("@Id", SqlDbType.Int).Value = stade.ID;
+                    sqlCommand.Parameters.Add("@Nom", SqlDbType.VarChar, 50).Value = stade.Nom;
+                    sqlCommand.Parameters.Add("@Type", SqlDbType.Int).Value = (int)stade.Type;
+                    sqlCommand.Parameters.Add("@NbPlaces", SqlDbType.Int).Value = stade.NbPlaces;
+                    sqlCommand.Parameters.Add("@Attaque", SqlDbType.Int).Value = stade.Attaque;
+                    sqlCommand.Parameters.Add("@Defense", SqlDbType.Int).Value = stade.Defense;
+                    sqlCommand.CommandType = CommandType.Text;
+                    sqlCommand.ExecuteReader();
+                    sqlConnection.Close();
+                    result = true;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                result = false;
+            }
+            return result;
+        }
+
+
+        public bool Delete(string request, int id)
+        {
+            bool result = false;
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+                {
+                    sqlConnection.Open();
+                    SqlCommand sqlCommand = new SqlCommand(request, sqlConnection);
+                    sqlCommand.Parameters.Add("@Id", SqlDbType.Int).Value = id;
+                    sqlCommand.CommandType = CommandType.Text;
+                    sqlCommand.ExecuteReader();
+                    sqlConnection.Close();
+                    result = true;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                result = false;
+            }
+            return result;
+        }
+
+        public bool DeleteStade(Stade stade)
+        {
+            return Delete("DELETE FROM Stade WHERE ID=@Id;", stade.ID);
         }
 
 

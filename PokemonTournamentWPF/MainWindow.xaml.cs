@@ -34,6 +34,7 @@ namespace PokemonTournamentWPF
         private StadesViewModel stadesViewModel { get; set; }
         private MatchesViewModel matchesViewModel { get; set; }
         private CaracteristiquesViewModel caracteristiquesViewModel { get; set; }
+        private TournoisViewModel tournoisViewModel { get; set; }
         public PokemonsViewModel bonusViewModel { get; set; }
 
         public MainWindow()
@@ -54,6 +55,7 @@ namespace PokemonTournamentWPF
 
         private void LoadAllViewModels()
         {
+            tournoisViewModel = new TournoisViewModel(new List<Tournoi>());
             pokemonsViewModel = new PokemonsViewModel(businessManager.GetAllPokemons());
             stadesViewModel = new StadesViewModel(businessManager.GetAllStades());
             matchesViewModel = new MatchesViewModel(businessManager.GetAllMatchs());
@@ -66,6 +68,10 @@ namespace PokemonTournamentWPF
             Button button = (Button)sender;
             switch (button.Name)
             {
+                case "btnTournois":
+                    contentControl.Content = new TournoisView();
+                    contentControl.DataContext = tournoisViewModel;
+                    break;
                 case "btnPokemons":
                     contentControl.Content = new PokemonsView();
                     contentControl.DataContext = pokemonsViewModel;

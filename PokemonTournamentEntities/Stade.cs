@@ -56,7 +56,7 @@ namespace PokemonTournamentEntities
 
         public override string ToString()
         {
-            return "Stade : " + base.ToString() + " Nom =" + Nom + " Attaque = " + Attaque + " Defense = " + Defense
+            return "Stade : " + base.ToString() + " Nom = " + Nom + " Attaque = " + Attaque + " Defense = " + Defense
                 + " NbPlaces = " + NbPlaces + " Type = " + Type;
         }
     }

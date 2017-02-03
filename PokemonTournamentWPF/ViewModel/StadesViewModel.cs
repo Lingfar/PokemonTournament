@@ -65,15 +65,51 @@ namespace PokemonTournamentWPF.ViewModel
         {
             if (SelectedItem != null)
             {
-                SelectedItem.Nom = "NomTest";
                 if(PokemonBusinessLayer.BusinessManager.Instance.AddStade(SelectedItem.Stade))
                 {
                     Stades.Add(SelectedItem);
+                    System.Windows.Forms.MessageBox.Show("Ajout du stade réussi", "Succeed");
+                }
+                else
+                {
+                    System.Windows.Forms.MessageBox.Show("Error lors de l'ajout du stade", "Failed");
                 }
             }
         }
 
-        // Commande Remove
+        // Commande Modify
+        private RelayCommand modifyCommand;
+        public ICommand ModifyCommand
+        {
+            get
+            {
+                if (modifyCommand == null)
+                {
+                    modifyCommand = new RelayCommand(
+                        () => this.Modify(),
+                        () => this.CanModify()
+                        );
+                }
+                return modifyCommand;
+            }
+        }
+        private bool CanModify()
+        {
+            return (SelectedItem != null && SelectedItem.ID != 0);
+        }
+        private void Modify()
+        {
+            if(PokemonBusinessLayer.BusinessManager.Instance.UpdateStade(SelectedItem.Stade))
+            {
+                System.Windows.Forms.MessageBox.Show("Modification du stade effectuée", "Succeed");
+            }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show("Error lors de la modification du stade", "Failed");
+            }
+        }
+
+        // Commande Clear
         private RelayCommand clearCommand;
         public ICommand ClearCommand
         {
@@ -123,8 +159,15 @@ namespace PokemonTournamentWPF.ViewModel
         {
             if (SelectedItem != null)
             {
-                PokemonBusinessLayer.BusinessManager.Instance.DeleteStade(SelectedItem.Stade);
-                Stades.Remove(SelectedItem);
+                if (PokemonBusinessLayer.BusinessManager.Instance.DeleteStade(SelectedItem.Stade))
+                {
+                    Stades.Remove(SelectedItem);
+                    System.Windows.Forms.MessageBox.Show("Supression du stade effectuée", "Succeed");
+                }
+                else
+                {
+                    System.Windows.Forms.MessageBox.Show("Error lors de la supression du stade", "Failed");
+                }
                 SelectedItem = new StadeViewModel();
             }
         }

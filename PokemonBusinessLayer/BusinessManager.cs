@@ -153,14 +153,20 @@ namespace PokemonBusinessLayer
             }
         }
 
+        public bool UpdateStade(Stade stade)
+        {
+            return dalManager.UpdateStade(stade);
+        }
+
 
         public void DeletePokemon(Pokemon poke)
         {
             //dalManager.DeleteNewPokemon(poke);
         }
-        public void DeleteStade(Stade stade)
+        public bool DeleteStade(Stade stade)
         {
-            dalManagerStub.DeleteNewStade(stade);
+            return dalManager.DeleteStade(stade);
+            //dalManagerStub.DeleteNewStade(stade);
         }
     }
 }

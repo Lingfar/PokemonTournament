@@ -14,16 +14,22 @@ namespace PokemonTournamentEntities
     public class Tournoi : EntityObject
     {
         public string Nom { get; set; }
-        public List<Match> Matchs { get; set; }
+        public Pokemon Vainqueur { get; set; }
+        public List<Match> Matches { get; set; }
         public List<Pokemon> AllPokemons { get; set; }
-        public List<Pokemon> Pokemons { get; set; }
+        private List<Pokemon> Pokemons { get; set; }
         public List<Stade> Stades { get; set; }
         private Random rng { get; set; }
+
+        public Tournoi()
+        {
+
+        }
 
         public Tournoi(string nom)
         {
             Nom = nom;
-            Matchs = new List<Match>();
+            Matches = new List<Match>();
             AllPokemons = new List<Pokemon>();
             Pokemons = new List<Pokemon>();
             Stades = new List<Stade>();
@@ -39,6 +45,7 @@ namespace PokemonTournamentEntities
             {
                 RunPhaseOfTournament((EPhaseTournoi)i);
             }
+            Vainqueur = Pokemons.First();
         }
 
         private void RunPhaseOfTournament(EPhaseTournoi phase)
@@ -51,7 +58,7 @@ namespace PokemonTournamentEntities
                 else
                     match = RunMatch(Pokemons[i - 1], Pokemons[i], phase);
 
-                Matchs.Add(match);           
+                Matches.Add(match);           
 
                 if (Pokemons[i].ID == match.IdPokemonVainqueur)
                     Pokemons.RemoveAt(i - 1);
