@@ -12,7 +12,7 @@
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <DataGrid ItemsSource="{Binding Pokemons}" AutoGenerateColumns="False" FontSize="14" IsReadOnly="True">
+            <DataGrid ItemsSource="{Binding Pokemons}" AutoGenerateColumns="False" FontSize="14" IsReadOnly="True" SelectedItem="{Binding SelectedItem}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
                 <DataGridTextColumn Header="Nom" Binding="{Binding Nom}"/>
