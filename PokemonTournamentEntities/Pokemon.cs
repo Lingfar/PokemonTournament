@@ -22,7 +22,10 @@ namespace PokemonTournamentEntities
         public ETypeElement Type { get; set; }
         public Caracteristique Caracteristiques { get; set; }
 
-        public Pokemon() { }
+        public Pokemon()
+        {
+            Caracteristiques = new Caracteristique();
+        }
 
         public Pokemon(int id) : base(id)
         {
