@@ -20,7 +20,7 @@
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
             <TextBlock Text="pv" FontSize="24" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"/>
-            <TextBox Name="pvTxt" Text="{Binding Nom}" FontSize="24" Grid.Column="1" Grid.Row="0" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBox Name="pvTxt" Text="{Binding PV}" FontSize="24" Grid.Column="1" Grid.Row="0" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBlock Text="att" FontSize="24" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="5"/>
             <TextBox Name="atTxt" Text="{Binding Attaque}" FontSize="24" Grid.Column="1" Grid.Row="1" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBlock Text="def" FontSize="24" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="5"/>
