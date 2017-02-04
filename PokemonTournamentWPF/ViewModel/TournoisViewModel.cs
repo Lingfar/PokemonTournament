@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace PokemonTournamentWPF.ViewModel
@@ -32,7 +33,7 @@ namespace PokemonTournamentWPF.ViewModel
                 OnPropertyChanged("Tournois");
             }
         }
-
+        
         public TournoisViewModel(List<Tournoi> tournoisModels)
         {
             SelectedItem = new TournoiViewModel();
@@ -42,35 +43,37 @@ namespace PokemonTournamentWPF.ViewModel
         }
 
         // Commande New
-        private RelayCommand newCommand;
-        public ICommand NewCommand
+        private RelayCommand addCommand;
+        public ICommand AddCommand
         {
             get
             {
-                if (newCommand == null)
+                if (addCommand == null)
                 {
-                    newCommand = new RelayCommand(
-                        () => this.New(),
-                        () => this.CanNew()
+                    addCommand = new RelayCommand(
+                        () => this.Add(),
+                        () => this.CanAdd()
                         );
                 }
-                return newCommand;
+                return addCommand;
             }
         }
-        private bool CanNew()
+        private bool CanAdd()
         {
             return (SelectedItem != null && SelectedItem.ID == 0);
         }
-        private void New()
+        private void Add()
         {
             if (SelectedItem != null && SelectedItem.Tournoi.Nom != null)
             {
-                SelectedItem.Tournoi.SetPokemonsAndStades(PokemonBusinessLayer.BusinessManager.Instance.GetAllPokemons(),
+                TournoiViewModel t = new TournoiViewModel(SelectedItem);
+                t.Tournoi.SetPokemonsAndStades(PokemonBusinessLayer.BusinessManager.Instance.GetAllPokemons(),
                         PokemonBusinessLayer.BusinessManager.Instance.GetAllStades());
-                SelectedItem.Tournoi.Run();
-                if (PokemonBusinessLayer.BusinessManager.Instance.AddTournoi(SelectedItem.Tournoi))
-                {                    
-                    PokemonBusinessLayer.BusinessManager.Instance.AddMatches(SelectedItem.Tournoi.Matches);
+                t.Tournoi.Run();
+                if (PokemonBusinessLayer.BusinessManager.Instance.AddTournoi(t.Tournoi))
+                {
+                    PokemonBusinessLayer.BusinessManager.Instance.AddMatches(t.Tournoi.Matches);
+                    Tournois.Add(t);
                     System.Windows.Forms.MessageBox.Show("Génération du tournoi réussie", "Succeed");
                 }
                 else
@@ -81,6 +84,38 @@ namespace PokemonTournamentWPF.ViewModel
             else
             {
                 System.Windows.Forms.MessageBox.Show("Veuillez renseigner un nom pour le tournoi", "Error");
+            }
+        }
+
+        // Commande Modify
+        private RelayCommand modifyCommand;
+        public ICommand ModifyCommand
+        {
+            get
+            {
+                if (modifyCommand == null)
+                {
+                    modifyCommand = new RelayCommand(
+                        () => this.Modify(),
+                        () => this.CanModify()
+                        );
+                }
+                return modifyCommand;
+            }
+        }
+        private bool CanModify()
+        {
+            return (SelectedItem != null && SelectedItem.ID != 0);
+        }
+        private void Modify()
+        {
+            if (PokemonBusinessLayer.BusinessManager.Instance.UpdateTournoi(SelectedItem.Tournoi))
+            {
+                System.Windows.Forms.MessageBox.Show("Modification du tournoi effectuée", "Succeed");
+            }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show("Error lors de la modification du tournoi", "Failed");
             }
         }
 
@@ -134,7 +169,16 @@ namespace PokemonTournamentWPF.ViewModel
         {
             if (SelectedItem != null)
             {
-
+                if (PokemonBusinessLayer.BusinessManager.Instance.DeleteTournoi(SelectedItem.Tournoi))
+                {
+                    Tournois.Remove(SelectedItem);
+                    System.Windows.Forms.MessageBox.Show("Supression du tournoi effectuée", "Succeed");
+                }
+                else
+                {
+                    System.Windows.Forms.MessageBox.Show("Error lors de la supression du tournoi", "Failed");
+                }
+                SelectedItem = new TournoiViewModel();
             }
         }
     }

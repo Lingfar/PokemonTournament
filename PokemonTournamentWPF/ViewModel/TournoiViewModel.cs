@@ -36,6 +36,13 @@ namespace PokemonTournamentWPF.ViewModel
             }
         }
 
+        public TournoiViewModel(TournoiViewModel t)
+        {
+            Tournoi = new Tournoi();
+            Tournoi.Nom = t.Nom;
+            MatchesViewModel = new MatchesViewModel();
+        }
+
         public int ID
         {
             get { return tournoi.ID; }

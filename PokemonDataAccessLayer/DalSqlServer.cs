@@ -213,6 +213,32 @@ namespace PokemonDataAccessLayer
             return result;
         }
 
+        public bool UpdateTournoi(Tournoi tournoi)
+        {
+            bool result = false;
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+                {
+                    sqlConnection.Open();
+                    string sql = "UPDATE Tournoi SET Nom=@Nom WHERE ID=@Id;";
+                    SqlCommand sqlCommand = new SqlCommand(sql, sqlConnection);
+                    sqlCommand.Parameters.Add("@Id", SqlDbType.Int).Value = tournoi.ID;
+                    sqlCommand.Parameters.Add("@Nom", SqlDbType.VarChar, 50).Value = tournoi.Nom;
+                    sqlCommand.CommandType = CommandType.Text;
+                    sqlCommand.ExecuteReader();
+                    sqlConnection.Close();
+                    result = true;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                result = false;
+            }
+            return result;
+        }
+
 
         public bool Delete(string request, int id)
         {
@@ -243,6 +269,20 @@ namespace PokemonDataAccessLayer
             return Delete("DELETE FROM Stade WHERE ID=@Id;", stade.ID);
         }
 
+        public void DeleteMatch(Match match)
+        {
+            Delete("DELETE FROM Match WHERE ID=@Id;", match.ID);
+        }
+
+        public bool DeleteTournoi(Tournoi tournoi)
+        {
+            foreach (Match match in tournoi.Matches)
+            {
+                DeleteMatch(match);
+            }
+            return Delete("DELETE FROM Tournoi WHERE ID=@Id;", tournoi.ID);
+        }
+
 
 
         public List<Tournoi> GetAllTournois()
@@ -264,7 +304,7 @@ namespace PokemonDataAccessLayer
                 tournoi.ID = Convert.ToInt32(item["Id"]);
                 tournoi.Nom = item["Nom"].ToString();
                 tournoi.Vainqueur = GetPokemonById(Convert.ToInt32(item["IdPokemonVainqueur"]));
-                tournoi.Matches = GetMatchesByIdTournoi(tournoi.ID);
+                tournoi.Matches = GetMatchesByIdTournoi(tournoi.ID).OrderByDescending(p => p.ID).ToList();
                 tournoi.Pokemons = GetPokemonsByMatches(tournoi.Matches).OrderBy(p => p.ID).ToList();
                 tournoi.Stades = GetStadesByMatches(tournoi.Matches).OrderBy(p => p.ID).ToList();
             }
@@ -319,6 +359,7 @@ namespace PokemonDataAccessLayer
 
         private List<Pokemon> GetPokemonsByMatches(List<Match> matches)
         {
+            matches = matches.OrderBy(m => m.ID).ToList();
             List<Pokemon> listPokemons = new List<Pokemon>();
             if (matches.Count > 0)
             {

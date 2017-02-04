@@ -166,6 +166,10 @@ namespace PokemonBusinessLayer
         {
             return dalManager.UpdateStade(stade);
         }
+        public bool UpdateTournoi(Tournoi tournoi)
+        {
+            return dalManager.UpdateTournoi(tournoi);
+        }
 
 
         public void DeletePokemon(Pokemon poke)
@@ -176,6 +180,10 @@ namespace PokemonBusinessLayer
         {
             return dalManager.DeleteStade(stade);
             //dalManagerStub.DeleteNewStade(stade);
+        }
+        public bool DeleteTournoi(Tournoi tournoi)
+        {
+            return dalManager.DeleteTournoi(tournoi);
         }
     }
 }

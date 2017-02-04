@@ -83,10 +83,21 @@ namespace PokemonDataAccessLayer
             return dalDb.UpdateStade(stade);
         }
 
+        public bool UpdateTournoi(Tournoi tournoi)
+        {
+            return dalDb.UpdateTournoi(tournoi);
+        }
+
+
 
         public bool DeleteStade(Stade stade)
         {
             return dalDb.DeleteStade(stade);
+        }
+
+        public bool DeleteTournoi(Tournoi tournoi)
+        {
+            return dalDb.DeleteTournoi(tournoi);
         }
     }
 }
