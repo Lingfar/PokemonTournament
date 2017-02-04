@@ -27,7 +27,7 @@ namespace PokemonTournamentEntities
             Pokemons = new List<Pokemon>();
             PokemonsRestants = new List<Pokemon>();
             Stades = new List<Stade>();
-            rng = new Random(5);
+            rng = new Random();
         }
 
         public Tournoi(string nom)
@@ -37,7 +37,7 @@ namespace PokemonTournamentEntities
             Pokemons = new List<Pokemon>();
             PokemonsRestants = new List<Pokemon>();
             Stades = new List<Stade>();
-            rng = new Random(5);
+            rng = new Random();
         }
 
         public void SetPokemonsAndStades(List<Pokemon> allPokemons, List<Stade> allStades)

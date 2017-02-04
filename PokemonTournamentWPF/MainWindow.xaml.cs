@@ -44,17 +44,15 @@ namespace PokemonTournamentWPF
             businessManager = BusinessManager.Instance;
 
             LoadAllViewModels();
-
+            
             contentControl.Content = new TournoisView();
-            contentControl.DataContext = tournoisViewModel;
+            contentControl.DataContext = new TournoisViewModel(businessManager.GetAllTournois());
         }
 
         private void LoadAllViewModels()
         {
-            tournoisViewModel = new TournoisViewModel(businessManager.GetAllTournois());
             pokemonsViewModel = new PokemonsViewModel(businessManager.GetAllPokemons());
             stadesViewModel = new StadesViewModel(businessManager.GetAllStades());
-            matchesViewModel = new MatchesViewModel(businessManager.GetAllMatchs());
             caracteristiquesViewModel = new CaracteristiquesViewModel(businessManager.GetAllCaracteristiques());
             bonusViewModel = new PokemonsViewModel(businessManager.GetAllPokemonsByType(ETypeElement.Dragon));
         }
@@ -66,7 +64,7 @@ namespace PokemonTournamentWPF
             {
                 case "btnTournois":
                     contentControl.Content = new TournoisView();
-                    contentControl.DataContext = tournoisViewModel;
+                    contentControl.DataContext = new TournoisViewModel(businessManager.GetAllTournois());
                     break;
                 case "btnPokemons":
                     contentControl.Content = new PokemonsView();
@@ -78,7 +76,7 @@ namespace PokemonTournamentWPF
                     break;
                 case "btnMatchs":
                     contentControl.Content = new MatchesView();
-                    contentControl.DataContext = matchesViewModel;
+                    contentControl.DataContext = new MatchesViewModel(businessManager.GetAllMatchs());
                     break;
                 case "btnCarac":
                     contentControl.Content = new CaracteristiquesView();
