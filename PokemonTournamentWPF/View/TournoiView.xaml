@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1.5*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <TextBlock Text="Nom du tournoi :" FontSize="24" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"/>
@@ -40,8 +40,8 @@
                 <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
                 <DataGridTextColumn Header="Nom" Binding="{Binding Nom}"/>
                 <DataGridTextColumn Header="Type" Binding="{Binding Type}"/>
-                <DataGridTextColumn Header="Attaque bonus/malus" Binding="{Binding Attaque}"/>
-                <DataGridTextColumn Header="Defense bonus/malus" Binding="{Binding Defense}"/>
+                <DataGridTextColumn Header="Attaque bonus" Binding="{Binding Attaque}"/>
+                <DataGridTextColumn Header="Defense bonus" Binding="{Binding Defense}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

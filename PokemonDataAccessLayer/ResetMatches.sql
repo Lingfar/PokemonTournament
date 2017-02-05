@@ -9,3 +9,10 @@ CREATE TABLE [dbo].[Match] (
     [Stade]              INT NOT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
+DROP TABLE IF EXISTS [dbo].[Tournoi];
+CREATE TABLE [dbo].[Tournoi] (
+    [Id]                 INT          IDENTITY (1, 1) NOT NULL,
+    [Nom]                VARCHAR (50) NOT NULL,
+    [IdPokemonVainqueur] INT          NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);

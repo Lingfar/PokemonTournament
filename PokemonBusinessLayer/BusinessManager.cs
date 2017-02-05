@@ -185,5 +185,124 @@ namespace PokemonBusinessLayer
         {
             return dalManager.DeleteTournoi(tournoi);
         }
+
+
+        #region Tournoi Mode Console
+        public void RunTournament()
+        {
+            List<Pokemon> pokemons = new List<Pokemon>();
+            pokemons.AddRange(dalManagerStub.GetAllPokemons());
+            for (int i = 0; i < 5; i++)
+            {
+                RunPhaseOfTournament(pokemons, (EPhaseTournoi)i);
+            }
+        }
+
+        private List<Pokemon> RunPhaseOfTournament(List<Pokemon> pokemons, EPhaseTournoi phase)
+        {
+            for (int i = pokemons.Count - 1; i >= 0; i -= 2)
+            {
+                Match match;
+                if (FasterPokemon(pokemons[i], pokemons[i - 1]))
+                    match = RunMatch(pokemons[i], pokemons[i - 1], phase);
+                else
+                    match = RunMatch(pokemons[i - 1], pokemons[i], phase);
+                dalManagerStub.AddMatchToList(match);
+
+                if (pokemons[i].ID == match.IdPokemonVainqueur)
+                    pokemons.RemoveAt(i - 1);
+                else
+                    pokemons.RemoveAt(i);
+            }
+
+            return pokemons;
+        }
+
+        private Match RunMatch(Pokemon pokemon1, Pokemon pokemon2, EPhaseTournoi phase)
+        {
+            Caracteristique oldCaracP1 = new Caracteristique(pokemon1.Caracteristiques);
+            Caracteristique oldCaracP2 = new Caracteristique(pokemon2.Caracteristiques);
+
+            Match match = new Match(PokemonDataAccessLayerStub.DalManager.LastId, phase, pokemon1, pokemon2);
+            PokemonDataAccessLayerStub.DalManager.LastId++;
+
+            match.Stade = dalManagerStub.GetAllStades()[rng.Next(0, 6)];
+
+            BuffNerfPokemonByStade(pokemon1, match.Stade);
+            BuffNerfPokemonByStade(pokemon2, match.Stade);
+
+            decimal multiplicatorP1 = GetMultiplicatorBetweenType(pokemon1.Type, pokemon2.Type);
+            decimal multiplicatorP2 = GetMultiplicatorBetweenType(pokemon2.Type, pokemon1.Type);
+            while (pokemon1.Caracteristiques.PV > 0 && pokemon2.Caracteristiques.PV > 0)
+            {
+                if (!EsquiveOrNot(pokemon2))
+                    pokemon2.Caracteristiques.PV -= (int)Math.Ceiling(multiplicatorP1 * (decimal)pokemon1.Caracteristiques.Attaque / (decimal)pokemon2.Caracteristiques.Defense * 4m);
+                if (!EsquiveOrNot(pokemon1))
+                    pokemon1.Caracteristiques.PV -= (int)Math.Ceiling(multiplicatorP2 * (decimal)pokemon2.Caracteristiques.Attaque / (decimal)pokemon1.Caracteristiques.Defense * 4m);
+            }
+
+            if (pokemon1.Caracteristiques.PV <= 0 && pokemon2.Caracteristiques.PV <= 0)
+                match.IdPokemonVainqueur = pokemon1.ID;
+            else if (pokemon1.Caracteristiques.PV <= 0)
+                match.IdPokemonVainqueur = pokemon2.ID;
+            else
+                match.IdPokemonVainqueur = pokemon1.ID;
+
+            pokemon1.Caracteristiques = oldCaracP1;
+            pokemon2.Caracteristiques = oldCaracP2;
+
+            return match;
+        }
+
+        private decimal GetMultiplicatorBetweenType(ETypeElement type1, ETypeElement type2)
+        {
+            decimal multiplicator = 1m;
+            if (Pokemon.TableFaiblesses[(int)type1, (int)type2] == -1)
+                multiplicator = 0.5m;
+            else if (Pokemon.TableFaiblesses[(int)type1, (int)type2] == 1)
+                multiplicator = 2m;
+            return multiplicator;
+        }
+
+        private void BuffNerfPokemonByStade(Pokemon pokemon, Stade stade)
+        {
+            if (pokemon.Type == stade.Type)
+            {
+                pokemon.Caracteristiques.Attaque += stade.Attaque;
+                pokemon.Caracteristiques.Defense += stade.Defense;
+            }
+            else if (GetMultiplicatorBetweenType(pokemon.Type, stade.Type) == 0.5m)
+            {
+                pokemon.Caracteristiques.Attaque -= stade.Attaque;
+                pokemon.Caracteristiques.Defense -= stade.Defense;
+            }
+        }
+
+        private bool FasterPokemon(Pokemon pokemon1, Pokemon pokemon2)
+        {
+            bool firstPokemon1;
+            if (pokemon1.Caracteristiques.Vitesse > pokemon2.Caracteristiques.Vitesse)
+                firstPokemon1 = true;
+            else if (pokemon1.Caracteristiques.Vitesse == pokemon2.Caracteristiques.Vitesse)
+            {
+                if (Rand.rand.Next(0, 1) > 0.5)
+                    firstPokemon1 = true;
+                else
+                    firstPokemon1 = false;
+            }
+            else
+                firstPokemon1 = false;
+
+            return firstPokemon1;
+        }
+
+        private bool EsquiveOrNot(Pokemon pokemon1)
+        {
+            bool esquive = true;
+            if (rng.Next(0, 101) > pokemon1.Caracteristiques.Esquive)
+                esquive = false;
+            return esquive;
+        }
+        #endregion
     }
 }

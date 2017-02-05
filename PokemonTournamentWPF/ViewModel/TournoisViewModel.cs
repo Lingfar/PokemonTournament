@@ -69,29 +69,6 @@ namespace PokemonTournamentWPF.ViewModel
         }
         private void Add()
         {
-            #region SelectedItem
-            //if (SelectedItem != null && SelectedItem.Tournoi.Nom != null)
-            //{
-            //    SelectedItem.Tournoi.SetPokemonsAndStades(PokemonBusinessLayer.BusinessManager.Instance.GetAllPokemons(),
-            //            PokemonBusinessLayer.BusinessManager.Instance.GetAllStades());
-            //    SelectedItem.Tournoi.Run();
-            //    if (PokemonBusinessLayer.BusinessManager.Instance.AddTournoi(SelectedItem.Tournoi))
-            //    {
-            //        PokemonBusinessLayer.BusinessManager.Instance.AddMatches(SelectedItem.Tournoi.Matches);
-            //        Tournois.Add(SelectedItem);
-            //        System.Windows.Forms.MessageBox.Show("Génération du tournoi réussie", "Succeed");
-            //    }
-            //    else
-            //    {
-            //        System.Windows.Forms.MessageBox.Show("La génération du stade a échoué", "Failed");
-            //    }
-            //}
-            //else
-            //{
-            //    System.Windows.Forms.MessageBox.Show("Veuillez renseigner un nom pour le tournoi", "Error");
-            //}
-            #endregion
-
             if (SelectedItem != null && SelectedItem.Tournoi.Nom != null)
             {
                 TournoiViewModel t = new TournoiViewModel(SelectedItem);
@@ -102,9 +79,9 @@ namespace PokemonTournamentWPF.ViewModel
                 {
                     PokemonBusinessLayer.BusinessManager.Instance.AddMatches(t.Tournoi.Matches);
                     Tournois.Add(t);
-                    System.Windows.Forms.MessageBox.Show("Génération du tournoi réussie", "Succeed");
-                    SelectedItem = new TournoiViewModel();                    
+                    System.Windows.Forms.MessageBox.Show("Génération du tournoi réussie", "Succeed");                                      
                     SetTournois(PokemonBusinessLayer.BusinessManager.Instance.GetAllTournois());
+                    SelectedItem = Tournois.Last();  
                 }
                 else
                 {

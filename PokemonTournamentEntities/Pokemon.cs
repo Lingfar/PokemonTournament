@@ -8,7 +8,7 @@ namespace PokemonTournamentEntities
 {
     public enum ETypeElement
     {
-        Eau, Feu, Sol, Insecte, Plante, Dragon
+        Eau/*0*/, Feu/*1*/, Sol/*2*/, Insecte/*3*/, Plante/*4*/, Dragon/*5*/
     }
 
     [Serializable]

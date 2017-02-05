@@ -20,6 +20,13 @@ namespace PokemonTournamentEntities
 
         }
 
+        public Match(int id, EPhaseTournoi phase, Pokemon p1, Pokemon p2) : base(id)
+        {
+            PhaseTournoi = phase;
+            Pokemon1 = p1;
+            Pokemon2 = p2;
+        }
+
         public Match(int id, Tournoi tournoi, EPhaseTournoi phase, Pokemon p1, Pokemon p2) : base(id)
         {
             Tournoi = tournoi;
