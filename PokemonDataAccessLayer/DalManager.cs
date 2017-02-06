@@ -39,22 +39,22 @@ namespace PokemonDataAccessLayer
         {
             return dalDb.GetAllTournois();
         }
-
         public List<Pokemon> GetAllPokemons()
         {
             return dalDb.GetAllPokemons();
         }
-
+        public List<Pokemon> GetAllPokemonsByType(ETypeElement type)
+        {
+            return dalDb.GetAllPokemonsByType(type);
+        }
         public List<Match> GetAllMatches()
         {
             return dalDb.GetAllMatches();
         }
-
         public List<Stade> GetAllStades()
         {
             return dalDb.GetAllStades();
         }
-
         public List<Caracteristique> GetAllCaracteristiques()
         {
             return dalDb.GetAllCaracteristiques();
@@ -65,41 +65,34 @@ namespace PokemonDataAccessLayer
         {
             return dalDb.InsertPokemon(pokemon);
         }
-
         public bool InsertMatch(Match match)
         {
             return dalDb.InsertMatch(match);
         }
-
         public bool InsertStade(Stade stade)
         {
             return dalDb.InsertStade(stade);
         }
-
         public bool InsertTournoi(Tournoi tournoi)
         {
             return dalDb.InsertTournoi(tournoi);
         }
 
 
-
         public bool UpdateStade(Stade stade)
         {
             return dalDb.UpdateStade(stade);
         }
-
         public bool UpdateTournoi(Tournoi tournoi)
         {
             return dalDb.UpdateTournoi(tournoi);
         }
 
 
-
         public bool DeleteStade(Stade stade)
         {
             return dalDb.DeleteStade(stade);
         }
-
         public bool DeleteTournoi(Tournoi tournoi)
         {
             return dalDb.DeleteTournoi(tournoi);

@@ -105,7 +105,8 @@ namespace PokemonBusinessLayer
         }
         public List<Pokemon> GetAllPokemonsByType(ETypeElement type)
         {
-            return dalManagerStub.GetAllPokemonsByType(type);
+            //return dalManagerStub.GetAllPokemonsByType(type);
+            return dalManager.GetAllPokemonsByType(type);
         }
         public List<Pokemon> GetAllPokemonsByStats(int attaque, int pv)
         {

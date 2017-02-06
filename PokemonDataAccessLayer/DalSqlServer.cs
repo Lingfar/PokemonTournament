@@ -334,6 +334,17 @@ namespace PokemonDataAccessLayer
             return listPokemons;
         }
 
+        public List<Pokemon> GetAllPokemonsByType(ETypeElement type)
+        {
+            List<Pokemon> listPokemons = new List<Pokemon>();
+            DataTable dt = Select("select * from pokemon where type=" + (int)type);
+            foreach (DataRow item in dt.Rows)
+            {
+                listPokemons.Add(GetPokemon(item));
+            }
+            return listPokemons;
+        }
+
         private Pokemon GetPokemon(DataRow item)
         {
             Pokemon poke = new Pokemon();
