@@ -322,6 +322,7 @@ namespace PokemonDataAccessLayer
             return t;
         }
 
+
         public List<Pokemon> GetAllPokemons()
         {
             List<Pokemon> listPokemons = new List<Pokemon>();
@@ -375,6 +376,7 @@ namespace PokemonDataAccessLayer
             return listPokemons;
         }
 
+
         public List<Stade> GetAllStades()
         {
             List<Stade> listStades = new List<Stade>();
@@ -425,6 +427,7 @@ namespace PokemonDataAccessLayer
             return listStades;
         }
 
+
         public List<Match> GetAllMatches()
         {
             List<Match> listMatches = new List<Match>();
@@ -461,6 +464,18 @@ namespace PokemonDataAccessLayer
                 listMatches.Add(GetMatch(item));
             }
             return listMatches;
+        }
+
+
+        public List<Caracteristique> GetAllCaracteristiques()
+        {
+            List<Caracteristique> listCaracteristiques = new List<Caracteristique>();
+            DataTable dt = Select("select * from Caracteristique");
+            foreach (DataRow item in dt.Rows)
+            {
+                listCaracteristiques.Add(GetCaracteristique(item));
+            }
+            return listCaracteristiques;
         }
 
         private Caracteristique GetCaracteristiqueById(int id)

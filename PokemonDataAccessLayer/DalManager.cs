@@ -55,6 +55,11 @@ namespace PokemonDataAccessLayer
             return dalDb.GetAllStades();
         }
 
+        public List<Caracteristique> GetAllCaracteristiques()
+        {
+            return dalDb.GetAllCaracteristiques();
+        }
+
 
         public bool InsertPokemon(Pokemon pokemon)
         {

@@ -16,6 +16,17 @@ namespace PokemonTournamentWPF.ViewModel
             set { caracteristique = value; }
         }
 
+        public int ID
+        {
+            get { return Caracteristique.ID; }
+            set
+            {
+                if (value == Caracteristique.ID) return;
+                Caracteristique.ID = value;
+                base.OnPropertyChanged("ID");
+            }
+        }
+
         public int Attaque
         {
             get { return Caracteristique.Attaque; }

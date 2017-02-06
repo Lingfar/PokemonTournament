@@ -9,6 +9,7 @@
     <Grid>
         <DataGrid Name="dataGridCarac" ItemsSource="{Binding Caracteristiques}" FontSize="16" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
                 <DataGridTextColumn Header="PV" Binding="{Binding PV}"/>
                 <DataGridTextColumn Header="Attaque" Binding="{Binding Attaque}"/>
                 <DataGridTextColumn Header="Défense" Binding="{Binding Defense}"/>

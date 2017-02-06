@@ -14,6 +14,7 @@ namespace PokemonDataAccessLayer
         List<Pokemon> GetAllPokemons();
         List<Match> GetAllMatches();
         List<Stade> GetAllStades();
+        List<Caracteristique> GetAllCaracteristiques();
 
         bool InsertPokemon(Pokemon pokemon);
         bool InsertMatch(Match match);
