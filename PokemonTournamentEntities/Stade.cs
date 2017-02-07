@@ -12,7 +12,19 @@ namespace PokemonTournamentEntities
 
         public string Nom { get; set; }
         public ETypeElement Type { get; set; }
-        public int NbPlaces { get; set; }
+
+        private int nbPlaces;
+        public int NbPlaces
+        {
+            get { return nbPlaces; }
+            set
+            {
+                if (value < 0)
+                    nbPlaces = 0;
+                else
+                    nbPlaces = value;
+            }
+        }
 
         private int attaque;
         public int Attaque
