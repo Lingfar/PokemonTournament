@@ -17,6 +17,22 @@ namespace PokemonTournamentTests
         }
 
         [TestMethod]
+        public void TestGetSpecificPokemon()
+        {
+            List<Pokemon> allPokemons = DalManager.Instance.GetAllPokemons();
+            Pokemon pokeTest = new Pokemon();
+            pokeTest.ID = 1;
+            pokeTest.Nom = "Bulbizarre";
+            pokeTest.Type = ETypeElement.Plante;
+            pokeTest.Caracteristiques.PV = 101;
+            pokeTest.Caracteristiques.Attaque = 6;
+            pokeTest.Caracteristiques.Defense = 6;
+            pokeTest.Caracteristiques.Vitesse = 13;
+            pokeTest.Caracteristiques.Esquive = 24;
+            Assert.AreEqual(pokeTest, allPokemons[0]);
+        }
+
+        [TestMethod]
         public void TestInsertPokemon()
         {
             Pokemon pokeTest = new Pokemon();
@@ -63,7 +79,7 @@ namespace PokemonTournamentTests
             int ancienneTaille = allPokemons.Count;
             DalManager.Instance.DeletePokemon(allPokemons[allPokemons.Count - 1]);
             allPokemons = DalManager.Instance.GetAllPokemons();
-            Assert.AreEqual(ancienneTaille -1, allPokemons.Count);
+            Assert.AreEqual(ancienneTaille - 1, allPokemons.Count);
         }
     }
 }
