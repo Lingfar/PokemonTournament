@@ -25,7 +25,7 @@ namespace PokemonDataAccessLayer
 
         }
 
-        public DataTable Select(string request)
+        private DataTable Select(string request)
         {
             DataTable table = new DataTable();
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
@@ -183,6 +183,33 @@ namespace PokemonDataAccessLayer
         }
 
 
+        public bool UpdatePokemon(Pokemon pokemon)
+        {
+            bool result = false;
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+                {
+                    sqlConnection.Open();
+                    string sql = "UPDATE Pokemon SET Nom=@Nom, Type=@Type WHERE ID=@Id;";
+                    SqlCommand sqlCommand = new SqlCommand(sql, sqlConnection);
+                    sqlCommand.Parameters.Add("@Id", SqlDbType.Int).Value = pokemon.ID;
+                    sqlCommand.Parameters.Add("@Nom", SqlDbType.VarChar, 50).Value = pokemon.Nom;
+                    sqlCommand.Parameters.Add("@Type", SqlDbType.Int).Value = (int)pokemon.Type;
+                    sqlCommand.CommandType = CommandType.Text;
+                    sqlCommand.ExecuteReader();
+                    sqlConnection.Close();
+                    result = UpdateCaracteristique(pokemon.Caracteristiques);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                result = false;
+            }
+            return result;
+        }
+
         public bool UpdateStade(Stade stade)
         {
             bool result = false;
@@ -239,8 +266,38 @@ namespace PokemonDataAccessLayer
             return result;
         }
 
+        private bool UpdateCaracteristique(Caracteristique carac)
+        {
+            bool result = false;
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+                {
+                    sqlConnection.Open();
+                    string sql = "UPDATE Caracteristique SET PV=@PV, Attaque=@Attaque, Defense=@Defense, Vitesse=@Vitesse, Esquive=@Esquive WHERE ID=@Id;";
+                    SqlCommand sqlCommand = new SqlCommand(sql, sqlConnection);
+                    sqlCommand.Parameters.Add("@Id", SqlDbType.Int).Value = carac.ID;
+                    sqlCommand.Parameters.Add("@PV", SqlDbType.Int).Value = carac.PV;
+                    sqlCommand.Parameters.Add("@Attaque", SqlDbType.Int).Value = carac.Attaque;
+                    sqlCommand.Parameters.Add("@Defense", SqlDbType.Int).Value = carac.Defense;
+                    sqlCommand.Parameters.Add("@Vitesse", SqlDbType.Int).Value = carac.Vitesse;
+                    sqlCommand.Parameters.Add("@Esquive", SqlDbType.Int).Value = carac.Esquive;
+                    sqlCommand.CommandType = CommandType.Text;
+                    sqlCommand.ExecuteReader();
+                    sqlConnection.Close();
+                    result = true;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                result = false;
+            }
+            return result;
+        }
 
-        public bool Delete(string request, int id)
+
+        private bool Delete(string request, int id)
         {
             bool result = false;
             try
@@ -264,6 +321,15 @@ namespace PokemonDataAccessLayer
             return result;
         }
 
+        public bool DeletePokemon(Pokemon pokemon)
+        {
+            if(Delete("DELETE FROM Pokemon WHERE ID=@Id;", pokemon.ID))
+            {
+                return DeleteCaracteristique(pokemon.Caracteristiques);
+            }
+            return false;
+        }
+
         public bool DeleteStade(Stade stade)
         {
             return Delete("DELETE FROM Stade WHERE ID=@Id;", stade.ID);
@@ -283,6 +349,11 @@ namespace PokemonDataAccessLayer
             return Delete("DELETE FROM Tournoi WHERE ID=@Id;", tournoi.ID);
         }
 
+        private bool DeleteCaracteristique(Caracteristique carac)
+        {
+            return Delete("DELETE FROM Caracteristique WHERE ID=@Id;", carac.ID);
+        }
+        
 
 
         public List<Tournoi> GetAllTournois()

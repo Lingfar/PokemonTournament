@@ -24,8 +24,10 @@ namespace PokemonDataAccessLayer
 
         bool UpdateStade(Stade stade);
         bool UpdateTournoi(Tournoi tournoi);
+        bool UpdatePokemon(Pokemon pokemon);
 
         bool DeleteStade(Stade stade);
         bool DeleteTournoi(Tournoi tournoi);
+        bool DeletePokemon(Pokemon pokemon);
     }
 }

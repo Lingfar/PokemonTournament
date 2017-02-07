@@ -87,6 +87,10 @@ namespace PokemonDataAccessLayer
         {
             return dalDb.UpdateTournoi(tournoi);
         }
+        public bool UpdatePokemon(Pokemon pokemon)
+        {
+            return dalDb.UpdatePokemon(pokemon);
+        }
 
 
         public bool DeleteStade(Stade stade)
@@ -96,6 +100,10 @@ namespace PokemonDataAccessLayer
         public bool DeleteTournoi(Tournoi tournoi)
         {
             return dalDb.DeleteTournoi(tournoi);
+        }
+        public bool DeletePokemon(Pokemon pokemon)
+        {
+            return dalDb.DeletePokemon(pokemon);
         }
     }
 }

@@ -163,11 +163,15 @@ namespace PokemonBusinessLayer
         {
             return dalManager.UpdateTournoi(tournoi);
         }
-
+        public bool UpdatePokemon(Pokemon pokemon)
+        {
+            return dalManager.UpdatePokemon(pokemon);
+        }
 
         public void DeletePokemon(Pokemon poke)
         {
-            //dalManager.DeleteNewPokemon(poke);
+            dalManager.DeletePokemon(poke);
+            //dalManagerStub.DeleteNewPokemon(poke);
         }
         public bool DeleteStade(Stade stade)
         {
