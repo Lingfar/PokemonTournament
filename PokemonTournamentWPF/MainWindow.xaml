@@ -14,8 +14,8 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Background="DarkRed">
-            <TextBlock Text="Pokemon Tournament" FontSize="30" HorizontalAlignment="Center" Foreground="White"/>
+        <Grid Grid.Row="0" Background="SandyBrown">
+            <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="logo.png" Height="80"/>
         </Grid>
 
         <Grid Grid.Row="1" Background="LightGray" Margin="2">
