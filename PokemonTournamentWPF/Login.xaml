@@ -24,10 +24,12 @@
         <TextBlock Text="Connexion" FontSize="48" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"/>
         
         <TextBlock Text="Login :" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="2"/>
-        <TextBox Name="txtLogin" FontSize="24" Width="200" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="2"/>
+        <TextBox Name="txtLogin" Text="{Binding Login}" FontSize="24" Width="200" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="2"/>
         <TextBlock Text="Password :" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="3"/>
         <PasswordBox Name="txtPassword" FontSize="24" Width="200" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="3"/>
-        <Button Name="btnLogin" Content="Se connecter" Width="250" FontSize="24" IsDefault="True"
-                Click="btnLogin_Click" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Button Name="btnRegister" Content="S'enregistrer" Width="175" FontSize="24"
+                Click="btnRegister_Click" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Button Name="btnLogin" Content="Se connecter" Width="175" FontSize="24" IsDefault="True"
+                Click="btnLogin_Click" Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center"/>
     </Grid>
 </Window>

@@ -10,6 +10,9 @@ namespace PokemonDataAccessLayer
 {
     public interface IDal
     {
+        Utilisateur GetUtilisateurByLogin(string login);
+        bool RegisterLogin(Utilisateur user);
+
         List<Tournoi> GetAllTournois();
         List<Pokemon> GetAllPokemons();
         List<Pokemon> GetAllPokemonsByType(ETypeElement type);

@@ -22,25 +22,78 @@ namespace PokemonDataAccessLayer
         
         //Franck
         //protected string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Franck\Desktop\GIT\PokemonTournament\PokemonDataAccessLayer\PokemonTournament.mdf;Integrated Security=True";
-
-        
+                
         public DalSqlServer()
         {
 
         }
 
-        private DataTable Select(string request)
+        
+        public Utilisateur GetUtilisateurByLogin(string login)
         {
-            DataTable table = new DataTable();
-            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            Utilisateur user = new Utilisateur();
+            DataTable dt = new DataTable();
+            try
             {
-                SqlCommand sqlCommand = new SqlCommand(request, sqlConnection);
-                sqlConnection.Open();
-                table.Load(sqlCommand.ExecuteReader());
-                sqlConnection.Close();
+                using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+                {
+                    sqlConnection.Open();
+                    string sql = "SELECT * FROM Utilisateur WHERE Login=@Login";
+                    SqlCommand sqlCommand = new SqlCommand(sql, sqlConnection);
+                    sqlCommand.Parameters.Add("@Login", SqlDbType.VarChar, 50).Value = login;
+                    sqlCommand.CommandType = CommandType.Text;
+                    dt.Load(sqlCommand.ExecuteReader());
+                    sqlConnection.Close();
+                }
             }
-            return table;
+            catch (Exception) { }
+
+            if (dt.Rows.Count > 0)
+            {
+                user.Login = login;
+                user.Nom = dt.Rows[0]["Nom"].ToString();
+                user.Prenom = dt.Rows[0]["Prenom"].ToString();
+                user.Password = dt.Rows[0]["Password"].ToString();
+            }
+            return user;
         }
+        public bool RegisterLogin(Utilisateur user)
+        {
+            bool result = false;
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+                {
+                    sqlConnection.Open();
+                    string sql = "INSERT INTO Utilisateur VALUES(@Login, @Nom, @Prenom, @Password);";
+                    SqlCommand sqlCommand = new SqlCommand(sql, sqlConnection);
+                    sqlCommand.Parameters.Add("@Login", SqlDbType.VarChar, 50).Value = user.Login;
+
+                    if (user.Nom != null)
+                        sqlCommand.Parameters.Add("@Nom", SqlDbType.VarChar, 100).Value = user.Nom;
+                    else
+                        sqlCommand.Parameters.Add("@Nom", SqlDbType.VarChar, 100).Value = DBNull.Value;
+
+                    if (user.Nom != null)
+                        sqlCommand.Parameters.Add("@Prenom", SqlDbType.VarChar, 100).Value = user.Prenom;
+                    else
+                        sqlCommand.Parameters.Add("@Prenom", SqlDbType.VarChar, 100).Value = DBNull.Value;
+
+                    sqlCommand.Parameters.Add("@Password", SqlDbType.VarChar, 200).Value = user.Password;
+                    sqlCommand.CommandType = CommandType.Text;
+                    sqlCommand.ExecuteNonQuery();
+                    sqlConnection.Close();
+                    result = true;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                result = false;
+            }
+            return result;
+        }
+
 
         public bool InsertPokemon(Pokemon pokemon)
         {
@@ -71,7 +124,6 @@ namespace PokemonDataAccessLayer
             }
             return result;
         }
-
         public bool InsertStade(Stade stade)
         {
             bool result = false;
@@ -100,7 +152,6 @@ namespace PokemonDataAccessLayer
             }
             return result;
         }
-
         public bool InsertCaracteristique(Caracteristique carac)
         {
             bool result = false;
@@ -129,7 +180,6 @@ namespace PokemonDataAccessLayer
             }
             return result;
         }
-
         public bool InsertMatch(Match match)
         {
             bool result = false;
@@ -159,7 +209,6 @@ namespace PokemonDataAccessLayer
             }
             return result;
         }
-
         public bool InsertTournoi(Tournoi tournoi)
         {
             bool result = false;
@@ -213,7 +262,6 @@ namespace PokemonDataAccessLayer
             }
             return result;
         }
-
         public bool UpdateStade(Stade stade)
         {
             bool result = false;
@@ -243,7 +291,6 @@ namespace PokemonDataAccessLayer
             }
             return result;
         }
-
         public bool UpdateTournoi(Tournoi tournoi)
         {
             bool result = false;
@@ -269,7 +316,6 @@ namespace PokemonDataAccessLayer
             }
             return result;
         }
-
         private bool UpdateCaracteristique(Caracteristique carac)
         {
             bool result = false;
@@ -324,7 +370,6 @@ namespace PokemonDataAccessLayer
             }
             return result;
         }
-
         public bool DeletePokemon(Pokemon pokemon)
         {
             if(Delete("DELETE FROM Pokemon WHERE ID=@Id;", pokemon.ID))
@@ -333,17 +378,14 @@ namespace PokemonDataAccessLayer
             }
             return false;
         }
-
         public bool DeleteStade(Stade stade)
         {
             return Delete("DELETE FROM Stade WHERE ID=@Id;", stade.ID);
         }
-
         public void DeleteMatch(Match match)
         {
             Delete("DELETE FROM Match WHERE ID=@Id;", match.ID);
         }
-
         public bool DeleteTournoi(Tournoi tournoi)
         {
             foreach (Match match in tournoi.Matches)
@@ -352,13 +394,24 @@ namespace PokemonDataAccessLayer
             }
             return Delete("DELETE FROM Tournoi WHERE ID=@Id;", tournoi.ID);
         }
-
         private bool DeleteCaracteristique(Caracteristique carac)
         {
             return Delete("DELETE FROM Caracteristique WHERE ID=@Id;", carac.ID);
         }
-        
 
+
+        private DataTable Select(string request)
+        {
+            DataTable table = new DataTable();
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            {
+                SqlCommand sqlCommand = new SqlCommand(request, sqlConnection);
+                sqlConnection.Open();
+                table.Load(sqlCommand.ExecuteReader());
+                sqlConnection.Close();
+            }
+            return table;
+        }
 
         public List<Tournoi> GetAllTournois()
         {
@@ -370,7 +423,6 @@ namespace PokemonDataAccessLayer
             }
             return listTournois;
         }
-
         private Tournoi GetTournoi(DataRow item)
         {
             Tournoi tournoi = new Tournoi();
@@ -385,7 +437,6 @@ namespace PokemonDataAccessLayer
             }
             return tournoi;
         }
-
         private Tournoi GetTournoiById(int id)
         {
             Tournoi t = new Tournoi();
@@ -397,7 +448,6 @@ namespace PokemonDataAccessLayer
             return t;
         }
 
-
         public List<Pokemon> GetAllPokemons()
         {
             List<Pokemon> listPokemons = new List<Pokemon>();
@@ -408,7 +458,6 @@ namespace PokemonDataAccessLayer
             }
             return listPokemons;
         }
-
         public List<Pokemon> GetAllPokemonsByType(ETypeElement type)
         {
             List<Pokemon> listPokemons = new List<Pokemon>();
@@ -419,7 +468,6 @@ namespace PokemonDataAccessLayer
             }
             return listPokemons;
         }
-
         private Pokemon GetPokemon(DataRow item)
         {
             Pokemon poke = new Pokemon();
@@ -432,7 +480,6 @@ namespace PokemonDataAccessLayer
             }
             return poke;
         }
-
         private Pokemon GetPokemonById(int id)
         {
             Pokemon poke = new Pokemon();
@@ -443,7 +490,6 @@ namespace PokemonDataAccessLayer
             }
             return poke;
         }
-
         private List<Pokemon> GetPokemonsByMatches(List<Match> matches)
         {
             matches = matches.OrderBy(m => m.ID).ToList();
@@ -462,7 +508,6 @@ namespace PokemonDataAccessLayer
             return listPokemons;
         }
 
-
         public List<Stade> GetAllStades()
         {
             List<Stade> listStades = new List<Stade>();
@@ -473,7 +518,6 @@ namespace PokemonDataAccessLayer
             }
             return listStades;
         }
-
         private Stade GetStade(DataRow item)
         {
             Stade stade = new Stade();
@@ -488,7 +532,6 @@ namespace PokemonDataAccessLayer
             }
             return stade;
         }
-
         private Stade GetStadeById(int id)
         {
             Stade stade = new Stade();
@@ -499,7 +542,6 @@ namespace PokemonDataAccessLayer
             }
             return stade;
         }
-
         private List<Stade> GetStadesByMatches(List<Match> matches)
         {
             List<Stade> listStades = new List<Stade>();
@@ -513,7 +555,6 @@ namespace PokemonDataAccessLayer
             return listStades;
         }
 
-
         public List<Match> GetAllMatches()
         {
             List<Match> listMatches = new List<Match>();
@@ -524,7 +565,6 @@ namespace PokemonDataAccessLayer
             }
             return listMatches;
         }
-
         private Match GetMatch(DataRow item)
         {
             Match match = new Match();
@@ -540,7 +580,6 @@ namespace PokemonDataAccessLayer
             }
             return match;
         }
-
         private List<Match> GetMatchesByIdTournoi(int idTournoi)
         {
             List<Match> listMatches = new List<Match>();
@@ -552,7 +591,6 @@ namespace PokemonDataAccessLayer
             return listMatches;
         }
 
-
         public List<Caracteristique> GetAllCaracteristiques()
         {
             List<Caracteristique> listCaracteristiques = new List<Caracteristique>();
@@ -563,7 +601,6 @@ namespace PokemonDataAccessLayer
             }
             return listCaracteristiques;
         }
-
         private Caracteristique GetCaracteristiqueById(int id)
         {
             Caracteristique carac = new Caracteristique();
@@ -574,7 +611,6 @@ namespace PokemonDataAccessLayer
             }
             return carac;
         }
-
         private Caracteristique GetCaracteristique(DataRow item)
         {
             Caracteristique carac = new Caracteristique();

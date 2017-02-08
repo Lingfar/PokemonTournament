@@ -42,7 +42,7 @@ namespace PokemonBusinessLayer
             }
         }
 
-        public static bool CheckConnectionUser(string login, string password)
+        public static bool CheckConnectionUserStub(string login, string password)
         {
             bool user = false;
             Utilisateur utilisateur = PokemonDataAccessLayerStub.DalManager.GetUtilisateurByLogin(login);
@@ -93,96 +93,6 @@ namespace PokemonBusinessLayer
             return dalManagerStub.GetWinner().ToString();
         }
         #endregion
-        
-        public List<Tournoi> GetAllTournois()
-        {
-            return dalManager.GetAllTournois();
-        }
-        public List<Pokemon> GetAllPokemons()
-        {
-            //return dalManagerStub.GetAllPokemons();
-            return dalManager.GetAllPokemons();
-        }
-        public List<Pokemon> GetAllPokemonsByType(ETypeElement type)
-        {
-            //return dalManagerStub.GetAllPokemonsByType(type);
-            return dalManager.GetAllPokemonsByType(type);
-        }
-        public List<Pokemon> GetAllPokemonsByStats(int attaque, int pv)
-        {
-            return dalManagerStub.GetAllPokemons().FindAll(p => p.Caracteristiques.Attaque >= attaque && p.Caracteristiques.PV >= pv);
-        }
-        public List<Match> GetAllMatchs()
-        {
-            //return dalManagerStub.GetAllMatchs();
-            return dalManager.GetAllMatches();
-        }
-        public List<Match> GetMatchsByPlaces(int nbPlaces)
-        {
-            return dalManagerStub.GetAllMatchs().FindAll(m => m.Stade.NbPlaces >= nbPlaces);
-        }
-        public List<Stade> GetAllStades()
-        {
-            List<Stade> allStades = dalManager.GetAllStades();
-            Stade.NbStades = allStades.Count;
-            return allStades;
-            //return dalManagerStub.GetAllStades();
-        }
-        public List<Caracteristique> GetAllCaracteristiques()
-        {
-            //return dalManagerStub.GetAllCaracteristiques();
-            return dalManager.GetAllCaracteristiques();
-        }
-        
-        public bool AddStade(Stade stade)
-        {
-            bool succeed = dalManager.InsertStade(stade);
-            if (succeed)
-                Stade.NbStades++;
-            return succeed;
-            //dalManagerStub.AddNewStade(stade);
-        }
-        public void AddMatches(List<Match> matches)
-        {
-            foreach (Match m in matches)
-            {
-                //dalManagerStub.AddMatchToList(m);
-                dalManager.InsertMatch(m);
-            }
-        }
-        public bool AddTournoi(Tournoi tournoi)
-        {
-            return dalManager.InsertTournoi(tournoi);
-        }
-
-        public bool UpdateStade(Stade stade)
-        {
-            return dalManager.UpdateStade(stade);
-        }
-        public bool UpdateTournoi(Tournoi tournoi)
-        {
-            return dalManager.UpdateTournoi(tournoi);
-        }
-        public bool UpdatePokemon(Pokemon pokemon)
-        {
-            return dalManager.UpdatePokemon(pokemon);
-        }
-
-        public void DeletePokemon(Pokemon poke)
-        {
-            dalManager.DeletePokemon(poke);
-            //dalManagerStub.DeleteNewPokemon(poke);
-        }
-        public bool DeleteStade(Stade stade)
-        {
-            return dalManager.DeleteStade(stade);
-            //dalManagerStub.DeleteNewStade(stade);
-        }
-        public bool DeleteTournoi(Tournoi tournoi)
-        {
-            return dalManager.DeleteTournoi(tournoi);
-        }
-
 
         #region Tournoi Mode Console
         public void RunTournament()
@@ -301,5 +211,107 @@ namespace PokemonBusinessLayer
             return esquive;
         }
         #endregion
+        
+        public bool CheckConnectionUser(string login, string password)
+        {
+            bool user = false;
+            Utilisateur utilisateur = dalManager.GetUtilisateurByLogin(login);
+            if (utilisateur != null && utilisateur.Password == password)
+                user = true;
+            return user;
+        }
+        public bool RegisterLogin(Utilisateur user)
+        {
+            return dalManager.RegisterLogin(user);
+        }
+
+        public List<Tournoi> GetAllTournois()
+        {
+            return dalManager.GetAllTournois();
+        }
+        public List<Pokemon> GetAllPokemons()
+        {
+            //return dalManagerStub.GetAllPokemons();
+            return dalManager.GetAllPokemons();
+        }
+        public List<Pokemon> GetAllPokemonsByType(ETypeElement type)
+        {
+            //return dalManagerStub.GetAllPokemonsByType(type);
+            return dalManager.GetAllPokemonsByType(type);
+        }
+        public List<Pokemon> GetAllPokemonsByStats(int attaque, int pv)
+        {
+            return dalManagerStub.GetAllPokemons().FindAll(p => p.Caracteristiques.Attaque >= attaque && p.Caracteristiques.PV >= pv);
+        }
+        public List<Match> GetAllMatchs()
+        {
+            //return dalManagerStub.GetAllMatchs();
+            return dalManager.GetAllMatches();
+        }
+        public List<Match> GetMatchsByPlaces(int nbPlaces)
+        {
+            return dalManagerStub.GetAllMatchs().FindAll(m => m.Stade.NbPlaces >= nbPlaces);
+        }
+        public List<Stade> GetAllStades()
+        {
+            List<Stade> allStades = dalManager.GetAllStades();
+            Stade.NbStades = allStades.Count;
+            return allStades;
+            //return dalManagerStub.GetAllStades();
+        }
+        public List<Caracteristique> GetAllCaracteristiques()
+        {
+            //return dalManagerStub.GetAllCaracteristiques();
+            return dalManager.GetAllCaracteristiques();
+        }
+        
+        public bool AddStade(Stade stade)
+        {
+            bool succeed = dalManager.InsertStade(stade);
+            if (succeed)
+                Stade.NbStades++;
+            return succeed;
+            //dalManagerStub.AddNewStade(stade);
+        }
+        public void AddMatches(List<Match> matches)
+        {
+            foreach (Match m in matches)
+            {
+                //dalManagerStub.AddMatchToList(m);
+                dalManager.InsertMatch(m);
+            }
+        }
+        public bool AddTournoi(Tournoi tournoi)
+        {
+            return dalManager.InsertTournoi(tournoi);
+        }
+
+        public bool UpdateStade(Stade stade)
+        {
+            return dalManager.UpdateStade(stade);
+        }
+        public bool UpdateTournoi(Tournoi tournoi)
+        {
+            return dalManager.UpdateTournoi(tournoi);
+        }
+        public bool UpdatePokemon(Pokemon pokemon)
+        {
+            return dalManager.UpdatePokemon(pokemon);
+        }
+
+        public void DeletePokemon(Pokemon poke)
+        {
+            dalManager.DeletePokemon(poke);
+            //dalManagerStub.DeleteNewPokemon(poke);
+        }
+        public bool DeleteStade(Stade stade)
+        {
+            return dalManager.DeleteStade(stade);
+            //dalManagerStub.DeleteNewStade(stade);
+        }
+        public bool DeleteTournoi(Tournoi tournoi)
+        {
+            return dalManager.DeleteTournoi(tournoi);
+        }
     }
 }

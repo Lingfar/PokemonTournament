@@ -35,6 +35,15 @@ namespace PokemonDataAccessLayer
             }
         }
 
+        public Utilisateur GetUtilisateurByLogin(string login)
+        {
+            return dalDb.GetUtilisateurByLogin(login);
+        }
+        public bool RegisterLogin(Utilisateur user)
+        {
+            return dalDb.RegisterLogin(user);
+        }
+
         public List<Tournoi> GetAllTournois()
         {
             return dalDb.GetAllTournois();
