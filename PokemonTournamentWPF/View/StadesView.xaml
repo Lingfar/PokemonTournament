@@ -31,16 +31,16 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Name="btnAdd" FontSize="24" Width="200" Grid.Column="0" Command="{Binding Path=AddCommand}"
+            <Button Name="btnAdd" FontSize="24" Width="300" Grid.Column="0" Command="{Binding Path=AddCommand}"
                 Content="Ajouter" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2"/>
 
-            <Button Name="btnModify" FontSize="24" Width="200" Grid.Column="1" Command="{Binding Path=ModifyCommand}"
+            <Button Name="btnModify" FontSize="24" Width="300" Grid.Column="1" Command="{Binding Path=ModifyCommand}"
                 Content="Modifier" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2"/>
 
-            <Button Name="btnClear" FontSize="24" Width="200" Grid.Column="2" Command="{Binding Path=ClearCommand}"
-                Content="Clear sélection" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2"/>
+            <Button Name="btnClear" FontSize="24" Width="300" Grid.Column="2" Command="{Binding Path=ClearCommand}"
+                Content="Nettoyer sélection" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2"/>
 
-            <Button Name="btnRemove" FontSize="24" Width="200" Grid.Column="3" Command="{Binding Path=RemoveCommand}"
+            <Button Name="btnRemove" FontSize="24" Width="300" Grid.Column="3" Command="{Binding Path=RemoveCommand}"
                 Content="Supprimer" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2"/>
         </Grid>
     </Grid>

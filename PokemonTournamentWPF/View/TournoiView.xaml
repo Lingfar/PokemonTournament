@@ -20,7 +20,7 @@
         <TextBlock Text="Nom du tournoi :" FontSize="24" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"/>
         <TextBox Name="txtName" Text="{Binding Nom, UpdateSourceTrigger=PropertyChanged}" FontSize="24" Grid.Column="1" Grid.Row="0" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <TextBlock Text="Pokemons" FontSize="24" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <DataGrid Grid.Column="0" Grid.Row="2" ItemsSource="{Binding Pokemons}" FontSize="16" AutoGenerateColumns="False">
+        <DataGrid Grid.Column="0" Grid.Row="2" ItemsSource="{Binding Pokemons}" IsReadOnly="True" FontSize="16" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
                 <DataGridTextColumn Header="Nom" Binding="{Binding Nom}"/>
@@ -35,7 +35,7 @@
         <TextBlock Text="Matchs" FontSize="24" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <local:MatchesView DataContext="{Binding MatchesViewModel}" Grid.Row="2" Grid.Column="1"/>
         <TextBlock Text="Stades" FontSize="24" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <DataGrid Grid.Column="2" Grid.Row="2" ItemsSource="{Binding Stades}" FontSize="16" AutoGenerateColumns="False">
+        <DataGrid Grid.Column="2" Grid.Row="2" ItemsSource="{Binding Stades}" IsReadOnly="True" FontSize="16" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
                 <DataGridTextColumn Header="Nom" Binding="{Binding Nom}"/>
