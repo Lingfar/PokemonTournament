@@ -7,8 +7,9 @@
         mc:Ignorable="d"
         Title="Login" Height="500" Width="500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
         FocusManager.FocusedElement="{Binding ElementName=txtLogin}">
-    <Grid Background="CadetBlue">
+    <Grid Background="SandyBrown">
         <Grid.RowDefinitions>
+            <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
@@ -18,12 +19,15 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBlock Text="Connexion" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"/>
-        <TextBlock Text="Login :" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="1"/>
-        <TextBox Name="txtLogin" FontSize="24" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1"/>
-        <TextBlock Text="Password :" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="2"/>
-        <PasswordBox Name="txtPassword" FontSize="24" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="2"/>
+        <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="logo.png" Grid.ColumnSpan="2"/>
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Center" Width="437" Stroke="Black" Grid.Column="0" Grid.Row="1" Margin="20" Grid.RowSpan="4" Grid.ColumnSpan="2"/>
+        <TextBlock Text="Connexion" FontSize="48" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"/>
+        
+        <TextBlock Text="Login :" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="2"/>
+        <TextBox Name="txtLogin" FontSize="24" Width="200" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="2"/>
+        <TextBlock Text="Password :" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="3"/>
+        <PasswordBox Name="txtPassword" FontSize="24" Width="200" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="3"/>
         <Button Name="btnLogin" Content="Se connecter" Width="250" FontSize="24" IsDefault="True"
-                Click="btnLogin_Click" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                Click="btnLogin_Click" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
     </Grid>
 </Window>

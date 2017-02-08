@@ -77,6 +77,39 @@ namespace PokemonTournamentWPF.ViewModel
             }
         }
 
+
+        // Commande Modify
+        private RelayCommand modifyCommand;
+        public ICommand ModifyCommand
+        {
+            get
+            {
+                if (modifyCommand == null)
+                {
+                    modifyCommand = new RelayCommand(
+                        () => this.Modify(),
+                        () => this.CanModify()
+                        );
+                }
+                return modifyCommand;
+            }
+        }
+        private bool CanModify()
+        {
+            return (SelectedItem != null && SelectedItem.ID != 0);
+        }
+        private void Modify()
+        {
+            if (PokemonBusinessLayer.BusinessManager.Instance.UpdatePokemon(SelectedItem.poke))
+            {
+                System.Windows.Forms.MessageBox.Show("Modification du pokemon effectuée", "Succeed");
+            }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show("Error lors de la modification du pokemon", "Failed");
+            }
+        }
+
         // Commande Remove
         private RelayCommand clearCommand;
         public ICommand ClearCommand
