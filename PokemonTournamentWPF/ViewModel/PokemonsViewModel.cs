@@ -2,10 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows.Input;
+using System.Xml.Serialization;
 
 namespace PokemonTournamentWPF.ViewModel
 {
@@ -72,8 +75,20 @@ namespace PokemonTournamentWPF.ViewModel
         {
             if (SelectedItem != null)
             {
-                Pokemons.Add(SelectedItem);
+                //Pokemons.Add(SelectedItem);
                 //PokemonBusinessLayer.BusinessManager.Instance.AddNewPokemon(SelectedItem.poke);
+                if (SelectedItem != null)
+                {
+                    if (PokemonBusinessLayer.BusinessManager.Instance.AddPokemon(SelectedItem.poke))
+                    {
+                        Pokemons.Add(SelectedItem);
+                        System.Windows.Forms.MessageBox.Show("Ajout du pokemon réussi", "Succeed");
+                    }
+                    else
+                    {
+                        System.Windows.Forms.MessageBox.Show("Error lors de l'ajout du pokemon", "Failed");
+                    }
+                }
             }
         }
 
@@ -165,6 +180,50 @@ namespace PokemonTournamentWPF.ViewModel
                 SelectedItem = new PokemonViewModel();
             }
         }
+
+
+        // Commande Export
+        private RelayCommand exportCommand;
+        public ICommand ExportCommand
+        {
+            get
+            {
+                if (exportCommand == null)
+                {
+                    exportCommand = new RelayCommand(
+                        () => this.Export(),
+                        () => this.CanExport()
+                        );
+                }
+                return exportCommand;
+            }
+        }
+        private bool CanExport()
+        {
+            return true;
+        }
+        private void Export()
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(List<Pokemon>));
+            SaveFileDialog save = new SaveFileDialog();
+            save.FileName = "Pokemons";
+            save.DefaultExt = ".xml";
+            save.Filter = "XML-File | *.xml";
+            DialogResult result = save.ShowDialog();
+            List<Pokemon> tmp_list = new List<Pokemon>();
+            foreach ( PokemonViewModel a in Pokemons )
+            {
+                tmp_list.Add(a.poke);
+            }
+            if ((result == DialogResult.Yes) || (result == DialogResult.OK))
+            {
+                using (FileStream fs = new FileStream(save.FileName, FileMode.Create))
+                {
+                    ser.Serialize(fs, tmp_list);
+                }
+            }
+        }
+
         #endregion
     }
 }

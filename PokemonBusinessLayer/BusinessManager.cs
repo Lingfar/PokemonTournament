@@ -285,6 +285,10 @@ namespace PokemonBusinessLayer
         {
             return dalManager.InsertTournoi(tournoi);
         }
+        public bool AddPokemon(Pokemon pokemon)
+        {
+            return dalManager.InsertPokemon(pokemon);
+        }
 
         public bool UpdateStade(Stade stade)
         {

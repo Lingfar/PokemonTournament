@@ -89,21 +89,5 @@ namespace PokemonTournamentWPF
             }
         }
 
-        //private void btnExportPokemons_Click(object sender, RoutedEventArgs e)
-        //{
-        //    XmlSerializer ser = new XmlSerializer(typeof(List<Pokemon>));
-        //    SaveFileDialog save = new SaveFileDialog();
-        //    save.FileName = "Pokemons";
-        //    save.DefaultExt = ".xml";
-        //    save.Filter = "XML-File | *.xml";
-        //    Nullable<bool> result = save.ShowDialog();
-        //    if (result == true)
-        //    {
-        //        using (FileStream fs = new FileStream(save.FileName, FileMode.Create))
-        //        {
-        //            ser.Serialize(fs, businessManager.GetAllPokemons());
-        //        }
-        //    }
-        //}
     }
 }
