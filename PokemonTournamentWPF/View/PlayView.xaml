@@ -6,14 +6,14 @@
              xmlns:local="clr-namespace:PokemonTournamentWPF.View"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"
-             d:DesignHeight="400" d:DesignWidth="400">
+             d:DesignHeight="400" d:DesignWidth="400" FontSize="26">
     <Grid Margin="5" Background="SandyBrown">
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -23,24 +23,24 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Label Content="Attaque" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3"/>
-        <Image Height="20" Width="20" Source="/PokemonTournamentWPF;component/damage.png" IsEnabled="{Binding other_changed}" Grid.Column="2" Grid.Row="1"/>
-        <Label Name="pv_other" Content="{Binding other_hp}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="2" Grid.Row="1"/>
+        <Label Content="Position d'Attaque" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3"/>
+        <Image Height="75" Width="150" Source="/PokemonTournamentWPF;component/damage.png" HorizontalAlignment="Center" VerticalAlignment="Center" IsEnabled="{Binding other_changed}" Grid.Column="2" Grid.Row="1"/>
+        <Label Name="pv_other" Content="{Binding other_hp}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Grid.Row="1"/>
         
-        <Button Name="att_left" Content="Gauche" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" Width="100" Click="btn_Click"/>
-        <Button Name="att_midl" Content="Milieu" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" Width="100" Click="btn_Click"/>
-        <Button Name="att_righ" Content="Droite" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Grid.Row="2" Width="100" Click="btn_Click"/>
+        <Button Name="att_left" Content="Gauche" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" Width="200" Click="btn_Click"/>
+        <Button Name="att_midl" Content="Milieu" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" Width="200" Click="btn_Click"/>
+        <Button Name="att_righ" Content="Droite" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Grid.Row="2" Width="200" Click="btn_Click"/>
         <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/PokemonTournamentWPF;component/poke_adv.png" Grid.Column="3" Grid.Row="1" Grid.RowSpan="2"/>
 
-        <Button Name="valider" Content="Valider" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" Width="200" Click="btn_Click"/>
+        <Button Name="valider" Content="Valider" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" Width="400" IsDefault="True" Click="btn_Click"/>
 
-        <Label Content="Defense" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3"/>
-        <Image Height="20" Width="20" Source="/PokemonTournamentWPF;component/damage.png" IsEnabled="{Binding self_changed}" Grid.Column="1" Grid.Row="4"/>
-        <Label Name="pv_self" Content="{Binding self_pv}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="4"/>
+        <Label Content="Position de Défense" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3"/>
+        <Image Height="75" Width="150" Source="/PokemonTournamentWPF;component/damage.png" HorizontalAlignment="Center" VerticalAlignment="Center" IsEnabled="{Binding self_changed}" Grid.Column="1" Grid.Row="4"/>
+        <Label Name="pv_self" Content="{Binding self_hp}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="4"/>
         
-        <Button Name="def_left" Content="Gauche" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="5" Width="100" Click="btn_Click"/>
-        <Button Name="def_midl" Content="Milieu" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Grid.Row="5" Width="100" Click="btn_Click"/>
-        <Button Name="def_righ" Content="Droite" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.Row="5" Width="100" Click="btn_Click"/>
+        <Button Name="def_left" Content="Gauche" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="5" Width="200" Click="btn_Click"/>
+        <Button Name="def_midl" Content="Milieu" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Grid.Row="5" Width="200" Click="btn_Click"/>
+        <Button Name="def_righ" Content="Droite" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.Row="5" Width="200" Click="btn_Click"/>
         <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/PokemonTournamentWPF;component/poke_self.png" Grid.Column="0" Grid.Row="4" Grid.RowSpan="2"/>
     </Grid>
 </UserControl>

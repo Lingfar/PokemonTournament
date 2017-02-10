@@ -75,8 +75,6 @@ namespace PokemonTournamentWPF.ViewModel
         {
             if (SelectedItem != null)
             {
-                //Pokemons.Add(SelectedItem);
-                //PokemonBusinessLayer.BusinessManager.Instance.AddNewPokemon(SelectedItem.poke);
                 if (SelectedItem != null)
                 {
                     if (PokemonBusinessLayer.BusinessManager.Instance.AddPokemon(SelectedItem.poke))
@@ -173,12 +171,16 @@ namespace PokemonTournamentWPF.ViewModel
         }
         private void Remove()
         {
-            if (SelectedItem != null)
+            if (PokemonBusinessLayer.BusinessManager.Instance.DeletePokemon(SelectedItem.poke))
             {
-                PokemonBusinessLayer.BusinessManager.Instance.DeletePokemon(SelectedItem.poke);
                 Pokemons.Remove(SelectedItem);
-                SelectedItem = new PokemonViewModel();
+                System.Windows.Forms.MessageBox.Show("Supression du pokémon effectuée", "Succeed");
             }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show("Error lors de la supression du pokemon", "Failed");
+            }
+            SelectedItem = new PokemonViewModel();
         }
 
 

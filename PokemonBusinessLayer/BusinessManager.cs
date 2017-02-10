@@ -303,9 +303,9 @@ namespace PokemonBusinessLayer
             return dalManager.UpdatePokemon(pokemon);
         }
 
-        public void DeletePokemon(Pokemon poke)
+        public bool DeletePokemon(Pokemon poke)
         {
-            dalManager.DeletePokemon(poke);
+            return dalManager.DeletePokemon(poke);
             //dalManagerStub.DeleteNewPokemon(poke);
         }
         public bool DeleteStade(Stade stade)

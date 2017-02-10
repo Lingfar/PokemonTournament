@@ -10,6 +10,9 @@ namespace PokemonTournamentEntities
     {
         public int self_hp { get; set; }
         public int other_hp { get; set; }
+
+        private Random rng = new Random();
+
         public Partie()
         {
             self_hp = 3;
@@ -17,8 +20,8 @@ namespace PokemonTournamentEntities
         }
         public void think ( int posatt, int posdef )
         {
-            int IA_att = 0;
-            int IA_def = 0;
+            int IA_att = rng.Next(0, 4);
+            int IA_def = rng.Next(0, 4);
 
             if ( posatt == IA_def )
             {
