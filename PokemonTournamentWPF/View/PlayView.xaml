@@ -24,7 +24,9 @@
         </Grid.ColumnDefinitions>
 
         <Label Content="Attaque" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3"/>
+        <Image Height="20" Width="20" Source="/PokemonTournamentWPF;component/damage.png" IsEnabled="{Binding other_changed}" Grid.Column="2" Grid.Row="1"/>
         <Label Name="pv_other" Content="{Binding other_hp}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="2" Grid.Row="1"/>
+        
         <Button Name="att_left" Content="Gauche" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" Width="100" Click="btn_Click"/>
         <Button Name="att_midl" Content="Milieu" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" Width="100" Click="btn_Click"/>
         <Button Name="att_righ" Content="Droite" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Grid.Row="2" Width="100" Click="btn_Click"/>
@@ -33,7 +35,9 @@
         <Button Name="valider" Content="Valider" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" Width="200" Click="btn_Click"/>
 
         <Label Content="Defense" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3"/>
-        <Label Name="pv_self" Content="{Binding self_hp}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="4"/>
+        <Image Height="20" Width="20" Source="/PokemonTournamentWPF;component/damage.png" IsEnabled="{Binding self_changed}" Grid.Column="1" Grid.Row="4"/>
+        <Label Name="pv_self" Content="{Binding self_pv}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="4"/>
+        
         <Button Name="def_left" Content="Gauche" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="5" Width="100" Click="btn_Click"/>
         <Button Name="def_midl" Content="Milieu" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Grid.Row="5" Width="100" Click="btn_Click"/>
         <Button Name="def_righ" Content="Droite" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.Row="5" Width="100" Click="btn_Click"/>

@@ -205,6 +205,7 @@
     <Resource Include="logo.png" />
     <Resource Include="poke_adv.png" />
     <Resource Include="poke_self.png" />
+    <Resource Include="damage.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

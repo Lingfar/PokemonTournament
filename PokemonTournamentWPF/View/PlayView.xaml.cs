@@ -28,7 +28,8 @@ namespace PokemonTournamentWPF.View
 
         public PlayView()
         {
-            log = new PlayViewModel(); 
+            log = new PlayViewModel();
+            DataContext = log;
             InitializeComponent();
         }
 
@@ -56,7 +57,7 @@ namespace PokemonTournamentWPF.View
                     posDef = 2;
                     break;
                 case "valider":
-                    log.Add(posAtt,posDef);
+                    log.think(posAtt,posDef);
                     break;
             }
         }
