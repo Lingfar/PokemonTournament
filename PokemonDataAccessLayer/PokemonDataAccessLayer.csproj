@@ -80,12 +80,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="PokemonTournament.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="PokemonTournament.mdf" />
     <Content Include="PokemonTournament_log.ldf">
       <DependentUpon>PokemonTournament.mdf</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -39,7 +39,6 @@ namespace PokemonTournamentWPF.ViewModel
             }
         }
 
-
         public ETypeElement Type
         {
             get { return poke.Type; }
@@ -72,6 +71,7 @@ namespace PokemonTournamentWPF.ViewModel
                 base.OnPropertyChanged("Caracteristiques");
             }
         }
+
         public int ID
         {
             get

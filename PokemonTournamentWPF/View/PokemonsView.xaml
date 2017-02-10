@@ -18,7 +18,11 @@
                 <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
                 <DataGridTextColumn Header="Nom" Binding="{Binding Nom}"/>
                 <DataGridTextColumn Header="Type" Binding="{Binding Type}"/>
-                <DataGridTextColumn Header="Caracteristiques" Binding="{Binding Caracteristiques}"/>
+                <DataGridTextColumn Header="PV" Binding="{Binding Caracteristiques.PV}"/>
+                <DataGridTextColumn Header="Attaque" Binding="{Binding Caracteristiques.Attaque}"/>
+                <DataGridTextColumn Header="Defense" Binding="{Binding Caracteristiques.Defense}"/>
+                <DataGridTextColumn Header="Vitesse" Binding="{Binding Caracteristiques.Vitesse}"/>
+                <DataGridTextColumn Header="Esquive" Binding="{Binding Caracteristiques.Esquive}"/>
             </DataGrid.Columns>
         </DataGrid>
         <Grid Grid.Row="1" Margin="5">
