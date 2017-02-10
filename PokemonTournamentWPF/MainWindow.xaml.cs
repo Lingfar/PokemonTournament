@@ -36,6 +36,7 @@ namespace PokemonTournamentWPF
         private CaracteristiquesViewModel caracteristiquesViewModel { get; set; }
         private TournoisViewModel tournoisViewModel { get; set; }
         private PokemonsViewModel bonusViewModel { get; set; }
+        private PlayViewModel playViewModel { get; set; }
 
         public MainWindow()
         {
@@ -85,6 +86,10 @@ namespace PokemonTournamentWPF
                 case "btnBonus":
                     contentControl.Content = new PokemonsView();
                     contentControl.DataContext = bonusViewModel;
+                    break;
+                case "btnPlay":
+                    contentControl.Content = new PlayView();
+                    contentControl.DataContext = playViewModel;
                     break;
             }
         }
