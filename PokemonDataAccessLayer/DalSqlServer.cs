@@ -27,7 +27,6 @@ namespace PokemonDataAccessLayer
         {
 
         }
-
         
         public Utilisateur GetUtilisateurByLogin(string login)
         {
