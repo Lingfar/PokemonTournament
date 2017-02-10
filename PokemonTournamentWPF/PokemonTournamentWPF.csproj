@@ -60,6 +60,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\PlayViewModel.cs" />
+    <Compile Include="View\PlayView.xaml.cs">
+      <DependentUpon>PlayView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\TournoisView.xaml.cs">
       <DependentUpon>TournoisView.xaml</DependentUpon>
     </Compile>
@@ -86,6 +90,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\CaracteristiquesEditorView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\PlayView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -194,9 +202,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="pokemon.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="logo.png" />
+    <Resource Include="poke_adv.png" />
+    <Resource Include="poke_self.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

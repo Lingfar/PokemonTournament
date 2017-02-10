@@ -43,6 +43,7 @@
     <Compile Include="Caracteristique.cs" />
     <Compile Include="EntityObject.cs" />
     <Compile Include="Match.cs" />
+    <Compile Include="Partie.cs" />
     <Compile Include="Pokemon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Stade.cs" />
