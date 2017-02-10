@@ -45,7 +45,10 @@ namespace PokemonDataAccessLayer
                     sqlConnection.Close();
                 }
             }
-            catch (Exception) { }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
 
             if (dt.Rows.Count > 0)
             {
